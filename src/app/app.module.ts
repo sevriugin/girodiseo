@@ -52,6 +52,7 @@ import { VgControlsModule } from 'videogular2/controls';
 import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { MatCardModule } from '@angular/material/card';
+import { EthcontractService } from './ethereum/ethcontract.service';
 
 
 @NgModule({
@@ -112,6 +113,7 @@ import { MatCardModule } from '@angular/material/card';
     RiderService,
     ClockService,
     ImagesService,
+    EthcontractService,
   ],
   bootstrap: [AppComponent]
 })
