@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenLoyalty } from '../ethereum/token-loyalty';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  token: TokenLoyalty;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    console.log(`Landing loaded`);
+    this.token = new TokenLoyalty();
   }
 
 }
