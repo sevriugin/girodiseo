@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TagService } from './tag.service';
+import { Tag } from './tag';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'app';
+  title = `Giro d'Iseo`;
 }

@@ -1,0 +1,39 @@
+<mat-grid-list cols="3" rowHeight="3em">
+    <mat-grid-tile [colspan]="3">
+      <h3>SMS confirmation</h3>
+    </mat-grid-tile>
+    
+</mat-grid-list>
+
+<form class="example-form">
+
+  <mat-grid-list cols="3" rowHeight="3em">
+
+    <mat-grid-tile [rowspan]="3" [colspan]="3">
+      <mat-form-field>
+        <input matInput name="smscode" type="text" placeholder="Enter sms code" required minlenght="6" [(ngModel)]="smscode">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3">
+      {{msg}}
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <button mat-raised-button color="primary" [disabled]="!smscode || progress" (click)="confirm($event)">Confirm</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <button mat-raised-button color="warn" [disabled]="!smscode || progress" (click)="clear()">Clear</button>
+    </mat-grid-tile>
+  
+    <mat-grid-tile [colspan]="3">
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</form>
+

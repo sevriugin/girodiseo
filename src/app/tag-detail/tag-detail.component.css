@@ -1,0 +1,25 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+.example-short {
+    width: 30%;
+}
+
+.example-half {
+    width: 50%;
+}
+
+table {
+    width: 100%;
+  }
+
+  .mat-cell .mat-icon {
+    transform: scale(0.6);
+}

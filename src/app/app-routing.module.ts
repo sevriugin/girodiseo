@@ -1,0 +1,41 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { TagsComponent } from './tags/tags.component';
+import { TagDetailComponent } from './tag-detail/tag-detail.component';
+import { TagRegistrationComponent } from './tag-registration/tag-registration.component';
+import { TagRegSmsComponent } from './tag-reg-sms/tag-reg-sms.component';
+import { LandingComponent } from './landing/landing.component';
+import { LoginComponent } from './login/login.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SmsConfirmationComponent } from './sms-confirmation/sms-confirmation.component';
+import { AboutComponent } from './about/about.component';
+import { ProfileUpdateComponent } from './profile-update/profile-update.component';
+import { RideComponent } from './ride/ride.component';
+import { RideDetailComponent } from './ride-detail/ride-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GetstartedComponent } from './getstarted/getstarted.component';
+
+
+const routes: Routes = [
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
+  { path: 'landing', component: LandingComponent },
+  { path: 'tags', component: TagsComponent },
+  { path: 'reg', component: TagRegistrationComponent },
+  { path: 'tag/:id', component: TagDetailComponent },
+  { path: 'regsms/:id/:mobile', component: TagRegSmsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'smsconfirm/:mobile', component: SmsConfirmationComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'update', component: ProfileUpdateComponent },
+  { path: 'ride', component: RideComponent },
+  { path: 'ride/:id', component: RideDetailComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'getstarted', component: GetstartedComponent },
+];
+
+@NgModule({
+  exports: [ RouterModule ],
+  imports: [ RouterModule.forRoot(routes) ],
+})
+export class AppRoutingModule { }

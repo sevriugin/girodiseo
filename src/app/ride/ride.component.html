@@ -1,0 +1,114 @@
+
+<mat-grid-list  cols="3" rowHeight="3em">
+    <mat-grid-tile>
+        <button (click)="gotoBack()" mat-icon-button>
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+      </mat-grid-tile>
+
+    <mat-grid-tile>
+      <h3>Ride</h3>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <small>{{nikname}}</small>
+    </mat-grid-tile>
+  
+  </mat-grid-list>
+
+<mat-accordion>
+      <mat-expansion-panel (opened)="getTags()">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Tags
+          </mat-panel-title>
+          <mat-panel-description>
+            Select tag to start a ride
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <span *ngFor="let tag of tags">
+            <button mat-stroked-button [disabled]="tagid === tag.id" (click)="select(tag.id)">{{tag.id}}</button>&nbsp;
+        </span>
+    
+      </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-grid-list *ngIf="ride; else loading" cols="3" rowHeight="3em">
+    <mat-grid-tile [colspan]="3">
+      <h3>Current Ride</h3>
+    </mat-grid-tile>
+  
+    <mat-grid-tile>
+      {{ride.start|date:"dd-MM-yyyy"}}
+    </mat-grid-tile>
+  
+    <mat-grid-tile>
+      {{ride.start|date:"HH:mm:ss"}}
+    </mat-grid-tile>
+  
+    <mat-grid-tile *ngIf="!ride.finish">
+      {{timestemp|date:"HH:mm:ss":"+00"}}
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.finish">
+        {{(ride.finish-ride.start)|date:"HH:mm:ss":"+00"}}
+      </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list  *ngIf="rides; else loading" cols="3" rowHeight="3em">
+      
+      <mat-grid-tile  [rowspan] = "2" [colspan]="3">
+        <button *ngIf="!ride" mat-stroked-button mat-raised-button color="primary" [disabled]="progress" (click)="startRide($event)">Start</button>
+        <button *ngIf="ride" mat-stroked-button mat-raised-button color="warn" [disabled]="progress || !ride.open" (click)="finishRide($event)">End</button>
+      </mat-grid-tile>
+  </mat-grid-list>
+  
+  <div *ngIf="rides">
+      <table *ngIf="rides.length>0" mat-table [dataSource]="rides | slice:start:end" class="mat-elevation-z8">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.start|date:"dd-MM-yyyy"}}</td>
+            </ng-container>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef> Start </th>
+            <td mat-cell *matCellDef="let element"> {{element.start|date:"HH:mm:ss"}}</td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="finish">
+            <th mat-header-cell *matHeaderCellDef> Finish </th>
+            <td mat-cell *matCellDef="let element"> {{element.finish|date:"HH:mm:ss"}}</td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef> Time </th>
+            <td mat-cell *matCellDef="let element"> {{(element.finish-element.start)|date:"HH:mm:ss":"+00"}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="link">
+              <th mat-header-cell *matHeaderCellDef> Details </th>
+              <td mat-cell *matCellDef="let element"> <button (click)="gotoRide(element.id)" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>
+            </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <br>
+        
+    <mat-paginator *ngIf="rides.length>0" [length]="rides.length"
+                  [pageSize]="10"
+                  [pageSizeOptions]="[1, 5, 10, 25, 100]"
+                  (page)="setPage($event)">
+    </mat-paginator>
+  </div>
+

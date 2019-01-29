@@ -1,0 +1,28 @@
+<mat-grid-list cols="3" rowHeight="3em">
+  
+  <mat-grid-tile>
+    <button (click)="gotoBack()" mat-icon-button>
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <h3>Join Giro d'Iseo</h3>
+  </mat-grid-tile>
+  
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>
+
+<p>Ride around Iseo lake, earning points and use them to buy local goods and services with discounts.</p>
+
+<mat-grid-list cols="3" rowHeight="3em">
+    <mat-grid-tile [colspan]="3">
+      <h3>To be a club meber</h3>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+<mat-action-list>
+  <button mat-list-item [routerLink]="['/reg']" > 1. Press here to register new tag &nbsp; <mat-icon>add_circle_outline</mat-icon></button>
+  <button mat-list-item [routerLink]="['/ride']"> 2. Press here to start new ride &nbsp; &nbsp; &nbsp; <mat-icon>directions_bike</mat-icon></button>
+  <button mat-list-item [routerLink]="['/dashboard']"> 3. Press here to view all results &nbsp; &nbsp; <mat-icon>dashboard</mat-icon> </button>
+</mat-action-list>

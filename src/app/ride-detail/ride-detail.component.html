@@ -1,0 +1,59 @@
+<mat-grid-list *ngIf="ride; else loading;"cols="3" rowHeight="3em">
+    
+    <mat-grid-tile>
+      <button (click)="gotoBack()" mat-icon-button>
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile><h3>Ride details</h3></mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.rider"></mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.rider"><img *ngIf="ride.rider && ride.rider.avatar" ngxGravatar size="46" [fallback]="'monsterid'" [src]="ride.rider.avatar"></mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.rider"></mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.rider"></mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.rider"><strong>{{ride.rider?ride.rider.nikname:""}}</strong></mat-grid-tile>
+
+    <mat-grid-tile *ngIf="ride.rider"></mat-grid-tile>
+
+    <mat-grid-tile>Date:</mat-grid-tile>
+
+    <mat-grid-tile>{{ride.start|date:"dd-MM-yyyy"}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Start:</mat-grid-tile>
+
+    <mat-grid-tile>{{ride.start|date:"HH:mm:ss"}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Finish:</mat-grid-tile>
+
+    <mat-grid-tile>{{ride.finish|date:"HH:mm:ss"}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+    
+    <mat-grid-tile>Time:</mat-grid-tile>
+
+    <mat-grid-tile>{{(ride.finish-ride.start)|date:"HH:mm:ss":"+00"}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+
+    <mat-grid-tile [colspan]="3">
+        <button mat-stroked-button (click)="gotoTagById(ride.tagid)">{{ride.tagid}}</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="uid === id" [colspan]="3">
+        <button mat-raised-button [disabled]="progress || !(uid === id)" (click)="updateRiderInfo()" color="primary">Update Rider Info</button>
+    </mat-grid-tile>
+
+
+</mat-grid-list>

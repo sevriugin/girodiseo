@@ -1,0 +1,33 @@
+<div *ngIf="tags; else loading">
+    <h2 *ngIf="tags.length === 0">Tag not found</h2>
+    <div *ngIf="tags.length > 0">
+      <h2>Tag Registration</h2>
+      <div><span>id: </span>{{tags[0].id}}</div>
+    </div>
+    <br><br>
+
+    <form class="example-form">
+      <table class="example-half" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input matInput name="smscode" type="text" placeholder="Enter sms code" required minlength="4" [(ngModel)]="smscode">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr *ngIf="msg">
+          <td>
+            {{msg}}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button mat-raised-button color="primary" [disabled]="!smscode || registered || progress" (click)="confirm($event)">Confirm</button>
+          </td>
+          <td>
+            <button mat-raised-button color="warn" [disabled]="!smscode || registered || progress" (click)="gotoBack()">Cancel</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+</div>

@@ -1,0 +1,14 @@
+<mat-grid-list *ngIf="tags; else loading" cols="3" rowHeight="3em">
+    <mat-grid-tile [colspan]="3">
+      <h3>Tags list</h3>
+    </mat-grid-tile>
+    <mat-grid-tile *ngFor="let tag of tags | slice:start:end" [colspan]="3">
+      <button mat-stroked-button (click)="gotoTagById(tag)">{{tag.id}}</button>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<mat-paginator *ngIf="tags; else loading" [length]="tags.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[1, 5, 10, 25, 100]"
+              (page)="setPage($event)">
+</mat-paginator>

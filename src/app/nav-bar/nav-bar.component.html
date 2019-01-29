@@ -1,0 +1,28 @@
+ <mat-grid-list cols="8" rowHeight="3em">
+    <mat-grid-tile (click)="gotoHome()" [colspan]="3">
+      <img  src="../assets/girologo.png">&nbsp;&nbsp;<h3>Giro d'Iseo</h3>
+    </mat-grid-tile>
+   
+    <mat-grid-tile></mat-grid-tile>
+    
+    <mat-grid-tile (click)="gotoReg()" [colspan]="2"><small>{{nikname}}</small></mat-grid-tile>
+    <mat-grid-tile>
+        <button (click)="gotoReg()" mat-icon-button>
+            <mat-icon>{{authenticated()?"account_circle":"add_circle_outline"}}</mat-icon>
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="gotoHome()">Home</button>
+            <button mat-menu-item (click)="gotoRide()">Ride</button>
+            <button mat-menu-item (click)="gotoDashboard()">Dashboard</button>
+            <button mat-menu-item (click)="gotoTags()">Tag list</button>
+            <button mat-menu-item (click)="gotoAbout()">About</button>
+            <button (click)="logout()" mat-menu-item>{{authenticated()?"Logout":"Login"}}</button>
+          </mat-menu>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-divider></mat-divider>

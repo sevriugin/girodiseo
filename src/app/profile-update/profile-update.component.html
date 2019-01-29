@@ -1,0 +1,83 @@
+<mat-grid-list cols="3" rowHeight="3em">
+    <mat-grid-tile [colspan]="3">
+      <h3>Profile Update</h3>
+    </mat-grid-tile>
+    
+    <mat-grid-tile [colspan]="3">
+        <label for="file-upload">
+            <img ngxGravatar size="44" [fallback]="'monsterid'" [md5Hash]="hash" [src]="avatarURL()">
+          <input id="file-upload" type="file" (change)="handleFileInput($event.target.files)"/>
+        </label>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-progress-bar *ngIf="avatar" mode="determinate" value="uploadPercent | async"></mat-progress-bar>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-icon *ngIf="updates.avatar">check_circle_outline</mat-icon>
+    </mat-grid-tile>
+    
+</mat-grid-list>
+
+<form class="example-form">
+
+  <mat-grid-list cols="3" rowHeight="3em">
+
+    <mat-grid-tile [rowspan]="2" [colspan]="2">
+      <mat-form-field>
+        <input matInput name="username" type="text" placeholder="Enter name" required [(ngModel)]="username">
+        <mat-hint align="start">Example: <strong>John Smith</strong> </mat-hint>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [rowspan]="2">
+      <mat-icon *ngIf="updates.username">check_circle_outline</mat-icon>
+    </mat-grid-tile>
+
+    <mat-grid-tile [rowspan]="2" [colspan]="2">
+      <mat-form-field>
+        <input matInput name="email" type="text" placeholder="Enter email" [(ngModel)]="email">
+        <mat-hint align="start">Example: <strong>smith.john@gmail.com</strong> </mat-hint>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [rowspan]="2">
+      <mat-icon *ngIf="updates.email">check_circle_outline</mat-icon>
+    </mat-grid-tile>
+
+    <mat-grid-tile [rowspan]="2" [colspan]="2">
+        <mat-form-field>
+          <input matInput name="nikname" type="text" placeholder="Enter nikname" [(ngModel)]="nikname">
+          <mat-hint align="start">Example: <strong>Colnago Rider</strong> </mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+  
+      <mat-grid-tile [rowspan]="2">
+        <mat-icon *ngIf="updates.nikname">check_circle_outline</mat-icon>
+      </mat-grid-tile>
+
+    <mat-grid-tile [rowspan]="2" [colspan]="3">
+      {{msg}}
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <button mat-raised-button color="primary" [disabled]="!username || progress" (click)="update($event)">Update</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <button mat-raised-button color="warn" [disabled]="progress" (click)="cancel()">Cancel</button>
+    </mat-grid-tile>
+  
+    <mat-grid-tile [colspan]="3">
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</form>

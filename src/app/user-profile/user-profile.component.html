@@ -1,0 +1,90 @@
+<mat-grid-list cols="3" rowHeight="3em">
+
+  <mat-grid-tile>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <h3>Profile</h3>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="name()">
+    Name
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="name()">
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="name()">
+    {{name()}}
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="phone()">
+    Mobile
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="phone()">
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="phone()">
+    {{phone()}}
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="rider">
+      Nikname
+    </mat-grid-tile>
+  
+    <mat-grid-tile *ngIf="rider">
+    </mat-grid-tile>
+  
+    <mat-grid-tile *ngIf="rider">
+      {{rider.nikname}}
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-accordion>
+    <mat-expansion-panel (opened)="getTags()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tags
+        </mat-panel-title>
+        <mat-panel-description>
+          Open to see your tags
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <span *ngFor="let tag of tags">
+          <button mat-stroked-button (click)="gotoTagById(tag)">{{tag.id}}</button>&nbsp;
+      </span>
+  
+    </mat-expansion-panel>
+</mat-accordion>
+  
+<mat-grid-list cols="3" rowHeight="3em">
+
+  <mat-grid-tile [colspan]="3">
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="authenticated()">
+    <button mat-raised-button color="warn" [disabled]="!authenticated()" (click)="logout()">Logout</button>
+  </mat-grid-tile>
+  
+  <mat-grid-tile *ngIf="authenticated()">
+    
+  </mat-grid-tile>
+  
+  <mat-grid-tile *ngIf="authenticated()">
+    <button mat-raised-button color="primary" [disabled]="!authenticated()" (click)="gotoUpdate()">Update</button>
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="!authenticated()" [colspan]="3">
+    No user logged in
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+
+  
