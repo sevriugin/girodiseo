@@ -53,6 +53,10 @@ import { VgOverlayPlayModule } from 'videogular2/overlay-play';
 import { VgBufferingModule } from 'videogular2/buffering';
 import { MatCardModule } from '@angular/material/card';
 import { EthcontractService } from './ethereum/ethcontract.service';
+import { EthereumModule } from './ethereum/ethereum.module';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HttpClientModule, HttpBackend } from '@angular/common/http';
+import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
 
 
 @NgModule({
@@ -102,7 +106,10 @@ import { EthcontractService } from './ethereum/ethcontract.service';
     VgBufferingModule,
     VgControlsModule,
     VgOverlayPlayModule,
-    MatCardModule
+    MatCardModule,
+    EthereumModule,
+    MatSlideToggleModule,
+    HttpClientModule
   ],
   providers: [
     AngularFirestoreModule,
@@ -114,6 +121,7 @@ import { EthcontractService } from './ethereum/ethcontract.service';
     ClockService,
     ImagesService,
     EthcontractService,
+    { provide: HttpBackend, useClass: CustExtBrowserXhr },
   ],
   bootstrap: [AppComponent]
 })

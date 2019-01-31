@@ -9,6 +9,8 @@ import { ImagesService } from '../images.service';
 import { Observable, Subscription } from 'rxjs';
 import { Observer } from 'firebase';
 import { finalize } from 'rxjs/operators';
+import { Wallet } from '../wallet';
+import { EthcontractService } from '../ethereum/ethcontract.service';
 
 @Component({
   selector: 'app-profile-update',
@@ -28,6 +30,9 @@ export class ProfileUpdateComponent implements OnInit {
   uploadPercent: Observable<number>;
   downloadURL: Observable<string>;
   percentage: number;
+  wallet: Wallet;
+  checked: boolean;
+  disabled: boolean;
   updates: {
     username: boolean,
     email: boolean,
@@ -35,6 +40,7 @@ export class ProfileUpdateComponent implements OnInit {
     rider: boolean,
     newrider: boolean,
     avatar: boolean,
+    wallet: boolean
   };
 
 
@@ -46,7 +52,8 @@ export class ProfileUpdateComponent implements OnInit {
     private router: Router,
     private riderService: RiderService,
     private imagesService: ImagesService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private contractService: EthcontractService
     ) { }
 
   ngOnInit() {
@@ -58,9 +65,24 @@ export class ProfileUpdateComponent implements OnInit {
             this.rider = riders[0];
             this.nikname = this.rider.nikname;
             this.hash = this.rider.id;
+            if (this.rider.wallet) {
+              this.disabled = true;
+              this.wallet = this.rider.wallet;
+            } else {
+              this.wallet.id = this.hash;
+            }
           }
         }
        });
+      this.contractService.getMnemonic().subscribe((mnemonic) => {
+        this.wallet.mnemonic = mnemonic;
+        console.log(`get mnemonic: ${this.wallet.mnemonic}`);
+        this.contractService.getAccounts().subscribe((accounts) => {
+          this.wallet.accounts = accounts;
+          console.log(`get accounts`);
+          console.log(this.wallet.accounts);
+        });
+      });
   }
 
   avatarURL(): string |null {
@@ -80,7 +102,10 @@ export class ProfileUpdateComponent implements OnInit {
     this.msg = null;
     this.avatar = null;
     this.percentage = 0;
-    this.updates = {username: false, email: false, nikname: false, rider: false, newrider: false, avatar: false};
+    this.checked = false;
+    this.disabled = false;
+    this.wallet = { id: null, accounts: [], mnemonic: null};
+    this.updates = {username: false, email: false, nikname: false, rider: false, newrider: false, avatar: false, wallet: false};
   }
 
   update(e: Event) {
@@ -135,6 +160,21 @@ export class ProfileUpdateComponent implements OnInit {
         this.updates.newrider = true;
       }
     }
+    console.log('Check this out!!');
+    if (this.checked && !this.rider.wallet) {
+      console.log(`generate wallet`);
+      console.log(this.wallet);
+      // generate new wallet
+      if (this.rider) {
+        this.rider.wallet = this.wallet;
+        this.updates.wallet = true;
+      } else {
+        // tslint:disable-next-line:max-line-length
+        this.rider = { id: this.authService.getUID(), mobile: this.mobile, nikname: this.nikname, avatar: this.avatar, wallet: this.wallet };
+        this.updates.rider = true;
+        this.updates.newrider = true;
+      }
+    }
     if (this.updates.rider) {
       if (this.updates.newrider) {
         this.riderService.addNewRiderCB(this.rider, (err, ref) => {
@@ -147,6 +187,12 @@ export class ProfileUpdateComponent implements OnInit {
             this.updates.newrider = false;
             if (this.nikname) {
               this.updates.nikname = true;
+            }
+            if (this.avatar) {
+              this.updates.avatar = true;
+            }
+            if (this.checked) {
+              this.updates.wallet = true;
             }
             this.msg = 'Profile is updated';
           }
@@ -165,6 +211,9 @@ export class ProfileUpdateComponent implements OnInit {
             }
             if (this.avatar) {
               this.updates.avatar = true;
+            }
+            if (this.checked) {
+              this.updates.wallet = true;
             }
             this.msg = 'Profile is updated';
           }

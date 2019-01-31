@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { EthcontractService } from '../ethereum/ethcontract.service';
 
 @Component({
   selector: 'app-landing',
@@ -12,7 +13,6 @@ export class LandingComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(`Landing loaded`);
   }
 
 }

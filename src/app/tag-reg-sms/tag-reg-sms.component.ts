@@ -4,6 +4,7 @@ import { TagService } from '../tag.service';
 import { Tag, Registration } from '../tag';
 import { Location } from '@angular/common';
 import { AuthService } from '../auth.service';
+import { Wallet } from '../wallet';
 
 @Component({
   selector: 'app-tag-reg-sms',

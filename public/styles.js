@@ -532,7 +532,7 @@ if(false) {}
 
 /***/ }),
 
-/***/ 2:
+/***/ 6:
 /*!******************************!*\
   !*** multi ./src/styles.css ***!
   \******************************/
@@ -544,5 +544,5 @@ module.exports = __webpack_require__(/*! /Users/sergei/cloud-firestore-test/src/
 
 /***/ })
 
-},[[2,"runtime"]]]);
+},[[6,"runtime"]]]);
 //# sourceMappingURL=styles.js.map

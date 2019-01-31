@@ -43,6 +43,19 @@
       {{rider.nikname}}
     </mat-grid-tile>
 
+    <mat-grid-tile [colspan]="3" *ngIf="wallet">
+        <h3>Wallet</h3>
+      </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3" *ngIf="wallet">
+        {{account}}
+      </mat-grid-tile>
+    
+      <mat-grid-tile [colspan]="3" *ngIf="wallet">
+        {{balance}} Ether
+      </mat-grid-tile>
+    
+
 </mat-grid-list>
 
 <mat-accordion>

@@ -60,6 +60,20 @@
         <mat-icon *ngIf="updates.nikname">check_circle_outline</mat-icon>
       </mat-grid-tile>
 
+      <mat-grid-tile  [colspan]="2">
+              <mat-slide-toggle
+              name="wallet"
+              [(ngModel)]="checked"
+              [checked]="checked"
+              [disabled]="disabled">
+            Generate a new wallet
+          </mat-slide-toggle>
+        </mat-grid-tile>
+    
+        <mat-grid-tile>
+          <mat-icon *ngIf="updates.wallet">check_circle_outline</mat-icon>
+        </mat-grid-tile>
+
     <mat-grid-tile [rowspan]="2" [colspan]="3">
       {{msg}}
     </mat-grid-tile>

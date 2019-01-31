@@ -1,3 +1,5 @@
+import { Wallet } from './wallet';
+
 export class Bike {
     brand: string;
     model: string;
@@ -15,4 +17,5 @@ export class Rider {
     country?: string;
     ghost?: boolean;
     bikes?: Bike[];
+    wallet?: Wallet;
 }
