@@ -57,6 +57,7 @@ import { EthereumModule } from './ethereum/ethereum.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule, HttpBackend } from '@angular/common/http';
 import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
     MatCardModule,
     EthereumModule,
     MatSlideToggleModule,
-    HttpClientModule
+    HttpClientModule,
+    ClipboardModule
   ],
   providers: [
     AngularFirestoreModule,

@@ -1,60 +1,54 @@
 <mat-grid-list cols="3" rowHeight="3em">
 
-  <mat-grid-tile>
-  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
 
-  <mat-grid-tile>
-    <h3>Profile</h3>
-  </mat-grid-tile>
+  <mat-grid-tile><h3>Profile</h3></mat-grid-tile>
 
-  <mat-grid-tile>
-  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
 
-  <mat-grid-tile *ngIf="name()">
-    Name
-  </mat-grid-tile>
+  <mat-grid-tile *ngIf="name()">Name</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="name()">
-  </mat-grid-tile>
+  <mat-grid-tile *ngIf="name()"></mat-grid-tile>
 
-  <mat-grid-tile *ngIf="name()">
-    {{name()}}
-  </mat-grid-tile>
+  <mat-grid-tile *ngIf="name()">{{name()}}</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="phone()">
-    Mobile
-  </mat-grid-tile>
+  <mat-grid-tile *ngIf="phone()">Mobile</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="phone()">
-  </mat-grid-tile>
+  <mat-grid-tile *ngIf="phone()"></mat-grid-tile>
 
-  <mat-grid-tile *ngIf="phone()">
-    {{phone()}}
-  </mat-grid-tile>
+  <mat-grid-tile *ngIf="phone()">{{phone()}}</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="rider">
-      Nikname
-    </mat-grid-tile>
+  <mat-grid-tile *ngIf="rider">Nikname</mat-grid-tile>
   
-    <mat-grid-tile *ngIf="rider">
-    </mat-grid-tile>
+  <mat-grid-tile *ngIf="rider"></mat-grid-tile>
   
-    <mat-grid-tile *ngIf="rider">
-      {{rider.nikname}}
-    </mat-grid-tile>
+  <mat-grid-tile *ngIf="rider">{{rider.nikname}}</mat-grid-tile>
+</mat-grid-list>
 
-    <mat-grid-tile [colspan]="3" *ngIf="wallet">
-        <h3>Wallet</h3>
-      </mat-grid-tile>
+<mat-divider *ngIf="wallet"></mat-divider>
+<mat-grid-list cols="3" rowHeight="3em">
+  
+  <mat-grid-tile [colspan]="3" *ngIf="wallet"><h3>Wallet</h3></mat-grid-tile>
 
-    <mat-grid-tile [colspan]="3" *ngIf="wallet">
-        {{account}}
-      </mat-grid-tile>
+  <mat-grid-tile *ngIf="wallet">Account</mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet"></mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet">
+    <button mat-stroked-button ngxClipboard [cbContent]="account">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet">Balance</mat-grid-tile>
     
-      <mat-grid-tile [colspan]="3" *ngIf="wallet">
-        {{balance}} Ether
-      </mat-grid-tile>
-    
+  <mat-grid-tile *ngIf="wallet"></mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet">{{balance}} Ether</mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet">Token</mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet"></mat-grid-tile>
+
+  <mat-grid-tile *ngIf="wallet">{{token}} Ether</mat-grid-tile>
 
 </mat-grid-list>
 

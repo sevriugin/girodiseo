@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   wallet: Wallet;
   balance: string;
   account: string;
+  token: string;
   constructor(
     private tagService: TagService,
     private authService: AuthService,
@@ -46,6 +47,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
               this.account = this.rider.wallet.accounts[0];
               this.contractService.getAccountBalance(this.account)
                 .subscribe((result) => this.zone.run(() => this.balance = result[0]));
+              this.getBalance().subscribe(results => {
+                console.log('Get token balance');
+                this.token = `${+results / 1e18}`;
+              });
             }
           }
         }
@@ -99,6 +104,14 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       return of(null);
     } else {
       return this.contractService.getAccountBalance(this.wallet.accounts[0]);
+    }
+  }
+
+  getBalance(): Observable<any[] | Error> {
+    if (!this.wallet) {
+      return of(null);
+    } else {
+      return this.contractService.getBalance();
     }
   }
 

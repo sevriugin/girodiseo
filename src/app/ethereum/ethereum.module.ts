@@ -15,7 +15,7 @@ import { EthcontractService } from './ethcontract.service';
  declarations: [],
  providers: [ EthcontractService , {
          provide: WEB3,
-         useFactory: () => new Web3('https://rinkeby.infura.io/v3/7ec884266d6343fab14b21fa52a06343')
+         useFactory: () => new Web3('https://us-central1-cloud-firestore-test-d95bf.cloudfunctions.net/proxy')
   }]
 })
 export class EthereumModule {}

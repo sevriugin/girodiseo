@@ -72,7 +72,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-grid-list cols=\"3\" rowHeight=\"4em\">\n    <mat-grid-tile [routerLink]=\"['/landing']\" [rowspan]=\"3\" [colspan]=\"3\">\n        <img  src=\"../assets/giro_logo_big.png\">\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p>Giro d'Iseo Web Application</p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Virsion 0.0.1.3</small></p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n        <p><small>Ethereum Rinkiby network (https)</small></p>\n      </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Copyright REGA Risk Sharing (C) 2019</small></p>\n    </mat-grid-tile>\n    \n</mat-grid-list>\n"
+module.exports = "\n<mat-grid-list cols=\"3\" rowHeight=\"4em\">\n    <mat-grid-tile [routerLink]=\"['/landing']\" [rowspan]=\"3\" [colspan]=\"3\">\n        <img  src=\"../assets/giro_logo_big.png\">\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p>Giro d'Iseo Web Application</p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Virsion 0.0.1.4</small></p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n        <p><small>Ethereum Rinkiby network via https proxy</small></p>\n      </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Copyright REGA Risk Sharing (C) 2019</small></p>\n    </mat-grid-tile>\n    \n</mat-grid-list>\n"
 
 /***/ }),
 
@@ -326,12 +326,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./ethereum/ethcontract.service */ "./src/app/ethereum/ethcontract.service.ts");
 /* harmony import */ var _ethereum_ethereum_module__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./ethereum/ethereum.module */ "./src/app/ethereum/ethereum.module.ts");
 /* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! @angular/material/slide-toggle */ "./node_modules/@angular/material/esm5/slide-toggle.es5.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _cust_ext_browser_xhr__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./cust-ext-browser-xhr */ "./src/app/cust-ext-browser-xhr.ts");
+/* harmony import */ var ngx_clipboard__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ngx-clipboard */ "./node_modules/ngx-clipboard/fesm5/ngx-clipboard.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -440,7 +446,9 @@ var AppModule = /** @class */ (function () {
                 videogular2_overlay_play__WEBPACK_IMPORTED_MODULE_49__["VgOverlayPlayModule"],
                 _angular_material_card__WEBPACK_IMPORTED_MODULE_51__["MatCardModule"],
                 _ethereum_ethereum_module__WEBPACK_IMPORTED_MODULE_53__["EthereumModule"],
-                _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_54__["MatSlideToggleModule"]
+                _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_54__["MatSlideToggleModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_55__["HttpClientModule"],
+                ngx_clipboard__WEBPACK_IMPORTED_MODULE_57__["ClipboardModule"]
             ],
             providers: [
                 _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestoreModule"],
@@ -452,6 +460,7 @@ var AppModule = /** @class */ (function () {
                 _clock_service__WEBPACK_IMPORTED_MODULE_39__["ClockService"],
                 _images_service__WEBPACK_IMPORTED_MODULE_44__["ImagesService"],
                 _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_52__["EthcontractService"],
+                { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_55__["HttpBackend"], useClass: _cust_ext_browser_xhr__WEBPACK_IMPORTED_MODULE_56__["CustExtBrowserXhr"] },
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -667,6 +676,60 @@ var ClockService = /** @class */ (function () {
     ], ClockService);
     return ClockService;
 }());
+
+
+
+/***/ }),
+
+/***/ "./src/app/cust-ext-browser-xhr.ts":
+/*!*****************************************!*\
+  !*** ./src/app/cust-ext-browser-xhr.ts ***!
+  \*****************************************/
+/*! exports provided: CustExtBrowserXhr */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustExtBrowserXhr", function() { return CustExtBrowserXhr; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CustExtBrowserXhr = /** @class */ (function (_super) {
+    __extends(CustExtBrowserXhr, _super);
+    function CustExtBrowserXhr(xhrFactory) {
+        return _super.call(this, xhrFactory) || this;
+    }
+    CustExtBrowserXhr.prototype.handle = function (req) {
+        var event = _super.prototype.handle.call(this, req);
+        req.headers.set('Access-Control-Allow-Origin', '*');
+        return event;
+    };
+    CustExtBrowserXhr = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["XhrFactory"]])
+    ], CustExtBrowserXhr);
+    return CustExtBrowserXhr;
+}(_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpXhrBackend"]));
 
 
 
@@ -930,7 +993,7 @@ var EthereumModule = /** @class */ (function () {
             declarations: [],
             providers: [_ethcontract_service__WEBPACK_IMPORTED_MODULE_3__["EthcontractService"], {
                     provide: _tokens__WEBPACK_IMPORTED_MODULE_2__["WEB3"],
-                    useFactory: function () { return new Web3('https://rinkeby.infura.io/v3/7ec884266d6343fab14b21fa52a06343'); }
+                    useFactory: function () { return new Web3('https://us-central1-cloud-firestore-test-d95bf.cloudfunctions.net/proxy'); }
                 }]
         })
     ], EthereumModule);
@@ -976,7 +1039,7 @@ module.exports = ".vg-player {\n    width: 400px;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile>\n    <button (click)=\"gotoBack()\" mat-icon-button>\n      <mat-icon>arrow_back_ios</mat-icon>\n    </button>\n  </mat-grid-tile>\n\n  <mat-grid-tile>\n    <h3>Join Giro d'Iseo</h3>\n  </mat-grid-tile>\n  \n  <mat-grid-tile></mat-grid-tile>\n</mat-grid-list>\n\n<p>Ride around Iseo lake, earning points and use them to buy local goods and services with discounts.</p>\n\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n    <mat-grid-tile [colspan]=\"3\">\n      <h3>To be a club meber</h3>\n    </mat-grid-tile>\n  </mat-grid-list>\n\n<mat-action-list>\n  <button mat-list-item [routerLink]=\"['/reg']\" > 1. Press here to register new tag &nbsp; <mat-icon>add_circle_outline</mat-icon></button>\n  <button mat-list-item [routerLink]=\"['/ride']\"> 2. Press here to start new ride &nbsp; &nbsp; &nbsp; <mat-icon>directions_bike</mat-icon></button>\n  <button mat-list-item [routerLink]=\"['/dashboard']\"> 3. Press here to view all results &nbsp; &nbsp; <mat-icon>dashboard</mat-icon> </button>\n</mat-action-list>\n"
+module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile>\n    <button (click)=\"gotoBack()\" mat-icon-button>\n      <mat-icon>arrow_back_ios</mat-icon>\n    </button>\n  </mat-grid-tile>\n\n  <mat-grid-tile>\n    <h3>Join</h3>\n  </mat-grid-tile>\n\n  <mat-grid-tile></mat-grid-tile>\n</mat-grid-list>\n\n<p>Ride around Iseo lake, earning points and use them to buy local goods and services with discounts.</p>\n\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n    <mat-grid-tile [colspan]=\"3\">\n      <h3>To be a club meber</h3>\n    </mat-grid-tile>\n  </mat-grid-list>\n\n<mat-action-list>\n  <button mat-list-item [routerLink]=\"['/reg']\" > 1. Press here to register new tag &nbsp; <mat-icon>add_circle_outline</mat-icon></button>\n  <button mat-list-item [routerLink]=\"['/ride']\"> 2. Press here to start new ride &nbsp; &nbsp; &nbsp; <mat-icon>directions_bike</mat-icon></button>\n  <button mat-list-item [routerLink]=\"['/dashboard']\"> 3. Press here to view all results &nbsp; &nbsp; <mat-icon>dashboard</mat-icon> </button>\n</mat-action-list>\n"
 
 /***/ }),
 
@@ -1107,7 +1170,6 @@ module.exports = "<br>\n<mat-card class=\"example-card\">\n    <mat-card-header>
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LandingComponent", function() { return LandingComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ethereum/ethcontract.service */ "./src/app/ethereum/ethcontract.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1118,18 +1180,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var LandingComponent = /** @class */ (function () {
-    function LandingComponent(contractService, zone) {
-        this.contractService = contractService;
-        this.zone = zone;
+    function LandingComponent() {
     }
     LandingComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        console.log("Landing loaded");
-        this.contractService.alife();
-        this.contractService.getBalance().subscribe(function (result) { return _this.zone.run(function () { return console.log(result); }); });
-        this.contractService.getAccountBalance(null).subscribe(function (result) { return _this.zone.run(function () { return console.log(result); }); });
     };
     LandingComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1137,7 +1191,7 @@ var LandingComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./landing.component.html */ "./src/app/landing/landing.component.html"),
             styles: [__webpack_require__(/*! ./landing.component.css */ "./src/app/landing/landing.component.css")]
         }),
-        __metadata("design:paramtypes", [_ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_1__["EthcontractService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]])
+        __metadata("design:paramtypes", [])
     ], LandingComponent);
     return LandingComponent;
 }());
@@ -3165,7 +3219,7 @@ module.exports = ".example-headers-align .mat-expansion-panel-header-title,\n.ex
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile>\n  </mat-grid-tile>\n\n  <mat-grid-tile>\n    <h3>Profile</h3>\n  </mat-grid-tile>\n\n  <mat-grid-tile>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">\n    Name\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">\n    {{name()}}\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">\n    Mobile\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">\n    {{phone()}}\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"rider\">\n      Nikname\n    </mat-grid-tile>\n  \n    <mat-grid-tile *ngIf=\"rider\">\n    </mat-grid-tile>\n  \n    <mat-grid-tile *ngIf=\"rider\">\n      {{rider.nikname}}\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\">\n        <h3>Wallet</h3>\n      </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\">\n        {{account}}\n      </mat-grid-tile>\n    \n      <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\">\n        {{balance}} Ether\n      </mat-grid-tile>\n    \n\n</mat-grid-list>\n\n<mat-accordion>\n    <mat-expansion-panel (opened)=\"getTags()\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Tags\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see your tags\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <span *ngFor=\"let tag of tags\">\n          <button mat-stroked-button (click)=\"gotoTagById(tag)\">{{tag.id}}</button>&nbsp;\n      </span>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n  \n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile [colspan]=\"3\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"warn\" [disabled]=\"!authenticated()\" (click)=\"logout()\">Logout</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    \n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"primary\" [disabled]=\"!authenticated()\" (click)=\"gotoUpdate()\">Update</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"!authenticated()\" [colspan]=\"3\">\n    No user logged in\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n\n  "
+module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile></mat-grid-tile>\n\n  <mat-grid-tile><h3>Profile</h3></mat-grid-tile>\n\n  <mat-grid-tile></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">Name</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">{{name()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">Mobile</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">{{phone()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"rider\">Nikname</mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\"></mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\">{{rider.nikname}}</mat-grid-tile>\n</mat-grid-list>\n\n<mat-divider *ngIf=\"wallet\"></mat-divider>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\"><h3>Wallet</h3></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Account</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n    <button mat-stroked-button ngxClipboard [cbContent]=\"account\">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Balance</mat-grid-tile>\n    \n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{balance}} Ether</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Token</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{token}} Ether</mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-accordion>\n    <mat-expansion-panel (opened)=\"getTags()\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Tags\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see your tags\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <span *ngFor=\"let tag of tags\">\n          <button mat-stroked-button (click)=\"gotoTagById(tag)\">{{tag.id}}</button>&nbsp;\n      </span>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n  \n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile [colspan]=\"3\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"warn\" [disabled]=\"!authenticated()\" (click)=\"logout()\">Logout</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    \n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"primary\" [disabled]=\"!authenticated()\" (click)=\"gotoUpdate()\">Update</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"!authenticated()\" [colspan]=\"3\">\n    No user logged in\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n\n  "
 
 /***/ }),
 
@@ -3224,6 +3278,10 @@ var UserProfileComponent = /** @class */ (function () {
                         _this.account = _this.rider.wallet.accounts[0];
                         _this.contractService.getAccountBalance(_this.account)
                             .subscribe(function (result) { return _this.zone.run(function () { return _this.balance = result[0]; }); });
+                        _this.getBalance().subscribe(function (results) {
+                            console.log('Get token balance');
+                            _this.token = "" + +results / 1e18;
+                        });
                     }
                 }
             }
@@ -3270,6 +3328,14 @@ var UserProfileComponent = /** @class */ (function () {
         }
         else {
             return this.contractService.getAccountBalance(this.wallet.accounts[0]);
+        }
+    };
+    UserProfileComponent.prototype.getBalance = function () {
+        if (!this.wallet) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_6__["of"])(null);
+        }
+        else {
+            return this.contractService.getBalance();
         }
     };
     UserProfileComponent = __decorate([
