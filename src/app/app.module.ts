@@ -58,6 +58,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule, HttpBackend } from '@angular/common/http';
 import { CustExtBrowserXhr } from './cust-ext-browser-xhr';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { UsePointsComponent } from './use-points/use-points.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { TransactionService } from './transaction.service';
+import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
 
 
 @NgModule({
@@ -78,6 +83,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     RideDetailComponent,
     DashboardComponent,
     GetstartedComponent,
+    UsePointsComponent,
+    TnxDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -111,7 +118,9 @@ import { ClipboardModule } from 'ngx-clipboard';
     EthereumModule,
     MatSlideToggleModule,
     HttpClientModule,
-    ClipboardModule
+    ClipboardModule,
+    ZXingScannerModule,
+    MatSliderModule
   ],
   providers: [
     AngularFirestoreModule,
@@ -123,6 +132,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     ClockService,
     ImagesService,
     EthcontractService,
+    TransactionService,
     { provide: HttpBackend, useClass: CustExtBrowserXhr },
   ],
   bootstrap: [AppComponent]

@@ -1,0 +1,29 @@
+<mat-grid-list cols="3" rowHeight="3em">
+    
+    <mat-grid-tile>
+      <button (click)="gotoBack()" mat-icon-button>
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile><h3>Use points</h3></mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3"><h4>From</h4></mat-grid-tile>
+    <mat-grid-tile [colspan]="3">{{account}}</mat-grid-tile>
+    <mat-grid-tile [colspan]="3"><h4>To</h4></mat-grid-tile>
+    <mat-grid-tile [colspan]="3">0xD601682a7584A7541C639899454D201Fe3270e9C</mat-grid-tile>
+    <mat-grid-tile [colspan]="3"><h4>Number</h4></mat-grid-tile>
+    <mat-grid-tile [colspan]="3">{{value}}</mat-grid-tile>
+    <mat-grid-tile [rowspan]="2" [colspan]="3">
+      <mat-slider [min]="0" [max]="points" thumbLabel="1" showTicks="1" step="1" [(ngModel)]="value"></mat-slider>
+    </mat-grid-tile>
+    
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-raised-button color="accent" [disabled]="!value || process" (click)="confirm()">Confirm</button>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+  
+</mat-grid-list>

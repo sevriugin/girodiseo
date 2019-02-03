@@ -25,6 +25,24 @@
   <mat-grid-tile *ngIf="rider">{{rider.nikname}}</mat-grid-tile>
 </mat-grid-list>
 
+<mat-accordion>
+    <mat-expansion-panel (opened)="getTags()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tags
+        </mat-panel-title>
+        <mat-panel-description>
+          Open to see your tags
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <span *ngFor="let tag of tags">
+          <button mat-stroked-button (click)="gotoTagById(tag)">{{tag.id}}</button>&nbsp;
+      </span>
+  
+    </mat-expansion-panel>
+</mat-accordion>
+
 <mat-divider *ngIf="wallet"></mat-divider>
 <mat-grid-list cols="3" rowHeight="3em">
   
@@ -44,31 +62,34 @@
 
   <mat-grid-tile *ngIf="wallet">{{balance}} Ether</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="wallet">Token</mat-grid-tile>
+  <mat-grid-tile *ngIf="wallet">Points</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="wallet"></mat-grid-tile>
+  <mat-grid-tile *ngIf="wallet">{{points}}</mat-grid-tile>
 
   <mat-grid-tile *ngIf="wallet">{{token}} Ether</mat-grid-tile>
 
 </mat-grid-list>
 
-<mat-accordion>
-    <mat-expansion-panel (opened)="getTags()">
+<mat-accordion *ngIf="wallet"> 
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Tags
+          Transactions
         </mat-panel-title>
         <mat-panel-description>
-          Open to see your tags
+          Open to see all
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <span *ngFor="let tag of tags">
-          <button mat-stroked-button (click)="gotoTagById(tag)">{{tag.id}}</button>&nbsp;
+      <span *ngFor="let tnx of transactions | async">
+          <button (click)="gotoTnx(tnx.hash)" mat-stroked-button>{{tnx.nonce}}</button>&nbsp;
       </span>
   
     </mat-expansion-panel>
 </mat-accordion>
+<br>
+
+
   
 <mat-grid-list cols="3" rowHeight="3em">
 
@@ -80,7 +101,7 @@
   </mat-grid-tile>
   
   <mat-grid-tile *ngIf="authenticated()">
-    
+      <button mat-raised-button color="accent" [disabled]="!authenticated() || !wallet || !havePoints()" (click)="use()">Use points</button>
   </mat-grid-tile>
   
   <mat-grid-tile *ngIf="authenticated()">

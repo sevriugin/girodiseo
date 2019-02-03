@@ -8,6 +8,15 @@ const cors = require('cors')({
     origin: true,
   });
 
+// Ethereum 
+const web3 = require('web3');
+const Tx = require('ethereumjs-tx');
+web3js = new web3('https://'+ Rinkeby_host + Rinkeby_path);
+
+const artifact = require('./TokenLoyalty.json');
+const owner = '0xD601682a7584A7541C639899454D201Fe3270e9C';
+const key = 'F7481AB0DEDA4E7BFF986CC9001AF506F46689394B66C67AC4CF054A58668E7E';
+
 exports.proxy = functions.https.onRequest((request, response) => {
     return cors(request, response, () => {
         var term = request.query.q;
@@ -29,3 +38,47 @@ exports.proxy = functions.https.onRequest((request, response) => {
             });
     });
 });
+
+exports.mine = functions.firestore.document('rides/{rideID}')
+    .onCreate((snap, context) => {
+        var contract = new web3js.eth.Contract(
+            artifact.abi,
+            artifact.networks['4'].address,
+            { from: owner }
+        );
+        const ride = snap.data();
+        if (!ride.rider || !ride.rider.wallet) {
+            return;
+        }
+        const address = snap.data().rider.wallet.accounts[0];
+        const data = contract.methods.create(address, ride.rider.mobile).encodeABI();
+        // get nonce 
+        web3js.eth.getTransactionCount(owner)
+            // eslint-disable-next-line promise/always-return
+            .then((result) => {
+                const nonce = result;
+                console.log(`Nonce: ${nonce}`);
+                const privateKey = new Buffer(key, 'hex');
+                const rawTx = {
+                    from: owner,
+                    to: contract.options.address,
+                    value: 0x0,
+                    nonce: nonce,
+                    gasPrice: 80000000000,
+                    gasLimit: 1000000,
+                    chainId: 4,
+                    data: data,
+                };
+                const tx = new Tx(rawTx);
+                tx.sign(privateKey);
+                const serializedTx = tx.serialize();
+                console.log(serializedTx.toString('hex'));
+                web3js.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+                    .on('receipt', console.log);
+
+            })
+            .catch(error => console.error(error));
+
+        console.log(data);
+        
+    });

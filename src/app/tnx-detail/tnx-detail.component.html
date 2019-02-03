@@ -1,0 +1,62 @@
+<mat-grid-list *ngIf="transaction | async; else loading;"cols="3" rowHeight="3em">
+    
+    <mat-grid-tile>
+      <button (click)="gotoBack()" mat-icon-button>
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+    </mat-grid-tile>
+
+    <mat-grid-tile><h3>Transaction</h3></mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>A/C from:</mat-grid-tile>
+
+    <mat-grid-tile>
+        <button mat-stroked-button ngxClipboard [cbContent]="tnx.from">{{tnx.from.slice(0,6)+'...'+tnx.from.slice(36,42)}}</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>A/C to:</mat-grid-tile>
+
+    <mat-grid-tile>
+        <button mat-stroked-button ngxClipboard [cbContent]="tnx.to">{{tnx.to.slice(0,5)+'...'+tnx.to.slice(37,42)}}</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Tnx #:</mat-grid-tile>
+
+    <mat-grid-tile>{{tnx.nonce}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Block #:</mat-grid-tile>
+
+    <mat-grid-tile>{{tnx.block}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Value:</mat-grid-tile>
+
+    <mat-grid-tile>{{tnx.value}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Points:</mat-grid-tile>
+
+    <mat-grid-tile>{{tnx.points}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile>Blockchain:</mat-grid-tile>
+
+    <mat-grid-tile>{{tnx.chainId}}</mat-grid-tile>
+
+    <mat-grid-tile></mat-grid-tile>
+    
+    <mat-grid-tile [colspan]="3"><a [href]="'https://rinkeby.etherscan.io/tx/'+tnx.hash">See this transaction on Etherscan.io</a></mat-grid-tile>
+
+
+</mat-grid-list>

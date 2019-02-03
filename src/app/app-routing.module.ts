@@ -14,6 +14,8 @@ import { RideComponent } from './ride/ride.component';
 import { RideDetailComponent } from './ride-detail/ride-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GetstartedComponent } from './getstarted/getstarted.component';
+import { UsePointsComponent } from './use-points/use-points.component';
+import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
 
 
 const routes: Routes = [
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'ride/:id', component: RideDetailComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'getstarted', component: GetstartedComponent },
+  { path: 'use/:acc/:points', component: UsePointsComponent },
+  { path: 'tnx/:hash', component: TnxDetailComponent },
 ];
 
 @NgModule({

@@ -12,6 +12,8 @@ import { Wallet } from '../wallet';
 import { EthcontractService } from '../ethereum/ethcontract.service';
 import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { Transaction } from '../transaction';
+import { TransactionService } from '../transaction.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -26,6 +28,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   balance: string;
   account: string;
   token: string;
+  points: string;
+  transactions: Observable<Transaction[]>;
   constructor(
     private tagService: TagService,
     private authService: AuthService,
@@ -33,7 +37,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private contractService: EthcontractService,
-    private zone: NgZone
+    private zone: NgZone,
+    private tnxService: TransactionService
     ) { }
 
   ngOnInit() {
@@ -46,10 +51,16 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
             if (this.rider.wallet) {
               this.account = this.rider.wallet.accounts[0];
               this.contractService.getAccountBalance(this.account)
-                .subscribe((result) => this.zone.run(() => this.balance = result[0]));
+                .subscribe((result) => this.zone.run(() => this.balance = `${+result / 1e18}`));
               this.getBalance().subscribe(results => {
-                console.log('Get token balance');
                 this.token = `${+results / 1e18}`;
+              });
+              this.transactions = this.tnxService.getAccountTransactions(this.account);
+              this.transactions.subscribe((tnxs) => {
+                this.contractService.getTokenBalance(this.account)
+                  .subscribe((balance) => {
+                    this.points = `${+balance}`;
+                  });
               });
             }
           }
@@ -86,6 +97,14 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     this.router.navigate([`/update`]);
   }
 
+  use(): void {
+    this.router.navigate([`/use/${this.account}/${this.points}`]);
+  }
+
+  havePoints(): boolean {
+    return +this.points > 0;
+  }
+
   gotoTagById(tag: Tag): void {
     const tagId = tag ? tag.id : null;
     this.router.navigate([`/tag/${tagId}`]);
@@ -113,6 +132,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     } else {
       return this.contractService.getBalance();
     }
+  }
+
+  gotoTnx(hash: string): void {
+    this.router.navigate([`/tnx/${hash}`]);
   }
 
 }
