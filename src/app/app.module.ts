@@ -63,6 +63,9 @@ import { UsePointsComponent } from './use-points/use-points.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { TransactionService } from './transaction.service';
 import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
+import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgxKjuaModule } from 'ngx-kjua';
 
 
 @NgModule({
@@ -85,6 +88,10 @@ import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
     GetstartedComponent,
     UsePointsComponent,
     TnxDetailComponent,
+    QrcodeDialogComponent,
+  ],
+  entryComponents: [
+    QrcodeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +127,9 @@ import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
     HttpClientModule,
     ClipboardModule,
     ZXingScannerModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule,
+    NgxKjuaModule
   ],
   providers: [
     AngularFirestoreModule,

@@ -14,6 +14,8 @@ import { Observable, of } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Transaction } from '../transaction';
 import { TransactionService } from '../transaction.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { QrcodeDialogComponent } from '../qrcode-dialog/qrcode-dialog.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,6 +31,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   account: string;
   token: string;
   points: string;
+  showqr: boolean;
+  result: string;
   transactions: Observable<Transaction[]>;
   constructor(
     private tagService: TagService,
@@ -38,7 +42,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private router: Router,
     private contractService: EthcontractService,
     private zone: NgZone,
-    private tnxService: TransactionService
+    private tnxService: TransactionService,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -70,6 +75,20 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.getTags();
+  }
+
+  qrcode(): void {
+    this.showqr = true;
+    const dialogRef = this.dialog.open(QrcodeDialogComponent, {
+      width: '250px',
+      height: '300px',
+      data: {account: this.account, result: null}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.result = result;
+    });
   }
 
   getTags(): void {

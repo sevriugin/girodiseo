@@ -1,4 +1,4 @@
-<mat-grid-list cols="3" rowHeight="3em">
+<mat-grid-list *ngIf="!scanning" cols="3" rowHeight="3em">
     
     <mat-grid-tile>
       <button (click)="gotoBack()" mat-icon-button>
@@ -13,7 +13,12 @@
     <mat-grid-tile [colspan]="3"><h4>From</h4></mat-grid-tile>
     <mat-grid-tile [colspan]="3">{{account}}</mat-grid-tile>
     <mat-grid-tile [colspan]="3"><h4>To</h4></mat-grid-tile>
-    <mat-grid-tile [colspan]="3">0xD601682a7584A7541C639899454D201Fe3270e9C</mat-grid-tile>
+    <mat-grid-tile *ngIf="dest" [colspan]="3">{{dest}}</mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <button mat-raised-button color="accent" [disabled]="process" (click)="scan()">Scan QR</button>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile [colspan]="3"><h4>Number</h4></mat-grid-tile>
     <mat-grid-tile [colspan]="3">{{value}}</mat-grid-tile>
     <mat-grid-tile [rowspan]="2" [colspan]="3">
@@ -22,8 +27,26 @@
     
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile>
-        <button mat-raised-button color="accent" [disabled]="!value || process" (click)="confirm()">Confirm</button>
+        <button mat-raised-button color="accent" [disabled]="!value || process || invalid" (click)="confirm()">Confirm</button>
     </mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
   
 </mat-grid-list>
+
+<mat-grid-list *ngIf="scanning" cols="3" rowHeight="3em">
+    
+    <mat-grid-tile>
+      
+    </mat-grid-tile>
+
+    <mat-grid-tile><h3>Scanner</h3></mat-grid-tile>
+
+    <mat-grid-tile>
+      <button (click)="close()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-grid-tile>
+  
+</mat-grid-list>
+
+<zxing-scanner *ngIf="scanning" #scanner (camerasFound)="camerasFoundHandler($event)" (scanComplete)="scanCompleteHandler($event)"></zxing-scanner>

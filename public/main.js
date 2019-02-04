@@ -72,7 +72,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-grid-list cols=\"3\" rowHeight=\"4em\">\n    <mat-grid-tile [routerLink]=\"['/landing']\" [rowspan]=\"3\" [colspan]=\"3\">\n        <img  src=\"../assets/giro_logo_big.png\">\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p>Giro d'Iseo Web Application</p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Virsion 0.0.1.5+</small></p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n        <p><small>Ethereum Rinkiby network via https proxy</small></p>\n      </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Copyright REGA Risk Sharing (C) 2019</small></p>\n    </mat-grid-tile>\n    \n</mat-grid-list>\n"
+module.exports = "\n<mat-grid-list cols=\"3\" rowHeight=\"4em\">\n    <mat-grid-tile [routerLink]=\"['/landing']\" [rowspan]=\"3\" [colspan]=\"3\">\n        <img  src=\"../assets/giro_logo_big.png\">\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p>Giro d'Iseo Web Application</p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Virsion 0.0.1.5.07</small></p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n        <p><small>Ethereum Rinkiby network via https proxy</small></p>\n      </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Copyright REGA Risk Sharing (C) 2019</small></p>\n    </mat-grid-tile>\n    \n</mat-grid-list>\n"
 
 /***/ }),
 
@@ -340,12 +340,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_slider__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! @angular/material/slider */ "./node_modules/@angular/material/esm5/slider.es5.js");
 /* harmony import */ var _transaction_service__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./transaction.service */ "./src/app/transaction.service.ts");
 /* harmony import */ var _tnx_detail_tnx_detail_component__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./tnx-detail/tnx-detail.component */ "./src/app/tnx-detail/tnx-detail.component.ts");
+/* harmony import */ var _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./qrcode-dialog/qrcode-dialog.component */ "./src/app/qrcode-dialog/qrcode-dialog.component.ts");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+/* harmony import */ var ngx_kjua__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ngx-kjua */ "./node_modules/ngx-kjua/esm5/ngx-kjua.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -433,6 +439,10 @@ var AppModule = /** @class */ (function () {
                 _getstarted_getstarted_component__WEBPACK_IMPORTED_MODULE_46__["GetstartedComponent"],
                 _use_points_use_points_component__WEBPACK_IMPORTED_MODULE_59__["UsePointsComponent"],
                 _tnx_detail_tnx_detail_component__WEBPACK_IMPORTED_MODULE_62__["TnxDetailComponent"],
+                _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_63__["QrcodeDialogComponent"],
+            ],
+            entryComponents: [
+                _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_63__["QrcodeDialogComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -468,7 +478,9 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_55__["HttpClientModule"],
                 ngx_clipboard__WEBPACK_IMPORTED_MODULE_57__["ClipboardModule"],
                 _zxing_ngx_scanner__WEBPACK_IMPORTED_MODULE_58__["ZXingScannerModule"],
-                _angular_material_slider__WEBPACK_IMPORTED_MODULE_60__["MatSliderModule"]
+                _angular_material_slider__WEBPACK_IMPORTED_MODULE_60__["MatSliderModule"],
+                _angular_material_dialog__WEBPACK_IMPORTED_MODULE_64__["MatDialogModule"],
+                ngx_kjua__WEBPACK_IMPORTED_MODULE_65__["NgxKjuaModule"]
             ],
             providers: [
                 _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestoreModule"],
@@ -1880,6 +1892,82 @@ var ProfileUpdateComponent = /** @class */ (function () {
             _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_8__["EthcontractService"]])
     ], ProfileUpdateComponent);
     return ProfileUpdateComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/qrcode-dialog/qrcode-dialog.component.css":
+/*!***********************************************************!*\
+  !*** ./src/app/qrcode-dialog/qrcode-dialog.component.css ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/qrcode-dialog/qrcode-dialog.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/qrcode-dialog/qrcode-dialog.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div mat-dialog-content>\n    <ngx-kjua\n    [text]=\"qrcode\"\n  ></ngx-kjua>\n</div>\n<div mat-dialog-actions>\n  <button mat-button [mat-dialog-close]=\"data.result\" cdkFocusInitial>Ok</button>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/qrcode-dialog/qrcode-dialog.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/qrcode-dialog/qrcode-dialog.component.ts ***!
+  \**********************************************************/
+/*! exports provided: QrcodeDialogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QrcodeDialogComponent", function() { return QrcodeDialogComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var QrcodeDialogComponent = /** @class */ (function () {
+    function QrcodeDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.data.result = 'OK';
+        this.qrcode = "ethereum:" + this.data.account;
+    }
+    QrcodeDialogComponent.prototype.ngOnInit = function () {
+    };
+    QrcodeDialogComponent.prototype.onNoClick = function () {
+        this.dialogRef.close();
+    };
+    QrcodeDialogComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-qrcode-dialog',
+            template: __webpack_require__(/*! ./qrcode-dialog.component.html */ "./src/app/qrcode-dialog/qrcode-dialog.component.html"),
+            styles: [__webpack_require__(/*! ./qrcode-dialog.component.css */ "./src/app/qrcode-dialog/qrcode-dialog.component.css")]
+        }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_1__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDialogRef"], Object])
+    ], QrcodeDialogComponent);
+    return QrcodeDialogComponent;
 }());
 
 
@@ -3517,7 +3605,7 @@ module.exports = ".example-h2 {\n    margin: 10px;\n  }\n  \n  .example-section 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n    \n    <mat-grid-tile>\n      <button (click)=\"gotoBack()\" mat-icon-button>\n        <mat-icon>arrow_back_ios</mat-icon>\n      </button>\n    </mat-grid-tile>\n\n    <mat-grid-tile><h3>Use points</h3></mat-grid-tile>\n\n    <mat-grid-tile></mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"3\"><h4>From</h4></mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\">{{account}}</mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\"><h4>To</h4></mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\">0xD601682a7584A7541C639899454D201Fe3270e9C</mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\"><h4>Number</h4></mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\">{{value}}</mat-grid-tile>\n    <mat-grid-tile [rowspan]=\"2\" [colspan]=\"3\">\n      <mat-slider [min]=\"0\" [max]=\"points\" thumbLabel=\"1\" showTicks=\"1\" step=\"1\" [(ngModel)]=\"value\"></mat-slider>\n    </mat-grid-tile>\n    \n    <mat-grid-tile></mat-grid-tile>\n    <mat-grid-tile>\n        <button mat-raised-button color=\"accent\" [disabled]=\"!value || process\" (click)=\"confirm()\">Confirm</button>\n    </mat-grid-tile>\n    <mat-grid-tile></mat-grid-tile>\n  \n</mat-grid-list>"
+module.exports = "<mat-grid-list *ngIf=\"!scanning\" cols=\"3\" rowHeight=\"3em\">\n    \n    <mat-grid-tile>\n      <button (click)=\"gotoBack()\" mat-icon-button>\n        <mat-icon>arrow_back_ios</mat-icon>\n      </button>\n    </mat-grid-tile>\n\n    <mat-grid-tile><h3>Use points</h3></mat-grid-tile>\n\n    <mat-grid-tile></mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"3\"><h4>From</h4></mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\">{{account}}</mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\"><h4>To</h4></mat-grid-tile>\n    <mat-grid-tile *ngIf=\"dest\" [colspan]=\"3\">{{dest}}</mat-grid-tile>\n    <mat-grid-tile></mat-grid-tile>\n    <mat-grid-tile>\n        <button mat-raised-button color=\"accent\" [disabled]=\"process\" (click)=\"scan()\">Scan QR</button>\n    </mat-grid-tile>\n    <mat-grid-tile></mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\"><h4>Number</h4></mat-grid-tile>\n    <mat-grid-tile [colspan]=\"3\">{{value}}</mat-grid-tile>\n    <mat-grid-tile [rowspan]=\"2\" [colspan]=\"3\">\n      <mat-slider [min]=\"0\" [max]=\"points\" thumbLabel=\"1\" showTicks=\"1\" step=\"1\" [(ngModel)]=\"value\"></mat-slider>\n    </mat-grid-tile>\n    \n    <mat-grid-tile></mat-grid-tile>\n    <mat-grid-tile>\n        <button mat-raised-button color=\"accent\" [disabled]=\"!value || process || invalid\" (click)=\"confirm()\">Confirm</button>\n    </mat-grid-tile>\n    <mat-grid-tile></mat-grid-tile>\n  \n</mat-grid-list>\n\n<mat-grid-list *ngIf=\"scanning\" cols=\"3\" rowHeight=\"3em\">\n    \n    <mat-grid-tile>\n      \n    </mat-grid-tile>\n\n    <mat-grid-tile><h3>Scanner</h3></mat-grid-tile>\n\n    <mat-grid-tile>\n      <button (click)=\"close()\" mat-icon-button>\n        <mat-icon>close</mat-icon>\n      </button>\n    </mat-grid-tile>\n  \n</mat-grid-list>\n\n<zxing-scanner *ngIf=\"scanning\" #scanner (camerasFound)=\"camerasFoundHandler($event)\" (scanComplete)=\"scanCompleteHandler($event)\"></zxing-scanner>"
 
 /***/ }),
 
@@ -3537,6 +3625,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
 /* harmony import */ var _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ethereum/ethcontract.service */ "./src/app/ethereum/ethcontract.service.ts");
+/* harmony import */ var _zxing_ngx_scanner__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @zxing/ngx-scanner */ "./node_modules/@zxing/ngx-scanner/esm5/zxing-ngx-scanner.js");
+/* harmony import */ var _zxing_library__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @zxing/library */ "./node_modules/@zxing/library/esm5/index.js");
+/* harmony import */ var _zxing_library__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_zxing_library__WEBPACK_IMPORTED_MODULE_7__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3546,6 +3637,8 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
+
 
 
 
@@ -3563,19 +3656,53 @@ var UsePointsComponent = /** @class */ (function () {
     }
     UsePointsComponent.prototype.ngOnInit = function () {
         this.value = 0;
+        this.dest = '';
         this.process = false;
+        this.scanning = false;
+        this.invalid = true;
         this.account = this.route.snapshot.paramMap.get('acc');
         this.points = this.route.snapshot.paramMap.get('points');
+    };
+    UsePointsComponent.prototype.camerasFoundHandler = function (event) {
+        this.scanner.scan(event[0].deviceId);
+    };
+    UsePointsComponent.prototype.scanCompleteHandler = function (event) {
+        this.scanning = false;
+        console.log(event);
+        if (event instanceof _zxing_library__WEBPACK_IMPORTED_MODULE_7__["Result"]) {
+            this.qr_code = event.getText();
+            if (this.qr_code.startsWith('ethereum:')) {
+                this.invalid = false;
+                this.dest = this.qr_code.slice(9);
+            }
+            else {
+                this.invalid = true;
+                this.dest = 'Not Ethereum account';
+            }
+        }
+        else {
+            console.error('Scanner error');
+        }
     };
     UsePointsComponent.prototype.gotoBack = function () {
         this.location.back();
     };
+    UsePointsComponent.prototype.scan = function () {
+        this.scanning = true;
+    };
+    UsePointsComponent.prototype.close = function () {
+        this.scanning = false;
+    };
     UsePointsComponent.prototype.confirm = function () {
         this.value = 1;
         this.process = true;
-        this.contractService.transfer('0xD601682a7584A7541C639899454D201Fe3270e9C');
+        this.contractService.transfer(this.dest);
         this.location.back();
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('scanner'),
+        __metadata("design:type", _zxing_ngx_scanner__WEBPACK_IMPORTED_MODULE_6__["ZXingScannerComponent"])
+    ], UsePointsComponent.prototype, "scanner", void 0);
     UsePointsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-use-points',
@@ -3614,7 +3741,7 @@ module.exports = ".example-headers-align .mat-expansion-panel-header-title,\n.ex
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile></mat-grid-tile>\n\n  <mat-grid-tile><h3>Profile</h3></mat-grid-tile>\n\n  <mat-grid-tile></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">Name</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">{{name()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">Mobile</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">{{phone()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"rider\">Nikname</mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\"></mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\">{{rider.nikname}}</mat-grid-tile>\n</mat-grid-list>\n\n<mat-accordion>\n    <mat-expansion-panel (opened)=\"getTags()\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Tags\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see your tags\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <span *ngFor=\"let tag of tags\">\n          <button mat-stroked-button (click)=\"gotoTagById(tag)\">{{tag.id}}</button>&nbsp;\n      </span>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n\n<mat-divider *ngIf=\"wallet\"></mat-divider>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\"><h3>Wallet</h3></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Account</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n    <button mat-stroked-button ngxClipboard [cbContent]=\"account\">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Balance</mat-grid-tile>\n    \n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{balance}} Ether</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Points</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{points}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{token}} Ether</mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-accordion *ngIf=\"wallet\"> \n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Transactions\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see all\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <span *ngFor=\"let tnx of transactions | async\">\n          <button (click)=\"gotoTnx(tnx.hash)\" mat-stroked-button>{{tnx.nonce}}</button>&nbsp;\n      </span>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n<br>\n\n\n  \n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile [colspan]=\"3\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"warn\" [disabled]=\"!authenticated()\" (click)=\"logout()\">Logout</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n      <button mat-raised-button color=\"accent\" [disabled]=\"!authenticated() || !wallet || !havePoints()\" (click)=\"use()\">Use points</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"primary\" [disabled]=\"!authenticated()\" (click)=\"gotoUpdate()\">Update</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"!authenticated()\" [colspan]=\"3\">\n    No user logged in\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n\n  "
+module.exports = "<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile></mat-grid-tile>\n\n  <mat-grid-tile><h3>Profile</h3></mat-grid-tile>\n\n  <mat-grid-tile></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">Name</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">{{name()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">Mobile</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">{{phone()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"rider\">Nikname</mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\"></mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\">{{rider.nikname}}</mat-grid-tile>\n</mat-grid-list>\n\n<mat-accordion>\n    <mat-expansion-panel (opened)=\"getTags()\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Tags\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see your tags\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <span *ngFor=\"let tag of tags\">\n          <button mat-stroked-button (click)=\"gotoTagById(tag)\">{{tag.id}}</button>&nbsp;\n      </span>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n\n<mat-divider *ngIf=\"wallet\"></mat-divider>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\"><h3>Wallet</h3></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Account</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n      <button (click)=\"qrcode()\" mat-icon-button>\n          <mat-icon>view_agenda</mat-icon>\n      </button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n    <button mat-stroked-button ngxClipboard [cbContent]=\"account\">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Balance</mat-grid-tile>\n    \n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{balance}} Ether</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Points</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{points}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{token}} Ether</mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-accordion *ngIf=\"wallet\"> \n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Transactions\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see all\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <span *ngFor=\"let tnx of transactions | async\">\n          <button (click)=\"gotoTnx(tnx.hash)\" mat-stroked-button>{{tnx.nonce}}</button>&nbsp;\n      </span>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n<br>\n\n\n  \n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile [colspan]=\"3\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"warn\" [disabled]=\"!authenticated()\" (click)=\"logout()\">Logout</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n      <button mat-raised-button color=\"accent\" [disabled]=\"!authenticated() || !wallet || !havePoints()\" (click)=\"use()\">Use points</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"primary\" [disabled]=\"!authenticated()\" (click)=\"gotoUpdate()\">Update</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"!authenticated()\" [colspan]=\"3\">\n    No user logged in\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n\n  "
 
 /***/ }),
 
@@ -3636,6 +3763,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ethereum/ethcontract.service */ "./src/app/ethereum/ethcontract.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var _transaction_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../transaction.service */ "./src/app/transaction.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../qrcode-dialog/qrcode-dialog.component */ "./src/app/qrcode-dialog/qrcode-dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3653,8 +3782,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var UserProfileComponent = /** @class */ (function () {
-    function UserProfileComponent(tagService, authService, riderService, route, router, contractService, zone, tnxService) {
+    function UserProfileComponent(tagService, authService, riderService, route, router, contractService, zone, tnxService, dialog) {
         this.tagService = tagService;
         this.authService = authService;
         this.riderService = riderService;
@@ -3663,6 +3794,7 @@ var UserProfileComponent = /** @class */ (function () {
         this.contractService = contractService;
         this.zone = zone;
         this.tnxService = tnxService;
+        this.dialog = dialog;
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -3693,6 +3825,19 @@ var UserProfileComponent = /** @class */ (function () {
     };
     UserProfileComponent.prototype.ngAfterViewInit = function () {
         this.getTags();
+    };
+    UserProfileComponent.prototype.qrcode = function () {
+        var _this = this;
+        this.showqr = true;
+        var dialogRef = this.dialog.open(_qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_9__["QrcodeDialogComponent"], {
+            width: '250px',
+            height: '300px',
+            data: { account: this.account, result: null }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            _this.result = result;
+        });
     };
     UserProfileComponent.prototype.getTags = function () {
         var _this = this;
@@ -3765,7 +3910,8 @@ var UserProfileComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_5__["EthcontractService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"],
-            _transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"]])
+            _transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialog"]])
     ], UserProfileComponent);
     return UserProfileComponent;
 }());

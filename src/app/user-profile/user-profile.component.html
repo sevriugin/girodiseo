@@ -50,7 +50,11 @@
 
   <mat-grid-tile *ngIf="wallet">Account</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="wallet"></mat-grid-tile>
+  <mat-grid-tile *ngIf="wallet">
+      <button (click)="qrcode()" mat-icon-button>
+          <mat-icon>view_agenda</mat-icon>
+      </button>
+  </mat-grid-tile>
 
   <mat-grid-tile *ngIf="wallet">
     <button mat-stroked-button ngxClipboard [cbContent]="account">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>
