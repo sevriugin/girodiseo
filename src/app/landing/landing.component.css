@@ -1,8 +1,136 @@
-.example-card {
-    max-width: 380px;
+
+
+  .BG {
+    width: 1440px;
+    height: 900px;
+    background-color: #010020;
+    position: relative;
   }
+
+  .Bike {
+    width: 1440px;
+    height: 540px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+  }
+
   
-  img {
-    max-height: 380px;
+
+  .Group-6 {
+    width: 231px;
+    height: 230px;
+    position: relative;
+    top: -400px;
+    left: 400px;
+    z-index: 2;
+  }
+
+  .Rectangle-2-Copy {
+    width: 270px;
+    height: 48px;
+    opacity: 0.4;
+    border-radius: 24px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+    border-color: aqua;
+    background-color: #010020;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    color:white;
+  }
+
+
+  .Girodiseo {
+    width: 570px;
+    height: 44px;
+    font-family: Lato;
+    font-size: 36px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: var(--white);
+  }
+
+  .Great-idea-for-a-loc {
+    width: 570px;
+    height: 63px;
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    color: var(--white);
+  }
+
+  
+
+  .Actions {
+    position: relative;
+    top: -700px;
+    left: 700px;
+    z-index: 2;
+    color:white;
+  }
+
+  .PR {
+    color:white;
+    position: relative;
+    top: -400px;
+    left: 500px;
+  }
+
+  .PR-text {
+    font-family: Lato;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    position: relative;
+    z-index: 3;
+    color:white;
+    left: 200px;
+  }
+
+  .Bike_PR {
+    width: 570px;
+    height: 180px;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    top: -100px;
+  }
+
+  @media (max-width: 767px) {
+    .BG {
+      width: 767px;
+    }
+    .Group-6 {
+      top: -520px;
+      left: 150px;
+      transform: scale(.5);
+    }
+
+    .PR {
+      display: none;
+    }
+
+    .Bike {
+      transform-origin: 0% 0%;
+      transform: scale(.5);
+    }
+
+    .Actions {
+      top: -450px;
+      left: 20px;
+    }
   }
   

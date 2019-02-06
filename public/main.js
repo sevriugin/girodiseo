@@ -72,7 +72,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-grid-list cols=\"3\" rowHeight=\"4em\">\n    <mat-grid-tile [routerLink]=\"['/landing']\" [rowspan]=\"3\" [colspan]=\"3\">\n        <img  src=\"../assets/giro_logo_big.png\">\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p>Giro d'Iseo Web Application</p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Virsion 0.0.1.5.07</small></p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n        <p><small>Ethereum Rinkiby network via https proxy</small></p>\n      </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Copyright REGA Risk Sharing (C) 2019</small></p>\n    </mat-grid-tile>\n    \n</mat-grid-list>\n"
+module.exports = "\n<mat-grid-list cols=\"3\" rowHeight=\"4em\">\n    <mat-grid-tile [routerLink]=\"['/landing']\" [rowspan]=\"3\" [colspan]=\"3\">\n        <img  src=\"../assets/group-6.svg\">\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p>Giro d'Iseo Web Application</p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Virsion 0.0.1.5.07</small></p>\n    </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n        <p><small>Ethereum Rinkiby network via https proxy</small></p>\n      </mat-grid-tile>\n\n    <mat-grid-tile rowHeight=\"3em\" [colspan]=\"3\">\n      <p><small>Copyright REGA Risk Sharing (C) 2019</small></p>\n    </mat-grid-tile>\n    \n</mat-grid-list>\n"
 
 /***/ }),
 
@@ -343,12 +343,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./qrcode-dialog/qrcode-dialog.component */ "./src/app/qrcode-dialog/qrcode-dialog.component.ts");
 /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
 /* harmony import */ var ngx_kjua__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ngx-kjua */ "./node_modules/ngx-kjua/esm5/ngx-kjua.js");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/esm5/core.es5.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -480,7 +482,8 @@ var AppModule = /** @class */ (function () {
                 _zxing_ngx_scanner__WEBPACK_IMPORTED_MODULE_58__["ZXingScannerModule"],
                 _angular_material_slider__WEBPACK_IMPORTED_MODULE_60__["MatSliderModule"],
                 _angular_material_dialog__WEBPACK_IMPORTED_MODULE_64__["MatDialogModule"],
-                ngx_kjua__WEBPACK_IMPORTED_MODULE_65__["NgxKjuaModule"]
+                ngx_kjua__WEBPACK_IMPORTED_MODULE_65__["NgxKjuaModule"],
+                _angular_material_core__WEBPACK_IMPORTED_MODULE_66__["MatRippleModule"]
             ],
             providers: [
                 _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestoreModule"],
@@ -1268,7 +1271,7 @@ var ImagesService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-card {\n    max-width: 380px;\n  }\n  \n  img {\n    max-height: 380px;\n  }\n  "
+module.exports = "\n\n  .BG {\n    width: 1440px;\n    height: 900px;\n    background-color: #010020;\n    position: relative;\n  }\n\n  .Bike {\n    width: 1440px;\n    height: 540px;\n    -o-object-fit: contain;\n       object-fit: contain;\n    position: relative;\n    z-index: 1;\n  }\n\n  .Group-6 {\n    width: 231px;\n    height: 230px;\n    position: relative;\n    top: -400px;\n    left: 400px;\n    z-index: 2;\n  }\n\n  .Rectangle-2-Copy {\n    width: 270px;\n    height: 48px;\n    opacity: 0.4;\n    border-radius: 24px;\n    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);\n    border-color: aqua;\n    background-color: #010020;\n    font-family: Lato;\n    font-size: 16px;\n    font-weight: bold;\n    font-style: normal;\n    font-stretch: normal;\n    color:white;\n  }\n\n  .Girodiseo {\n    width: 570px;\n    height: 44px;\n    font-family: Lato;\n    font-size: 36px;\n    font-weight: bold;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: normal;\n    letter-spacing: normal;\n    color: var(--white);\n  }\n\n  .Great-idea-for-a-loc {\n    width: 570px;\n    height: 63px;\n    font-family: Lato;\n    font-size: 18px;\n    font-weight: normal;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: 1.17;\n    letter-spacing: normal;\n    color: var(--white);\n  }\n\n  .Actions {\n    position: relative;\n    top: -700px;\n    left: 700px;\n    z-index: 2;\n    color:white;\n  }\n\n  .PR {\n    color:white;\n    position: relative;\n    top: -400px;\n    left: 500px;\n  }\n\n  .PR-text {\n    font-family: Lato;\n    font-size: 18px;\n    font-weight: normal;\n    font-style: normal;\n    font-stretch: normal;\n    line-height: 1.17;\n    letter-spacing: normal;\n    position: relative;\n    z-index: 3;\n    color:white;\n    left: 200px;\n  }\n\n  .Bike_PR {\n    width: 570px;\n    height: 180px;\n    -o-object-fit: contain;\n       object-fit: contain;\n    position: relative;\n    z-index: 2;\n    top: -100px;\n  }\n\n  @media (max-width: 767px) {\n    .BG {\n      width: 767px;\n    }\n    .Group-6 {\n      top: -520px;\n      left: 150px;\n      -webkit-transform: scale(.5);\n              transform: scale(.5);\n    }\n\n    .PR {\n      display: none;\n    }\n\n    .Bike {\n      -webkit-transform-origin: 0% 0%;\n              transform-origin: 0% 0%;\n      -webkit-transform: scale(.5);\n              transform: scale(.5);\n    }\n\n    .Actions {\n      top: -450px;\n      left: 20px;\n    }\n  }\n  "
 
 /***/ }),
 
@@ -1279,7 +1282,7 @@ module.exports = ".example-card {\n    max-width: 380px;\n  }\n  \n  img {\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<br>\n<mat-card class=\"example-card\">\n    <mat-card-header>\n      <mat-card-title>Fun, Wellness, Savings</mat-card-title>\n      <mat-card-subtitle>Ride around Iseo lake, earning points and use them to buy local goods and services with discounts.</mat-card-subtitle>\n    </mat-card-header>\n  \n        <img  [routerLink]=\"['/getstarted']\"mat-card-image src=\"../assets/girodiseo.jpg\" alt=\"Get Started\">\n\n    <mat-card-content>\n      <strong>Join the Giro d'Iseo to make the riding even more fun!</strong>\n    </mat-card-content>\n    <mat-card-actions>\n      <button mat-raised-button [routerLink]=\"['/getstarted']\" color=\"warn\">Get started</button>\n      <button mat-raised-button [routerLink]=\"['/dashboard']\" color=\"primary\">See results</button>\n    </mat-card-actions>\n  </mat-card>\n  \n\n\n\n\n"
+module.exports = "<section class=\"BG\">\n    <img src=\"../../assets/bike.png\"\n    srcset=\"../../assets/bike@2x.png 2x,\n           ../../assets/bike@3x.png 3x\"\n    class=\"Bike\">\n    <!-- png -->\n\n    <img src=\"../../assets/group-6.png\"\n    srcset=\"../../assets/group-6@2x.png 2x,\n           ../../assets/group-6@3x.png 3x\"\n    class=\"Group-6\">\n\n    <div class=\"Actions\">\n      <h1 class=\"Girodiseo\">Giro d'Iseo</h1>\n      <p class=\"Great-idea-for-a-loc\">Ride around the lake, earning points and use them<br>\n     to buy local goods and services</p>\n     <button matRipple [matRippleColor]=\"'aqua'\" [routerLink]=\"['/getstarted']\" class=\"Rectangle-2-Copy\">\n      Get Started\n      </button>\n    </div>\n\n    <div class=\"PR\">\n      <div class=\"PR-text\"> FUN, WELLNESS AND SAVINGD <br><br>Gerat product for the local communuty</div>\n      <img src=\"../../assets/bike-pr.png\"\n        srcset=\"../../assets/bike-pr@2x.png 2x,\n               ../../assets/bike-pr@3x.png 3x\"\n        class=\"Bike_PR\">\n    </div>\n\n\n</section>\n  \n\n\n\n\n"
 
 /***/ }),
 

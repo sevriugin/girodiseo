@@ -66,6 +66,7 @@ import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
 import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxKjuaModule } from 'ngx-kjua';
+import { MatRippleModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { NgxKjuaModule } from 'ngx-kjua';
     ZXingScannerModule,
     MatSliderModule,
     MatDialogModule,
-    NgxKjuaModule
+    NgxKjuaModule,
+    MatRippleModule
   ],
   providers: [
     AngularFirestoreModule,
