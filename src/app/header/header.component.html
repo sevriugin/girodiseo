@@ -1,0 +1,22 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center"  class="header-bar">
+
+    <div fxFlex="2"></div>
+    <div fxFlex="8">
+        <button *ngIf="back" (click)="gotoBack()" class="header-btn" mat-icon-button>
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex="35"></div>
+    <div fxFlex="10"><h3 class="header-title">{{title}}</h3></div>
+    <div fxFlex="35"></div>
+
+    <div fxFlex="8">
+        <button *ngIf="reload" (click)="doReload()" class="header-btn" mat-icon-button>
+            <mat-icon>autorenew</mat-icon>
+        </button>
+        <span *ngIf="subtitle" fxHide fxShow.gt-sm><small>{{subtitle}}</small></span>
+    </div>
+    <div fxFlex="2"></div>
+</div>
+

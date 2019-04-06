@@ -1,0 +1,35 @@
+<div fxLayout="column">
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div fxFlex="100">
+        <br><br>
+      </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div fxFlex="100">
+          <mat-form-field>
+              <input matInput name="itemid" type="text" placeholder="Enter item ID" required minlenght="8" [(ngModel)]="data.id">
+          </mat-form-field>
+      </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div fxFlex="100">
+        <br><br>
+      </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div fxFlex="40" mat-dialog-actions>
+          <button mat-raised-button color="primary" mat-button [disabled]="!data.id" [mat-dialog-close]="data.id" cdkFocusInitial>Ok</button>
+      </div>
+      <div fxFlex="20" mat-dialog-actions></div>
+      <div fxFlex="40" mat-dialog-actions>
+          <button mat-raised-button color="warn" mat-button (click)="onNoClick()">Cancel</button>
+      </div>
+          
+     
+  </div>
+  
+</div>

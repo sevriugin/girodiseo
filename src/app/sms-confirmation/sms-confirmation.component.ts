@@ -15,6 +15,7 @@ export class SmsConfirmationComponent implements OnInit {
   smscode: string;
   msg: string;
   progress: boolean;
+  page: string;
 
   constructor(
     private zone: NgZone,
@@ -25,6 +26,11 @@ export class SmsConfirmationComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.page = this.route.snapshot.paramMap.get('page');
+    console.log('PAGE ' + this.page);
+    if (!this.page) {
+      this.page = 'profile';
+    }
     this.clear();
     this.getMobile();
   }
@@ -50,7 +56,7 @@ export class SmsConfirmationComponent implements OnInit {
       } else {
         console.log(user);
         // registration is confirmed move to client profile
-        this.zone.run(() => this.router.navigate([`/profile`]))
+        this.zone.run(() => this.router.navigate([`/${this.page}`]))
           .then(() => console.log('SmsConfirmationComponent: confirm: navigated to profile'))
           .catch((err) => console.error(err));
       }

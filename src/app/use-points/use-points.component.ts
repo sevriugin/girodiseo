@@ -59,7 +59,7 @@ export class UsePointsComponent implements OnInit {
         this.dest = this.qr_code.slice(9);
       } else {
         this.invalid = true;
-        this.dest = 'Not Ethereum account';
+        this.dest = this.qr_code;
       }
     } else {
       console.error('Scanner error');

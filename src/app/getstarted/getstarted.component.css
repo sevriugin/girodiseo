@@ -1,3 +1,47 @@
-.vg-player {
-    width: 400px;
-}
+.home-intro-section {
+    background: url('../../assets/bike.png') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 180px 0;
+    color: #ffffff;
+    overflow: hidden;
+  }
+  
+  .home-footer-section {
+    height: 20px;
+    background-color: #010020;
+    color: #ffffff;
+  }
+  
+  .get-started {
+    width: 270px;
+    height: 48px;
+    opacity: 0.4;
+    border-radius: 24px;
+    font-size: 16px;
+    border-color: aqua;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    background-color: #010020;
+  }
+  
+  .footer-info {
+    font-size: 9px;
+    color: gray;
+  }
+  
+  .home-intro-section-small {
+    background: url('../../assets/bike-small.png') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 180px 0;
+    color: #ffffff;
+    overflow: hidden;
+  }
+  
+  
+  

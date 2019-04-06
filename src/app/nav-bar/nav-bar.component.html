@@ -1,28 +1,42 @@
- <mat-grid-list cols="8" rowHeight="3em">
-    <mat-grid-tile (click)="gotoHome()" [colspan]="3">
-      <img  src="../assets/girologo.png">&nbsp;&nbsp;<h3>Giro d'Iseo</h3>
-    </mat-grid-tile>
-   
-    <mat-grid-tile></mat-grid-tile>
-    
-    <mat-grid-tile (click)="gotoReg()" [colspan]="2"><small>{{nikname}}</small></mat-grid-tile>
-    <mat-grid-tile>
+ <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center"  class="nav-bar">
+
+    <div fxFlex.gt-sm="2" fxFlex="5"></div>
+    <div fxFlex.gt-sm="8" fxFlex="20" (click)="gotoHome()">
+      <img  src="../assets/group-6-logo.png">
+    </div>
+
+    <div fxLayout="row" fxFlex.gt-sm="80" fxFlex="22">
+        <div fxFlex="10" fxHide fxShow.gt-sm></div>
+        <button fxHide fxShow.gt-sm class="hometop-btn" mat-menu-item (click)="gotoHome()">Home</button>
+        <button fxHide fxShow.gt-sm class="hometop-btn" mat-menu-item (click)="gotoRide()">Ride</button>
+        <button fxHide fxShow.gt-sm class="hometop-btn" mat-menu-item (click)="gotoDashboard()">Dashboard</button>
+        <button fxHide fxShow.gt-sm class="hometop-btn" mat-menu-item (click)="gotoTags()">Tag list</button>
+        <button fxHide fxShow.gt-sm class="hometop-btn" mat-menu-item (click)="gotoAbout()">About</button>
+        <button fxHide fxShow.gt-sm class="hometop-btn" mat-menu-item (click)="gotoShopping()">Shopping</button>
+        <button fxHide fxShow.gt-sm class="hometop-btn" (click)="logout()" mat-menu-item>{{authenticated()?"Logout":"Login"}}</button>
+        <div fxFlex="10" fxHide fxShow.gt-sm></div>
+    </div>
+
+    <div fxFlex.gt-sm="10" fxFlex="43">
         <button (click)="gotoReg()" mat-icon-button>
             <mat-icon>{{authenticated()?"account_circle":"add_circle_outline"}}</mat-icon>
         </button>
-    </mat-grid-tile>
-    <mat-grid-tile>
+    </div>
+
+    <div fxHide.gt-sm fxFlex.gt-sm="0" fxFlex="5">
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
         </button>
-          <mat-menu #menu="matMenu">
+        <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="gotoHome()">Home</button>
             <button mat-menu-item (click)="gotoRide()">Ride</button>
             <button mat-menu-item (click)="gotoDashboard()">Dashboard</button>
             <button mat-menu-item (click)="gotoTags()">Tag list</button>
             <button mat-menu-item (click)="gotoAbout()">About</button>
+            <button mat-menu-item (click)="gotoShopping()">Shopping</button>
             <button (click)="logout()" mat-menu-item>{{authenticated()?"Logout":"Login"}}</button>
-          </mat-menu>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-divider></mat-divider>
+        </mat-menu>
+    </div>
+    <div fxHide.gt-sm fxFlex.gt-sm="0" fxFlex="5"></div>
+</div>
+

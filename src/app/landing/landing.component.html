@@ -1,34 +1,34 @@
-<section class="BG">
-    <img src="../../assets/bike.png"
-    srcset="../../assets/bike@2x.png 2x,
-           ../../assets/bike@3x.png 3x"
-    class="Bike">
-    <!-- png -->
+<div fxLayout="column">
+       <div fxLayout="raw" 
+              fxLayout.lt-md="column" 
+              fxLayoutAlign="space-around center" 
+              id="intro-section" 
+              class = "home-intro-section"
+              [ngClass.md]="['home-intro-section']" 
+              [ngClass.sm]="['home-intro-section-small']"
+              [ngClass.xs]="['home-intro-section-small']">
+              <div fxHide.lt-md></div>
+              <div><img [routerLink]="['/getstarted']" src="../../assets/group-6.png" src.xs="../../assets/group-6-small.png"></div>
+              <div fxLayout="column" fxLayoutAlign.lt-md="space-around center">
+                     <h1>GIRO d'ISEO</h1>
+                     
+                     <h3><span fxFlex.lt-md="30px" fxFlex="0"></span>Ride around Iseo lake, earning points<br>
+                     and use them to buy local goods and services</h3>
+              
+                     
+                     <button [routerLink]="['/getstarted']" class="get-started">Get Started</button>
+              </div>
+              <div></div>
+       </div>
+       <div id="footer-section" fxLayout="raw" fxLayoutAlign="space-around center" class="home-footer-section">
+              <div class="footer-info">GIRO d'ISEO Web App</div>
+              <div class="footer-info">{{version}}</div>
+              
+              <div></div>
+              <div class="footer-info">© Copyright REGA Risk Sharing 2019</div>
+       </div>
+</div>
 
-    <img src="../../assets/group-6.png"
-    srcset="../../assets/group-6@2x.png 2x,
-           ../../assets/group-6@3x.png 3x"
-    class="Group-6">
-
-    <div class="Actions">
-      <h1 class="Girodiseo">Giro d'Iseo</h1>
-      <p class="Great-idea-for-a-loc">Ride around the lake, earning points and use them<br>
-     to buy local goods and services</p>
-     <button matRipple [matRippleColor]="'aqua'" [routerLink]="['/getstarted']" class="Rectangle-2-Copy">
-      Get Started
-      </button>
-    </div>
-
-    <div class="PR">
-      <div class="PR-text"> FUN, WELLNESS AND SAVINGD <br><br>Gerat product for the local communuty</div>
-      <img src="../../assets/bike-pr.png"
-        srcset="../../assets/bike-pr@2x.png 2x,
-               ../../assets/bike-pr@3x.png 3x"
-        class="Bike_PR">
-    </div>
-
-
-</section>
   
 
 

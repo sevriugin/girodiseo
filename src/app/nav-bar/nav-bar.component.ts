@@ -85,6 +85,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/dashboard']);
   }
 
+  gotoShopping(): void {
+    this.router.navigate(['/shopping']);
+  }
+
   gotoReg(): void {
     if (this.authenticated()) {
       this.router.navigate(['/profile']);

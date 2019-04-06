@@ -1,14 +1,7 @@
+<app-header [title]="'Transaction'" [back]="true"></app-header>
+
 <mat-grid-list *ngIf="transaction | async; else loading;"cols="3" rowHeight="3em">
     
-    <mat-grid-tile>
-      <button (click)="gotoBack()" mat-icon-button>
-        <mat-icon>arrow_back_ios</mat-icon>
-      </button>
-    </mat-grid-tile>
-
-    <mat-grid-tile><h3>Transaction</h3></mat-grid-tile>
-
-    <mat-grid-tile></mat-grid-tile>
 
     <mat-grid-tile>A/C from:</mat-grid-tile>
 

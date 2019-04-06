@@ -1,25 +1,4 @@
-<mat-grid-list  cols="3" rowHeight="3em">
-  <mat-grid-tile>
-    <button (click)="gotoBack()" mat-icon-button>
-      <mat-icon>arrow_back_ios</mat-icon>
-    </button>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
-    <h3>Dashboard</h3>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
-    <button (click)="update()" mat-icon-button>
-      <mat-icon>autorenew</mat-icon>
-    </button> 
-  </mat-grid-tile>
-
-  <mat-grid-tile [rowspan]="2" [colspan]="3">      
-    Best ride time for all Giro d'Iseo riders
-  </mat-grid-tile>
-  
-</mat-grid-list>
+<app-header [back]="true" [title]="'Dashboard'" [reload]="true" [parent]="'dashboard'"></app-header>
 
 <div *ngIf="rides">
   <table *ngIf="rides.length>0" mat-table [dataSource]="rides | slice:start:end" class="mat-elevation-z8">

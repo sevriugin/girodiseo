@@ -17,6 +17,12 @@ const artifact = require('./TokenLoyalty.json');
 const owner = '0xD601682a7584A7541C639899454D201Fe3270e9C';
 const key = 'F7481AB0DEDA4E7BFF986CC9001AF506F46689394B66C67AC4CF054A58668E7E';
 
+const crypto = require('crypto');
+const FormData = require('form-data');
+const concat = require("concat-stream");
+const formurlencoded = require('form-urlencoded').default;
+const utf8 = require('utf8');
+
 exports.proxy = functions.https.onRequest((request, response) => {
     return cors(request, response, () => {
         var term = request.query.q;
@@ -81,4 +87,148 @@ exports.mine = functions.firestore.document('rides/{rideID}')
 
         console.log(data);
         
+    });
+
+    exports.snitch = functions.https.onRequest((request, response) => {
+        return cors(request, response, () => {
+            var id = request.query.id;
+            var url = 'https://www.ikea.com/ru/ru/catalog/products/' + id + '/';
+            console.log('Snitching url: ' + url);
+            axios({
+                method:'get',
+                url: url,
+                responseType: 'text'
+              })
+                // eslint-disable-next-line promise/always-return
+                .then(result => {
+                    console.log(result.data);
+                    // var dom = parser.parseFromString(result.data);
+                    // console.log(dom.getElementById('schemaProductId').innerHTML);
+                    response.set("Access-Control-Allow-Origin", "*");
+                    response.set("Access-Control-Allow-Methods", "GET, POST");
+                    response.status(200).send(result.data);
+                })
+                .catch(err => { 
+                    console.error(err);
+                    response.status(500).send(err);
+                });
+        });
+    });
+
+    exports.register = functions.https.onRequest((request, response) => {
+        return cors(request, response, () => {
+            var data = request.body;
+            var url = 'https://test.best2pay.net/webapi/Register';
+            console.log('register started');
+            const str = `${data.sector}${data.amount}${data.currency}test`;
+            const signature = crypto.createHash('md5').update(utf8.encode(str),'utf8').digest('hex');
+            data.signature = Buffer.from(signature).toString('base64');
+
+            console.log('Data:');
+            console.log(data);
+
+            console.log('Using: formurlencoded for utf8 string ...');
+            console.log('String: '+ str);
+            console.log('UTF8 ecoded: '+ utf8.encode(str));
+            console.log('Signature: ' + data.signature);
+            
+            axios({
+                method:'post',
+                url: url,
+                data: formurlencoded(data),
+                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                    // eslint-disable-next-line promise/always-return
+                    .then(result => {
+                        console.log(result.data);
+                        response.set("Access-Control-Allow-Origin", "*");
+                        response.set("Access-Control-Allow-Methods", "GET, POST");
+                        response.status(200).send(result.data);
+                    })
+                    .catch(err => { 
+                        console.error(err);
+                        response.set("Access-Control-Allow-Origin", "*");
+                        response.set("Access-Control-Allow-Methods", "GET, POST");
+                        response.status(500).send(err);
+                    });
+            // }));
+        });
+    });
+
+    exports.authorize = functions.https.onRequest((request, response) => {
+        return cors(request, response, () => {
+            var data = request.body;
+            var url = `https://test.best2pay.net/webapi/Purchase?sector=${data.sector}&id=${data.id}&signature=`;
+            console.log('Authorize / Purchase started');
+            console.log('URL before signature: ' + url);
+            const str = `${data.sector}${data.id}test`;
+            const signature = crypto.createHash('md5').update(utf8.encode(str),'utf8').digest('hex');
+            data.signature = Buffer.from(signature).toString('base64');
+
+            console.log('Data:');
+            console.log(data);
+            url = url + data.signature;
+            console.log('Using post for url ...');
+
+            console.log('URL: '+ url);
+            
+            axios.get(url)
+                    // eslint-disable-next-line promise/always-return
+                    .then(result => {
+                        console.log('result.request: Host, path');
+                        console.log(result.request.getHeader('Host'));
+                        console.log(result.request.path);
+                        
+                        response.set("Access-Control-Allow-Origin", "*");
+                        response.set("Access-Control-Allow-Methods", "GET, POST");
+                        response.status(200).send(`https://${result.request.getHeader('Host')}${result.request.path}`);
+                    })
+                    .catch(err => { 
+                        console.error(err);
+                        response.set("Access-Control-Allow-Origin", "*");
+                        response.set("Access-Control-Allow-Methods", "GET, POST");
+                        response.status(500).send(err);
+                    });
+            // }));
+        });
+    });
+
+    exports.operation = functions.https.onRequest((request, response) => {
+        return cors(request, response, () => {
+            var data = request.body;
+            var url = 'https://test.best2pay.net/webapi/Operation';
+            console.log('operation started');
+            const str = `${data.sector}${data.id}${data.operation}test`;
+            const signature = crypto.createHash('md5').update(utf8.encode(str),'utf8').digest('hex');
+            data.signature = Buffer.from(signature).toString('base64');
+
+            console.log('Data:');
+            console.log(data);
+
+            console.log('Using: formurlencoded for utf8 string ...');
+            console.log('String: '+ str);
+            console.log('UTF8 ecoded: '+ utf8.encode(str));
+            console.log('Signature: ' + data.signature);
+            
+            axios({
+                method:'post',
+                url: url,
+                data: formurlencoded(data),
+                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                    // eslint-disable-next-line promise/always-return
+                    .then(result => {
+                        console.log(result.data);
+                        response.set("Access-Control-Allow-Origin", "*");
+                        response.set("Access-Control-Allow-Methods", "GET, POST");
+                        response.status(200).send(result.data);
+                    })
+                    .catch(err => { 
+                        console.error(err);
+                        response.set("Access-Control-Allow-Origin", "*");
+                        response.set("Access-Control-Allow-Methods", "GET, POST");
+                        response.status(500).send(err);
+                    });
+            // }));
+        });
     });

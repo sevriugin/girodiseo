@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { version } from '../../environments/environment';
 
 @Component({
   selector: 'app-getstarted',
@@ -9,8 +10,10 @@ import { Location } from '@angular/common';
 export class GetstartedComponent implements OnInit {
 
   constructor(private location: Location) { }
+  version: string;
 
   ngOnInit() {
+    this.version = version;
   }
 
   gotoBack(): void {

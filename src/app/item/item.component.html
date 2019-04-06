@@ -1,0 +1,81 @@
+<app-header *ngIf="!scanning" [back]="true" [title]="'Item'"></app-header>
+
+<div *ngIf="!scanning" fxLayout="column">
+    <div *ngIf="loading" fxFlex="100"><br><br><br><br><br><br></div>
+    <div *ngIf="loading" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+        <div fxFlex="40"></div><div fxFlex="20"><h2>Loading...</h2></div><div fxFlex="40"></div>
+    </div>
+
+    <div *ngIf="!loading" fxFlex="100"><br></div>
+    <div *ngIf="!loading" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+        <div fxFlex="2"></div>
+        <div fxFlex="88">{{schemaProductName}}</div>
+
+        <div fxFlex="8">
+          <button (click)="addItem()" mat-icon-button>
+              <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </div>
+        <div fxFlex="2"></div>
+    </div>
+
+    <div *ngIf="!loading" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+        <div fxFlex="2"></div>
+        <div fxFlex="88">{{schemaProductId}}</div>
+        <div fxFlex="8">
+            <button (click)="plusOne()" mat-icon-button>
+                <mat-icon>expand_less</mat-icon>
+            </button>
+          </div>
+          <div fxFlex="2"></div>
+    </div>
+
+    <div *ngIf="!loading" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+        <div fxFlex="2"></div>
+        <div fxFlex="45" [innerHTML]="schemaProductPrice"></div>
+        <div fxFlex="8">{{itemQty}}</div>
+        <div fxFlex="35"></div>
+        
+        <div fxFlex="8">
+            <button (click)="minusOne()" mat-icon-button>
+                <mat-icon>expand_more</mat-icon>
+            </button>
+          </div>
+          <div fxFlex="2"></div>
+    </div>
+
+    
+
+
+    <div *ngIf="!loading" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+        <div fxFlex="100">
+            <img *ngIf="!loading" [src]="schemaProductImg">
+        </div>
+        
+    </div>
+</div>
+
+
+<div *ngIf="scanning" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+
+    <div fxFlex="2"></div>
+    <div fxFlex="8">
+        <button (click)="getItemId()" mat-icon-button>
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </div>
+
+    <div fxFlex="35"></div>
+    <div fxFlex="10"><h4>Scan</h4></div>
+    <div fxFlex="35"></div>
+
+    <div fxFlex="8">
+        <button (click)="close()" mat-icon-button>
+            <mat-icon>close</mat-icon>
+          </button>
+    </div>
+    <div fxFlex="2"></div>
+</div>
+
+
+<zxing-scanner [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'CODABAR', 'UPC_A', 'UPC_E', 'UPC_EAN_EXTENSION', 'CODE_39', 'ITF']" *ngIf="scanning" #scanner (camerasFound)="camerasFoundHandler($event)" (scanComplete)="scanCompleteHandler($event)"></zxing-scanner>

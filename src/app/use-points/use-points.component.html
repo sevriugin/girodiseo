@@ -1,14 +1,8 @@
+<app-header *ngIf="!scanning" [back]="true" [title]="'Use points'"></app-header>
+
 <mat-grid-list *ngIf="!scanning" cols="3" rowHeight="3em">
     
-    <mat-grid-tile>
-      <button (click)="gotoBack()" mat-icon-button>
-        <mat-icon>arrow_back_ios</mat-icon>
-      </button>
-    </mat-grid-tile>
-
-    <mat-grid-tile><h3>Use points</h3></mat-grid-tile>
-
-    <mat-grid-tile></mat-grid-tile>
+    
 
     <mat-grid-tile [colspan]="3"><h4>From</h4></mat-grid-tile>
     <mat-grid-tile [colspan]="3">{{account}}</mat-grid-tile>
@@ -49,4 +43,4 @@
   
 </mat-grid-list>
 
-<zxing-scanner *ngIf="scanning" #scanner (camerasFound)="camerasFoundHandler($event)" (scanComplete)="scanCompleteHandler($event)"></zxing-scanner>
+<zxing-scanner [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'CODABAR', 'UPC_A', 'UPC_E', 'UPC_EAN_EXTENSION', 'CODE_39', 'ITF']" *ngIf="scanning" #scanner (camerasFound)="camerasFoundHandler($event)" (scanComplete)="scanCompleteHandler($event)"></zxing-scanner>

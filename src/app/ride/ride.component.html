@@ -1,20 +1,5 @@
+<app-header [title]="'Ride'" [back]="true" [subtitle]="nikname"></app-header>
 
-<mat-grid-list  cols="3" rowHeight="3em">
-    <mat-grid-tile>
-        <button (click)="gotoBack()" mat-icon-button>
-            <mat-icon>arrow_back_ios</mat-icon>
-        </button>
-      </mat-grid-tile>
-
-    <mat-grid-tile>
-      <h3>Ride</h3>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-        <small>{{nikname}}</small>
-    </mat-grid-tile>
-  
-  </mat-grid-list>
 
 <mat-accordion>
       <mat-expansion-panel (opened)="getTags()">

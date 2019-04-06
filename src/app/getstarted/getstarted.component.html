@@ -1,28 +1,26 @@
-<mat-grid-list cols="3" rowHeight="3em">
-  
-  <mat-grid-tile>
-    <button (click)="gotoBack()" mat-icon-button>
-      <mat-icon>arrow_back_ios</mat-icon>
-    </button>
-  </mat-grid-tile>
-
-  <mat-grid-tile>
-    <h3>Join</h3>
-  </mat-grid-tile>
-
-  <mat-grid-tile></mat-grid-tile>
-</mat-grid-list>
-
-<p>Ride around Iseo lake, earning points and use them to buy local goods and services with discounts.</p>
-
-<mat-grid-list cols="3" rowHeight="3em">
-    <mat-grid-tile [colspan]="3">
-      <h3>To be a club meber</h3>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-<mat-action-list>
-  <button mat-list-item [routerLink]="['/reg']" > 1. Press here to register new tag &nbsp; <mat-icon>add_circle_outline</mat-icon></button>
-  <button mat-list-item [routerLink]="['/ride']"> 2. Press here to start new ride &nbsp; &nbsp; &nbsp; <mat-icon>directions_bike</mat-icon></button>
-  <button mat-list-item [routerLink]="['/dashboard']"> 3. Press here to view all results &nbsp; &nbsp; <mat-icon>dashboard</mat-icon> </button>
-</mat-action-list>
+<div fxLayout="column">
+  <div fxLayout="raw" 
+         fxLayout.lt-md="column" 
+         fxLayoutAlign="space-around center" 
+         id="intro-section" 
+         class = "home-intro-section"
+         [ngClass.md]="['home-intro-section']" 
+         [ngClass.sm]="['home-intro-section-small']"
+         [ngClass.xs]="['home-intro-section-small']">
+         <div fxHide.lt-md></div>
+         <div fxLayout="column" fxLayoutAlign="space-around center">
+              <h1>GIRO d'ISEO</h1>
+              <button [routerLink]="['/reg']" class="get-started">New Tag</button><br><br>
+              <button [routerLink]="['/ride']" class="get-started">New Ride</button><br><br>
+              <button [routerLink]="['/dashboard']" class="get-started">Dashboard</button>
+         </div>
+         <div></div>
+  </div>
+  <div id="footer-section" fxLayout="raw" fxLayoutAlign="space-around center" class="home-footer-section">
+         <div class="footer-info">Giro d'Iseo Web App</div>
+         <div class="footer-info">{{version}}</div>
+         
+         <div></div>
+         <div class="footer-info">© Copyright REGA Risk Sharing 2019</div>
+  </div>
+</div>

@@ -13,6 +13,9 @@ export class TagsComponent implements OnInit {
   tags: Tag[];
   start: number;
   end: number;
+
+  displayedColumns: string[] = ['id', 'date', 'mobile', 'link'];
+
   constructor(private tagService: TagService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
@@ -40,5 +43,9 @@ export class TagsComponent implements OnInit {
     const { pageIndex, pageSize } = e;
     this.start = pageIndex * pageSize;
     this.end = this.start + pageSize;
+  }
+
+  showMobile(mobile: string): string {
+    return `... ${mobile.slice(6)}`;
   }
 }

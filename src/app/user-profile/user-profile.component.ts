@@ -16,6 +16,7 @@ import { Transaction } from '../transaction';
 import { TransactionService } from '../transaction.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { QrcodeDialogComponent } from '../qrcode-dialog/qrcode-dialog.component';
+import { UserTagsComponent } from '../user-tags/user-tags.component';
 
 @Component({
   selector: 'app-user-profile',

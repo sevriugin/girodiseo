@@ -1,10 +1,5 @@
+<app-header [back]="true" [title]="'Profile'"></app-header>
 <mat-grid-list cols="3" rowHeight="3em">
-
-  <mat-grid-tile></mat-grid-tile>
-
-  <mat-grid-tile><h3>Profile</h3></mat-grid-tile>
-
-  <mat-grid-tile></mat-grid-tile>
 
   <mat-grid-tile *ngIf="name()">Name</mat-grid-tile>
 
@@ -36,9 +31,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
   
-      <span *ngFor="let tag of tags">
-          <button mat-stroked-button (click)="gotoTagById(tag)">{{tag.id}}</button>&nbsp;
-      </span>
+      <app-user-tags [tags]="tags"></app-user-tags>
   
     </mat-expansion-panel>
 </mat-accordion>
@@ -84,10 +77,9 @@
           Open to see all
         </mat-panel-description>
       </mat-expansion-panel-header>
+
+      <app-user-tnx [transactions]="transactions | async"></app-user-tnx>
   
-      <span *ngFor="let tnx of transactions | async">
-          <button (click)="gotoTnx(tnx.hash)" mat-stroked-button>{{tnx.nonce}}</button>&nbsp;
-      </span>
   
     </mat-expansion-panel>
 </mat-accordion>

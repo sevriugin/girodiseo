@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   mobile: string;
   msg: string;
   progress: boolean;
+  page: string;
 
   constructor(
     private zone: NgZone,
@@ -31,6 +32,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.page = this.route.snapshot.paramMap.get('page');
+    if (this.page) {
+      console.log('Back to page after login ' + this.page);
+    }
     this.clear();
   }
   clear() {
@@ -51,7 +56,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
       } else {
         // I've got a confirmation object, lets go to the SMS confirmation screen
         // Need to use NgZone.run to go back to Angular zone exec env
-        this.zone.run(() => this.router.navigate([`/smsconfirm/${this.mobile}`]))
+        // tslint:disable-next-line:max-line-length
+        this.zone.run(() => this.page ? this.router.navigate([`/smsconfirm/${this.mobile}/${this.page}`]) : this.router.navigate([`/smsconfirm/${this.mobile}`]))
           .then(() => console.log('LoginComponent: login: navigated to smsconfirm'))
           .catch((err) => console.error(err));
         console.log(`Has confirmation for ${this.mobile}`);

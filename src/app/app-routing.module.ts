@@ -16,6 +16,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GetstartedComponent } from './getstarted/getstarted.component';
 import { UsePointsComponent } from './use-points/use-points.component';
 import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+import { ItemComponent } from './item/item.component';
+import { ShoppingResultComponent } from './shopping-result/shopping-result.component';
 
 
 const routes: Routes = [
@@ -26,13 +29,19 @@ const routes: Routes = [
   { path: 'tag/:id', component: TagDetailComponent },
   { path: 'regsms/:id/:mobile', component: TagRegSmsComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'login/:page', component: LoginComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'smsconfirm/:mobile', component: SmsConfirmationComponent },
+  { path: 'smsconfirm/:mobile/:page', component: SmsConfirmationComponent },
   { path: 'about', component: AboutComponent },
   { path: 'update', component: ProfileUpdateComponent },
   { path: 'ride', component: RideComponent },
   { path: 'ride/:id', component: RideDetailComponent },
+  { path: 'item/:id', component: ItemComponent },
+  { path: 'item/:id/:ref', component: ItemComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'shopping', component: ShoppingComponent },
+  { path: 'shopping/:result', component: ShoppingResultComponent },
   { path: 'getstarted', component: GetstartedComponent },
   { path: 'use/:acc/:points', component: UsePointsComponent },
   { path: 'tnx/:hash', component: TnxDetailComponent },

@@ -1,14 +1,48 @@
-<mat-grid-list *ngIf="tags; else loading" cols="3" rowHeight="3em">
-    <mat-grid-tile [colspan]="3">
-      <h3>Tags list</h3>
-    </mat-grid-tile>
-    <mat-grid-tile *ngFor="let tag of tags | slice:start:end" [colspan]="3">
-      <button mat-stroked-button (click)="gotoTagById(tag)">{{tag.id}}</button>
-    </mat-grid-tile>
-</mat-grid-list>
+<app-header [back]="true" [title]="'Tags'"></app-header>
 
-<mat-paginator *ngIf="tags; else loading" [length]="tags.length"
+<div *ngIf="tags">
+  <table *ngIf="tags.length>0" mat-table [dataSource]="tags | slice:start:end" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.regDate}}</td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef> Mobile </th>
+        <td mat-cell *matCellDef="let element"> {{showMobile(element.reg.mobile)}}</td>
+      </ng-container>
+    
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="link">
+          <th mat-header-cell *matHeaderCellDef> Details </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="gotoTagById(element)" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>
+        </ng-container>
+    
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+    
+<mat-paginator *ngIf="tags.length>0" [length]="tags.length"
               [pageSize]="10"
               [pageSizeOptions]="[1, 5, 10, 25, 100]"
               (page)="setPage($event)">
 </mat-paginator>
+</div>
+

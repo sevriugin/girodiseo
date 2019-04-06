@@ -1,0 +1,30 @@
+<div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+  <div fxFlex="100"><br></div>
+</div>
+
+<div *ngIf="result" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div fxFlex="30"></div>
+    <div *ngIf="result ==='fail'" fxFlex="60" class="error"><h2>Payment is failed</h2></div>
+    <div *ngIf="result ==='accept'" fxFlex="60"><h2>Payment is accepted</h2></div>
+    <div fxFlex="10"></div>
+</div>
+
+<div *ngIf="result" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div fxFlex="30"></div>
+    <div *ngIf="result ==='fail'" fxFlex="60" ><h3>{{getErrorMessage()}}</h3></div>
+    <div *ngIf="result ==='accept'" fxFlex="60"><h3>{{code}}</h3></div>
+    <div fxFlex="10"></div>
+</div>
+
+<div *ngIf="result" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <div fxFlex="30"></div>
+    <div *ngIf="result ==='fail'" fxFlex="60" >
+        <button mat-raised-button color="warn" (click)="gotoShopping()">Back</button>
+    </div>
+    <div *ngIf="result ==='accept'" fxFlex="60" >
+        <button mat-raised-button color="primary" [disabled]="process" (click)="gotoShopping()">Back</button>
+    </div>
+    <div fxFlex="10"></div>
+</div>
+
+

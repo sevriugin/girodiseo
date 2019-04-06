@@ -1,18 +1,7 @@
+<app-header [title]="'Tag'" [back]="true"></app-header>
 <mat-grid-list *ngIf="tags; else loading;"cols="3" rowHeight="3em">
     
-    <mat-grid-tile>
-        <button (click)="gotoBack()" mat-icon-button>
-            <mat-icon>arrow_back_ios</mat-icon>
-        </button>
-      </mat-grid-tile>
-
-    <mat-grid-tile>
-      <h3>Tag details</h3>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-        
-      </mat-grid-tile>
+    
 
     <mat-grid-tile  *ngIf="tags.length > 0" [colspan]="3">
         <h3>{{tags[0].id}}</h3>

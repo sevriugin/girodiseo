@@ -67,6 +67,16 @@ import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxKjuaModule } from 'ngx-kjua';
 import { MatRippleModule } from '@angular/material/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { HeaderComponent } from './header/header.component';
+import { UserTagsComponent } from './user-tags/user-tags.component';
+import { UserTnxComponent } from './user-tnx/user-tnx.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+import { OrderService } from './order.service';
+import { ItemComponent } from './item/item.component';
+import { ItemDialogComponent } from './item-dialog/item-dialog.component';
+import { ShoppingResultComponent } from './shopping-result/shopping-result.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -90,9 +100,17 @@ import { MatRippleModule } from '@angular/material/core';
     UsePointsComponent,
     TnxDetailComponent,
     QrcodeDialogComponent,
+    HeaderComponent,
+    UserTagsComponent,
+    UserTnxComponent,
+    ShoppingComponent,
+    ItemComponent,
+    ItemDialogComponent,
+    ShoppingResultComponent,
   ],
   entryComponents: [
-    QrcodeDialogComponent
+    QrcodeDialogComponent,
+    ItemDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +149,9 @@ import { MatRippleModule } from '@angular/material/core';
     MatSliderModule,
     MatDialogModule,
     NgxKjuaModule,
-    MatRippleModule
+    MatRippleModule,
+    FlexLayoutModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     AngularFirestoreModule,
@@ -144,6 +164,7 @@ import { MatRippleModule } from '@angular/material/core';
     ImagesService,
     EthcontractService,
     TransactionService,
+    OrderService,
     { provide: HttpBackend, useClass: CustExtBrowserXhr },
   ],
   bootstrap: [AppComponent]
