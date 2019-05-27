@@ -1,0 +1,23 @@
+.message {
+    color: red;
+}
+table {
+    width: 100%;
+  }
+
+.mat-cell .mat-icon {
+    transform: scale(0.6);
+}
+
+.payment {
+  color: gold;
+}
+.bike {
+  color: green;
+}
+.error {
+  color: red;
+}
+.test {
+  color: gray;
+}

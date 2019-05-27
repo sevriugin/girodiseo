@@ -1,0 +1,89 @@
+<app-header [title]="'Admin'"></app-header>
+
+<br>
+<div *ngIf="!action" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+  <mat-card (click)="addExpert()" class="action-card">
+    <mat-card-header>
+      <mat-card-title>Expert</mat-card-title>
+      <mat-card-subtitle>Add expert account</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="'../assets/' + 'expert.png'">
+  </mat-card>
+
+  <mat-card (click)="addShop()" class="action-card">
+      <mat-card-header>
+        <mat-card-title>Shop</mat-card-title>
+        <mat-card-subtitle>Add shop account</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="'../assets/' + 'shop.png'">
+    </mat-card>
+
+    <mat-card (click)="addBikeShop()" class="action-card">
+        <mat-card-header>
+          <mat-card-title>Bike Shop</mat-card-title>
+          <mat-card-subtitle>Add Bike shop</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="'../assets/' + 'bike-shop.png'">
+    </mat-card>
+
+</div>
+
+<div *ngIf="action && action.expert" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Expert</mat-card-title>
+        <mat-card-subtitle>Add expert account</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="'../assets/' + 'expert.png'">
+
+      <mat-card-content >
+          <mat-form-field>
+            <input matInput name="expert" type="text" placeholder="Phone number" required [(ngModel)]="expert">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="save()" mat-button>SAVE</button>
+            <button (click)="action=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card> 
+  </div>
+
+  <div *ngIf="action && action.shop" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+      <mat-card class="action-card">
+        <mat-card-header>
+          <mat-card-title>Shop</mat-card-title>
+          <mat-card-subtitle>Add shop account</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="'../assets/' + 'shop.png'">
+  
+        <mat-card-content >
+            <mat-form-field>
+              <input matInput name="shop" type="text" placeholder="Phone number" required [(ngModel)]="shop">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+              <button (click)="save()" mat-button>SAVE</button>
+              <button (click)="action=undefined" mat-button>CANCEL</button>
+            </mat-card-actions>
+      </mat-card> 
+  </div>
+
+  <div *ngIf="action && action.bike" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+      <mat-card class="action-card">
+        <mat-card-header>
+          <mat-card-title>Bike Shop</mat-card-title>
+          <mat-card-subtitle>Add bike shop</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="'../assets/' + 'bike-shop.png'">
+  
+        <mat-card-content >
+            <mat-form-field>
+              <input matInput name="bike" type="text" placeholder="Phone number" required [(ngModel)]="bike">
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+              <button (click)="save()" mat-button>SAVE</button>
+              <button (click)="action=undefined" mat-button>CANCEL</button>
+            </mat-card-actions>
+      </mat-card> 
+  </div>

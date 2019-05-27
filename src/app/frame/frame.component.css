@@ -1,0 +1,64 @@
+.brand-card {
+    max-width: 200px;
+}
+
+.colnago-header-image {
+    background-image: url('../../assets/colnago-logo.png');
+    background-size: cover;
+}
+
+.pinarello-header-image {
+    background-image: url('../../assets/pinarello-logo.gif');
+    background-size: cover;
+}
+
+.argon18-header-image {
+    background-image: url('../../assets/argon18-logo.png');
+    background-size: cover;
+}
+
+.cervelo-header-image {
+    background-image: url('../../assets/cervelo-logo.png');
+    background-size: cover;
+}
+
+.noname-header-image {
+    background-image: url('../../assets/giro_logo_big.png');
+    background-size: cover;
+}
+
+.model-card {
+    max-width: 400px;
+}
+
+.group-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+  
+.group-radio-button {
+    margin: 5px;
+}
+
+.mat-spinner {
+    position: absolute;
+    top: 150px;
+    left: 150px;
+}
+
+.file-upload {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+
+.custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+}
+.mat-progress-bar {
+    width: 400px;
+}

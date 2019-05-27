@@ -1,0 +1,46 @@
+<div *ngIf="orders">
+    <table *ngIf="orders.length>0" mat-table [dataSource]="orders | slice:start:end" class="mat-elevation-z8">
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+        </ng-container>
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="ref">
+          <th mat-header-cell *matHeaderCellDef> Ref </th>
+          <td mat-cell *matCellDef="let element"> {{element.ref}}</td>
+        </ng-container>
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}}</td>
+        </ng-container>
+  
+         <!-- Position Column -->
+         <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}}</td>
+        </ng-container>
+      
+  
+        <!-- Weight Column -->
+        <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef> Details </th>
+            <td mat-cell *matCellDef="let element"> <button (click)="gotoOrder(element.ref)" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>
+          </ng-container>
+      
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      
+  <mat-paginator *ngIf="orders.length>0" [length]="orders.length"
+                [pageSize]="10"
+                [pageSizeOptions]="[1, 5, 10, 25, 100]"
+                (page)="setPage($event)">
+  </mat-paginator>
+  </div>

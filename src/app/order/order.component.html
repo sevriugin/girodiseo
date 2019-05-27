@@ -1,0 +1,135 @@
+<app-header [back]="true" [title]="'Order'"></app-header>
+<mat-spinner *ngIf="!order"></mat-spinner>
+<div *ngIf="order">
+  <br>
+  <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div fxFlex.gt-sm="2" fxFlex="5"></div>
+      <div fxFlex.gt-sm="48" fxFlex="45" fxItemAlign="right"><small>{{order.ref}}</small></div>
+      <div fxFlex.gt-sm="10" fxFlex="10"></div>
+      <div fxFlex.gt-sm="40" fxFlex="40" fxItemAlign="right"><small>{{order.status}}</small></div>
+  </div>
+  <br>
+  <table *ngIf="order.items.length>0" mat-table [dataSource]="order.items | slice:start:end" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+      </ng-container>
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell (click)="gotoItem(element.id)" *matCellDef="let element"> {{shortName(element.name)}}</td>
+          
+        </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price | currency:' ':'symbol':'2.0-2'}}</td>
+        
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="qty">
+        <th mat-header-cell *matHeaderCellDef> Qty </th>
+        <td mat-cell *matCellDef="let element"> {{element.qty}}</td>
+      </ng-container>
+    
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="link">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="gotoItem(element.id)" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+      <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element; let i = index;"> <button (click)="deleteItem(i)" mat-icon-button> <mat-icon>delete_outline</mat-icon></button> </td>
+        </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <br>
+    
+<mat-paginator *ngIf="order.items.length>0" [length]="order.items.length"
+              [pageSize]="10"
+              [pageSizeOptions]="[1, 5, 10, 25, 100]"
+              (page)="setPage($event)">
+</mat-paginator>
+</div>
+<button *ngIf="order" mat-raised-button color="primary" [disabled]="process" (click)="checkOrder()">Payment status</button>
+
+<div *ngIf="paymentStatus" fxLayout="column">
+    <div fxLayout="row">
+      <br>
+    </div>
+    <div *ngIf="paymentStatus.id" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">ID</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.id}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.state" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">State</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.state}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.inprogress" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">Inprogress</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.inprogress}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.date" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">Date</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.date}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.amount" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">Amount</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.amount}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.currency" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">Currency</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.currency}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.email" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">EMail</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.email}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.reference" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">Reference</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.reference}}</div>
+    </div>
+
+    <div *ngIf="paymentStatus.description" fxLayout="row">
+        <div fxFlex="2"></div>
+        <div fxFlex="20">Description</div>
+        <div fxFlex="20"></div>
+        <div fxFlex="58">{{paymentStatus.description}}</div>
+    </div>
+    
+</div>

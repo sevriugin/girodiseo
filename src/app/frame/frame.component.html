@@ -1,0 +1,205 @@
+<br>
+<div *ngIf="!selected" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+  <mat-card *ngFor="let brand of brands" (click)="select(brand)" class="brand-card">
+    <img mat-card-image [src]="'../assets/' + brand.logo">
+  </mat-card>
+</div>
+
+<div *ngIf="selected && step==1" fxLayout="column" fxLayoutAlign.xs="center" fxLayoutGap="1.5%" >
+  <div *ngIf="selected.change">
+    {{selected.name}}
+  </div>
+  <div *ngIf="!selected.change" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div fxFlex="2"></div>
+      <div fxFlex="8">
+          <button (click)="unselect()" class="header-btn" mat-icon-button>
+              <mat-icon>arrow_back_ios</mat-icon>
+          </button>
+      </div>
+  
+      <div fxFlex="25"></div>
+      <div fxFlex="65"><h3 class="header-title">{{selected.name}}</h3></div>
+  </div>
+  <mat-card *ngFor="let model of selected.models" (click)="select(model)" class="model-card">
+      <mat-card-header>
+          <div mat-card-avatar [ngClass]="selected.class"></div>
+          <mat-card-title>{{model.name}}</mat-card-title>
+          <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+        </mat-card-header>
+    <img mat-card-image [src]="'../assets/' + model.img">
+  </mat-card>
+</div>
+
+<div *ngIf="model && step==2" fxLayout="column" fxLayoutAlign.xs="center" fxLayoutGap="1.5%" >
+    <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+        <div fxFlex="2"></div>
+        <div fxFlex="8">
+            <button (click)="unselect()" class="header-btn" mat-icon-button>
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+        </div>
+    
+        <div fxFlex="25"></div>
+        <div fxFlex="65"><h3 class="header-title">{{model.name}}</h3></div>
+    </div>
+    <mat-card *ngIf="!change" class="model-card">
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="selected.class"></div>
+            <mat-card-title>{{model.name}}</mat-card-title>
+            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+          </mat-card-header>
+      <img *ngIf="frame.images==undefined" mat-card-image [src]="'../assets/' + model.img">
+      <img *ngIf="frame.images!=undefined" mat-card-image [src]="frame.images[0]">
+      <mat-card-content>
+          <mat-chip-list>
+            <mat-chip>{{frame.model}}</mat-chip>
+            <mat-chip>{{frame.year}}</mat-chip>
+            <mat-chip>{{frame.type}}</mat-chip>
+            <mat-chip>{{frame.material}}</mat-chip>
+            <mat-chip *ngIf="frame.electronic==undefined" (click)="edit('group')" color="warn" [selected]="!locked">Group?</mat-chip>
+            <mat-chip *ngIf="frame.electronic!=undefined" (click)="edit('group')" [selected]="!locked">{{frame.electronic?"electronic":"mechanic"}}</mat-chip>
+            <mat-chip *ngIf="frame.bin==undefined" (click)="edit('bin')" color="warn" [selected]="!locked">BIN?</mat-chip>
+            <mat-chip *ngIf="frame.bin!=undefined" (click)="edit('bin')" [selected]="!locked">{{frame.bin}}</mat-chip>
+            <mat-chip *ngIf="frame.disk==undefined" (click)="edit('disk')" color="warn" [selected]="!locked">Brakes?</mat-chip>
+            <mat-chip *ngIf="frame.disk!=undefined" (click)="edit('disk')" [selected]="!locked">{{frame.disk?"disk":"rim"}}</mat-chip>
+            <mat-chip *ngIf="frame.new==undefined" (click)="edit('new')" color="warn" [selected]="!locked">New?</mat-chip>
+            <mat-chip *ngIf="frame.new!=undefined" (click)="edit('new')" [selected]="!locked">{{frame.new?"new":"used"}}</mat-chip>
+            <mat-chip *ngIf="frame.images==undefined" (click)="edit('images')" color="warn" [selected]="!locked"><mat-icon>photo</mat-icon>&nbsp;0</mat-chip>
+            <mat-chip *ngIf="frame.images!=undefined" (click)="edit('images')" [selected]="!locked"><mat-icon>photo</mat-icon>&nbsp;{{frame.images.length}}</mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="!complited() || locked" (click)="save()" mat-button>SAVE</button>
+            <button (click)="unselect()" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="change==='group'" class="model-card">
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="selected.class"></div>
+            <mat-card-title>{{model.name}}</mat-card-title>
+            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+          </mat-card-header>
+    
+        <mat-card-content >
+          <label id="group-radio-group-label"><h3>Select bike group type</h3></label>
+          <mat-radio-group
+            aria-labelledby="group-radio-group-label"
+            class="group-radio-group"
+            [(ngModel)]="grouptype">
+            <mat-radio-button class="group-radio-button" *ngFor="let type of model.group" [value]="type">
+              {{type}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="grouptype==='electronic'?frame.electronic=true:frame.electronic=false;change=undefined"mat-button>SAVE</button>
+            <button (click)="change=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="change==='disk'" class="model-card">
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="selected.class"></div>
+            <mat-card-title>{{model.name}}</mat-card-title>
+            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+          </mat-card-header>
+    
+        <mat-card-content >
+          <label id="group-radio-group-label"><h3>Select bike brake types</h3></label>
+          <mat-radio-group
+            aria-labelledby="group-radio-group-label"
+            class="group-radio-group"
+            [(ngModel)]="braketype">
+            <mat-radio-button class="group-radio-button" *ngFor="let type of model.brakes" [value]="type">
+              {{type}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="braketype==='disk'?frame.disk=true:frame.disk=false;change=undefined"mat-button>SAVE</button>
+            <button (click)="change=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="change==='new'" class="model-card">
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="selected.class"></div>
+            <mat-card-title>{{model.name}}</mat-card-title>
+            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+          </mat-card-header>
+    
+        <mat-card-content >
+          <label id="group-radio-group-label"><h3>Select new or used</h3></label>
+          <mat-radio-group
+            aria-labelledby="group-radio-group-label"
+            class="group-radio-group"
+            [(ngModel)]="neworused">
+            <mat-radio-button class="group-radio-button" *ngFor="let type of options" [value]="type">
+              {{type}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="neworused==='new'?frame.new=true:frame.new=false;change=undefined"mat-button>SAVE</button>
+            <button (click)="change=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="change==='bin'" class="model-card">
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="selected.class"></div>
+            <mat-card-title>{{model.name}}</mat-card-title>
+            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+          </mat-card-header>
+    
+        <mat-card-content >
+          <mat-form-field>
+            <input matInput name="bin" type="text" placeholder="Enter frame id number" required [(ngModel)]="frame.bin">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="change=undefined"mat-button>SAVE</button>
+            <button (click)="change=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="change==='images'" class="model-card">
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="selected.class"></div>
+            <mat-card-title>{{model.name}}</mat-card-title>
+            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>
+          </mat-card-header>
+
+        <img *ngIf="!frame.images || progress" mat-card-image [src]="'../assets/' + 'bike-blurred.jpg'">
+        <img *ngIf="frame.images && frame.images.length > 0 && !progress" mat-card-image [src]="frame.images[current]">
+        <mat-spinner *ngIf="progress"></mat-spinner>
+    
+        <mat-card-content >
+            <mat-chip-list *ngIf="frame.images">
+              <mat-chip *ngFor="let image of frame.images; index as i" [selected]="current==i" (click)="current=i">{{i+1}}</mat-chip>
+              <label for="file-upload-1">
+                  <mat-chip><mat-icon>cloud_upload</mat-icon></mat-chip>
+                 
+                    <input id="file-upload-1"  style="display: none" accept="image/*" type="file" (change)="handleFileInput($event.target.files)"/>
+                  
+                </label>
+            </mat-chip-list>
+
+            <mat-chip-list *ngIf="!frame.images">
+                <label for="file-upload-2">
+                  <mat-chip><mat-icon>cloud_upload</mat-icon></mat-chip>
+                  
+                    <input id="file-upload-2" style="display: none" accept="image/*" type="file" (change)="handleFileInput($event.target.files)"/>
+                 
+                </label>
+              </mat-chip-list>
+          
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="change=undefined"mat-button>SAVE</button>
+            <button (click)="change=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card>
+    
+  </div>

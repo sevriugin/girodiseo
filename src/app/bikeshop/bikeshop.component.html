@@ -1,0 +1,129 @@
+<app-header [title]="'Bikes'"></app-header>
+<br>
+<div *ngIf="!action" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+    <mat-card (click)="action={inspect:true}" class="action-card">
+        <mat-card-header>
+          <mat-card-title>Bike</mat-card-title>
+          <mat-card-subtitle>Inspect bike</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="'../assets/' + 'bike-shop.png'">
+    </mat-card>
+
+    <mat-card (click)="action={claim:true}" class="action-card">
+        <mat-card-header>
+          <mat-card-title>Claim</mat-card-title>
+          <mat-card-subtitle>Make Claim</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="'../assets/' + 'claim.png'">
+    </mat-card>
+
+</div>
+
+<div *ngIf="action && action.inspect" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Bike</mat-card-title>
+        <mat-card-subtitle>Start inspection</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="'../assets/' + 'bike-shop.png'">
+      <p class="message" *ngIf="msg">{{msg}}</p>
+
+      <mat-card-content >
+          <mat-form-field>
+            <input matInput name="tagid" type="text" placeholder="Tag Id or mobile start +" required [(ngModel)]="tagid">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="!tagid" (click)="startInspection()" mat-button>START</button>
+            <button (click)="action=undefined;msg=undefined;tagid=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card> 
+</div>
+
+<div *ngIf="action && action.claim" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Claim</mat-card-title>
+        <mat-card-subtitle>Start claim process</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="'../assets/' + 'claim.png'">
+      <p class="message" *ngIf="msg">{{msg}}</p>
+
+      <mat-card-content >
+          <mat-form-field>
+            <input matInput name="tagid" type="text" placeholder="Enter Tag Id" required [(ngModel)]="tagid">
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="startInspection()" mat-button>START</button>
+            <button (click)="action=undefined;msg=undefined" mat-button>CANCEL</button>
+          </mat-card-actions>
+    </mat-card> 
+</div>
+
+<div *ngIf="action && action.selection" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+
+    <div fxFlex="2"></div>
+    <div fxFlex="78"><h4>Select tag to start</h4></div>
+   
+
+    <div fxFlex="8">
+        <button (click)="action={inspect: true}" mat-icon-button>
+            <mat-icon>close</mat-icon>
+          </button>
+    </div>
+    <div fxFlex="2"></div>
+</div>
+
+<div *ngIf="action && action.selection" fxLayout="row"  fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="left">
+    
+    <table *ngIf="tags.length>0" mat-table [dataSource]="tags | slice:start:end" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        
+  
+        <!-- Position Column -->
+  
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element"> <mat-icon [ngClass]="status(element)">radio_button_checked</mat-icon></td>
+          </ng-container>
+  
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{showTagId(element.id)}}</td>
+        </ng-container>
+  
+        <!-- Position Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.regDate}}</td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="mobile">
+          <th mat-header-cell *matHeaderCellDef> Mobile </th>
+          <td mat-cell *matCellDef="let element"> {{showMobile(element.reg.mobile)}}</td>
+        </ng-container>
+      
+  
+        <!-- Weight Column -->
+        <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef> Start </th>
+            <td mat-cell *matCellDef="let element"> <button (click)="gotoTagById(element)" mat-icon-button> <mat-icon>play_arrow</mat-icon></button> </td>
+          </ng-container>
+      
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <br>
+      
+  <mat-paginator *ngIf="tags.length>0" [length]="tags.length"
+                [pageSize]="10"
+                [pageSizeOptions]="[1, 5, 10, 25, 100]"
+                (page)="setPage($event)">
+  </mat-paginator>
+  </div>

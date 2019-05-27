@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+  }
+
+.mat-cell .mat-icon {
+    transform: scale(0.6);
+}
+
+.example-margin {
+    margin: 0 10px;
+  }
+
+.mat-progress-bar {
+    width: 400px;
+}
+
+.mat-spinner {
+    position: absolute;
+    top: 150px;
+    left: 150px;
+}
