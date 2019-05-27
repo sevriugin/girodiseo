@@ -46,6 +46,10 @@ export class TagDetailComponent implements OnInit {
     this.router.navigate([`/tags`]);
   }
 
+  gotoBike(): void {
+    this.router.navigate([`/frame/${this.tags[0].id}/locked`]);
+  }
+
   gotoBack(): void {
     this.location.back();
   }
@@ -59,6 +63,14 @@ export class TagDetailComponent implements OnInit {
     const { pageIndex, pageSize } = e;
     this.start = pageIndex * pageSize;
     this.end = this.start + pageSize;
+  }
+
+  gotoPayment(): void {
+    if (!this.tags || this.tags.length === 0) {
+      return;
+    }
+    const payment = this.tags[0].payment;
+    this.router.navigate([`/order/${payment.reference}`]);
   }
 
 }

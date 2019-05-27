@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { OrderService } from '../order.service';
-import { Order, Item, ORDERSTATUS } from '../order';
+import { Order, Item, Payment, ORDERSTATUS } from '../order';
 import { PageEvent } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { TagService } from '../tag.service';
 
 const merchantID = 1743;
 
@@ -13,7 +15,7 @@ const merchantID = 1743;
   templateUrl: './shopping.component.html',
   styleUrls: ['./shopping.component.css']
 })
-export class ShoppingComponent implements OnInit {
+export class ShoppingComponent implements OnInit, OnDestroy {
 
   start: number;
   end: number;
@@ -31,7 +33,20 @@ export class ShoppingComponent implements OnInit {
   order: Order;
   msg: string;
 
-  constructor(private authService: AuthService, private router: Router, private orderService: OrderService, private http: HttpClient) { }
+  tagid: string;
+  ref: string;
+  action: any;
+
+  ordersubs: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private orderService: OrderService,
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private tagService: TagService
+    ) { }
 
   ngOnInit() {
     this.start = 0;
@@ -40,35 +55,133 @@ export class ShoppingComponent implements OnInit {
     this.new = false;
     this.msg = '';
     this.order = undefined;
+    this.ordersubs = undefined;
+    this.action = undefined;
+
+    this.tagid = this.route.snapshot.queryParamMap.get('tagid');
+    this.ref = this.route.snapshot.queryParamMap.get('ref');
 
     this.authService.getUser().subscribe((res) => {
       const userId = this.authService.getUID();
-      this.orderService.getClientOrders(userId).subscribe((result) => {
+      this.ordersubs = this.orderService.getClientCurrentOrder(userId).subscribe((result) => {
         if (result.length > 0) {
-          this.order = this.getCurrentOrder(result);
-          if (this.order) {
-            console.log('Loading current order...');
-            console.log(this.order);
-          } else {
-            console.log('Did not find any order with new status');
-            this.new = true;
-            this.msg = 'Order is closed, add a new one';
-            this.userId = userId;
-          }
+          this.order = result[0];
+          this.new = false;
+          console.log('Loading current order...');
+          console.log(this.order);
+          this.addTagToOrder();
         } else {
           console.log('Adding new order...');
-          // this.order = this.orderService.newOrder(userId);
           this.new = true;
-          this.msg = 'Add new order';
+          this.msg = 'Select a product';
           this.userId = userId;
+          this.addTagToOrder();
         }
       });
     });
   }
 
+  ngOnDestroy() {
+    if (this.ordersubs) {
+      this.ordersubs.unsubscribe();
+    }
+  }
+
+  generate(): string {
+    let tagid = Math.random();
+    tagid = tagid * 1e14;
+    tagid = Math.floor(tagid);
+    return tagid.toString();
+  }
+
+  select(): void {
+    if (!this.action) {
+      return;
+    }
+
+    let type: string;
+    let price: number;
+    let priceTag: string;
+    let img: string;
+    const id = this.generate();
+
+    if (this.action.bronze) {
+      type = 'Bronze';
+      price = 1000;
+      priceTag = '₽ 1,000';
+      img = '../assets/tag-bronze.svg';
+    } else if (this.action.silver) {
+      type = 'Silver';
+      price = 6000;
+      priceTag = '₽ 6,000';
+      img = '../assets/tag-silver.svg';
+    } else {
+      type = 'Gold';
+      price = 10000;
+      priceTag = '₽ 10,000';
+      img = '../assets/tag-gold.svg';
+    }
+
+    const item: Item = {
+      id: id,
+      code: `TAG-${type}-${id}`,
+      name: `Giro d'Iseo ${type} Tag ${id}`,
+      qty: 1,
+      currency: 'RUB',
+      priceTag,
+      price,
+      img
+    };
+
+    this.new = false;
+    this.order = this.orderService.newOrderWithItems(this.userId, [item]);
+
+  }
+
+  addTagToOrder() {
+    if (!this.tagid) {
+      console.log('Nothing to add to the order. Tagid is undefined');
+      return;
+    }
+
+    const item: Item = {
+      id: this.tagid,
+      code: `TAG${this.tagid}`,
+      name: `Giro d'Iseo Tag ${this.tagid}`,
+      qty: 1,
+      currency: 'RUB',
+      priceTag: `10,000 rub`,
+      price: 10000,
+      img: '../assets/tag.png'
+    };
+
+    if (this.new) {
+      console.log(`Adding tag ${this.tagid} to new order`);
+      this.new = false;
+      this.order = this.orderService.newOrderWithItems(this.userId, [item]);
+    } else {
+      // check if tag is already in the order
+      let index = -1;
+      for (let i = 0; i < this.order.items.length; i++) {
+        if (this.order.items[i].code === `TAG${this.tagid}`) {
+          index = i;
+          break;
+        }
+      }
+      if (index === -1) {
+        console.log(`Adding tag ${this.tagid} to existing order`);
+        // add tag to order
+        this.order.items.push(item);
+        this.orderService.updateOrder(this.order);
+      } else {
+        console.log(`TAG${this.tagid} is already in the order`);
+      }
+    }
+  }
+
   getCurrentOrder(orders): Order | null {
     let order: Order = null;
-    for (let i = 1; i < orders.length; i++) {
+    for (let i = 0; i < orders.length; i++) {
       if (orders[i].status === ORDERSTATUS.NEW) {
         order = orders[i];
         break;
@@ -91,6 +204,16 @@ export class ShoppingComponent implements OnInit {
   deleteItem(index: number): void {
     this.order.items.splice(index, 1);
     this.orderService.updateOrder(this.order);
+    if (this.order.items && this.order.items.length === 0) {
+      // empty orders deleted so make it undefined
+      this.order = undefined;
+    }
+  }
+
+  deleteOrder(): void {
+    this.order.items = [];
+    this.orderService.updateOrder(this.order);
+    this.order = undefined;
   }
 
   authenticated(): boolean {
@@ -140,6 +263,7 @@ export class ShoppingComponent implements OnInit {
   register(): void {
     this.process = true;
     this.value = 50; // progress spinner value
+    this.ordersubs.unsubscribe();
 
     const url = `https://us-central1-cloud-firestore-test-d95bf.cloudfunctions.net/register`;
     const data = {
@@ -158,6 +282,16 @@ export class ShoppingComponent implements OnInit {
       console.log(doc);
       if (doc.getElementsByTagName('id').length > 0) {
         const id = doc.getElementsByTagName('id').item(0);
+        const payment: Payment = { id: `${id.innerHTML}`, reference: this.order.ref, sector: merchantID.toString()};
+        this.order.payment = payment;
+        this.order.status = ORDERSTATUS.REG;
+        this.orderService.updateOrder(this.order);
+        if (this.tagid) {
+          console.log(`Update tag for tagid ${this.tagid}`);
+          this.tagService.setPayment(this.tagid, payment);
+        } else {
+          console.log('!No tag in the order!');
+        }
         console.log(`Transaction ID ${id.innerHTML}`);
         this.authorize(parseInt(id.innerHTML, 10));
       }
@@ -175,6 +309,8 @@ export class ShoppingComponent implements OnInit {
     };
     this.http.post(url, data, { responseType: 'text' }).subscribe((res: string) => {
       this.process = false;
+      this.order.status = ORDERSTATUS.AUTH;
+      this.orderService.updateOrder(this.order);
       console.log(res);
       window.location.assign(res);
       });

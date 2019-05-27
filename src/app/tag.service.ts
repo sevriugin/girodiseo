@@ -4,6 +4,8 @@ import { Observable, BehaviorSubject, combineLatest  } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Tag, Registration } from './tag';
 import { DatePipe } from '@angular/common';
+import { Bike } from './rider';
+import { Payment } from './order';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,13 @@ export class TagService {
   tags: Observable<Tag[]>;
   tag: Observable<Tag[]>;
   userTags: Observable<Tag[]>;
+  dateTags: Observable<Tag[]>;
   number$: BehaviorSubject<number|null>;
   start$: BehaviorSubject<string|null>;
   order$: BehaviorSubject<string|null>;
   where$: BehaviorSubject<string|null>;
   mobile$: BehaviorSubject<string|null>;
+  date$: BehaviorSubject<string|null>;
 
   constructor(private datePipe: DatePipe, db: AngularFirestore) {
     this.db = db;
@@ -54,6 +58,16 @@ export class TagService {
         return query;
         }).valueChanges()
     ));
+
+    this.date$ = new BehaviorSubject(null);
+    this.dateTags = combineLatest(this.date$).pipe(
+      switchMap(([date]) =>
+        db.collection<Tag>('tags', ref => {
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        query = query.where('regDate', '==', date);
+        return query;
+        }).valueChanges()
+    ));
   }
 
   getTagById(id: string): Observable<Tag[]> {
@@ -76,6 +90,25 @@ export class TagService {
   getTagsByMobile(mobile: string): Observable<Tag[]> {
     this.mobile$.next(mobile);
     return this.userTags;
+  }
+
+  getTagsByDate(date: string): Observable<Tag[]> {
+    console.log(`TagService: get tags by date: ${date}`);
+    this.date$.next(date);
+    return this.dateTags;
+  }
+
+  addNewTag(tag: Tag): void {
+    this.db.collection('tags').ref.where('id', '==', tag.id)
+      .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            console.log(`TagService: addNewTag: adding new tag for id: ${tag.id}`);
+            this.db.collection('tags').add(tag);
+          } else {
+            console.log(`TagService: addNewTag: tag has found with id: ${tag.id}. Can't add new tag`);
+          }
+        });
   }
 
   setRegistration(id: string, docRef: string, reg: Registration): void {
@@ -103,6 +136,38 @@ export class TagService {
             console.log(`TagService: setRegDate: set regDate: ${regDate} for id: ${id}`);
             this.db.collection('tags').doc(doc.id).update({ regDate });
             cb(null, doc);
+          }
+        });
+  }
+
+  setBike(id: string, bike: Bike): void {
+    this.db.collection('tags').ref.where('id', '==', id)
+      .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            console.error(`TagService: setBike: tag not found for id ${id}`);
+          } else {
+            const doc = querySnapshot.docs[0];
+            // update tag doc
+            console.log(`TagService: setBike: set bike field for id: ${id}`);
+            console.log(bike);
+            this.db.collection('tags').doc(doc.id).update({ bike });
+          }
+        });
+  }
+
+  setPayment(id: string, payment: Payment): void {
+    this.db.collection('tags').ref.where('id', '==', id)
+      .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            console.error(`TagService: setPayment: tag not found for id ${id}`);
+          } else {
+            const doc = querySnapshot.docs[0];
+            // update tag doc
+            console.log(`TagService: setPayment: set payment field for id: ${id}`);
+            console.log(payment);
+            this.db.collection('tags').doc(doc.id).update({ payment });
           }
         });
   }

@@ -120,6 +120,171 @@ var AboutComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/admin/admin.component.css":
+/*!*******************************************!*\
+  !*** ./src/app/admin/admin.component.css ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".action-card {\n    max-width: 200px;\n}"
+
+/***/ }),
+
+/***/ "./src/app/admin/admin.component.html":
+/*!********************************************!*\
+  !*** ./src/app/admin/admin.component.html ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-header [title]=\"'Admin'\"></app-header>\n\n<br>\n<div *ngIf=\"!action\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n  <mat-card (click)=\"addExpert()\" class=\"action-card\">\n    <mat-card-header>\n      <mat-card-title>Expert</mat-card-title>\n      <mat-card-subtitle>Add expert account</mat-card-subtitle>\n    </mat-card-header>\n    <img mat-card-image [src]=\"'../assets/' + 'expert.png'\">\n  </mat-card>\n\n  <mat-card (click)=\"addShop()\" class=\"action-card\">\n      <mat-card-header>\n        <mat-card-title>Shop</mat-card-title>\n        <mat-card-subtitle>Add shop account</mat-card-subtitle>\n      </mat-card-header>\n      <img mat-card-image [src]=\"'../assets/' + 'shop.png'\">\n    </mat-card>\n\n    <mat-card (click)=\"addBikeShop()\" class=\"action-card\">\n        <mat-card-header>\n          <mat-card-title>Bike Shop</mat-card-title>\n          <mat-card-subtitle>Add Bike shop</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'bike-shop.png'\">\n    </mat-card>\n\n</div>\n\n<div *ngIf=\"action && action.expert\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    <mat-card class=\"action-card\">\n      <mat-card-header>\n        <mat-card-title>Expert</mat-card-title>\n        <mat-card-subtitle>Add expert account</mat-card-subtitle>\n      </mat-card-header>\n      <img mat-card-image [src]=\"'../assets/' + 'expert.png'\">\n\n      <mat-card-content >\n          <mat-form-field>\n            <input matInput name=\"expert\" type=\"text\" placeholder=\"Phone number\" required [(ngModel)]=\"expert\">\n          </mat-form-field>\n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"save()\" mat-button>SAVE</button>\n            <button (click)=\"action=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card> \n  </div>\n\n  <div *ngIf=\"action && action.shop\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n      <mat-card class=\"action-card\">\n        <mat-card-header>\n          <mat-card-title>Shop</mat-card-title>\n          <mat-card-subtitle>Add shop account</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'shop.png'\">\n  \n        <mat-card-content >\n            <mat-form-field>\n              <input matInput name=\"shop\" type=\"text\" placeholder=\"Phone number\" required [(ngModel)]=\"shop\">\n            </mat-form-field>\n          </mat-card-content>\n          <mat-card-actions>\n              <button (click)=\"save()\" mat-button>SAVE</button>\n              <button (click)=\"action=undefined\" mat-button>CANCEL</button>\n            </mat-card-actions>\n      </mat-card> \n  </div>\n\n  <div *ngIf=\"action && action.bike\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n      <mat-card class=\"action-card\">\n        <mat-card-header>\n          <mat-card-title>Bike Shop</mat-card-title>\n          <mat-card-subtitle>Add bike shop</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'bike-shop.png'\">\n  \n        <mat-card-content >\n            <mat-form-field>\n              <input matInput name=\"bike\" type=\"text\" placeholder=\"Phone number\" required [(ngModel)]=\"bike\">\n            </mat-form-field>\n          </mat-card-content>\n          <mat-card-actions>\n              <button (click)=\"save()\" mat-button>SAVE</button>\n              <button (click)=\"action=undefined\" mat-button>CANCEL</button>\n            </mat-card-actions>\n      </mat-card> \n  </div>\n"
+
+/***/ }),
+
+/***/ "./src/app/admin/admin.component.ts":
+/*!******************************************!*\
+  !*** ./src/app/admin/admin.component.ts ***!
+  \******************************************/
+/*! exports provided: AdminComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminComponent", function() { return AdminComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var AdminComponent = /** @class */ (function () {
+    function AdminComponent(authService, router, http, location, route) {
+        this.authService = authService;
+        this.router = router;
+        this.http = http;
+        this.location = location;
+        this.route = route;
+    }
+    AdminComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.action = undefined;
+        this.expert = undefined;
+        this.shop = undefined;
+        this.bike = undefined;
+        this.token = undefined;
+        this.process = false;
+        this.user_subs = this.authService.getUser().subscribe(function (user) {
+            if (user) {
+                _this.mobile = user.phoneNumber;
+                user.getIdTokenResult()
+                    .then(function (idTokenResult) {
+                    // Confirm the user is an Admin.
+                    if (!!idTokenResult.claims.admin) {
+                        _this.admin = true;
+                        _this.token = idTokenResult.token;
+                        console.log("Admin account " + _this.mobile);
+                    }
+                    else {
+                        _this.admin = false;
+                        _this.token = undefined;
+                    }
+                })
+                    .catch(function (error) {
+                    console.log(error);
+                });
+            }
+            else {
+                _this.mobile = null;
+                _this.admin = false;
+                _this.token = undefined;
+            }
+        });
+    };
+    AdminComponent.prototype.addExpert = function () {
+        console.log('Add expert account');
+        this.action = { expert: true };
+    };
+    AdminComponent.prototype.addShop = function () {
+        console.log('Add shop account');
+        this.action = { shop: true };
+    };
+    AdminComponent.prototype.addBikeShop = function () {
+        console.log('Add bike shop account');
+        this.action = { bike: true };
+    };
+    AdminComponent.prototype.save = function () {
+        if (!this.action) {
+            return;
+        }
+        if (!this.token) {
+            return;
+        }
+        if (!this.mobile) {
+            return;
+        }
+        if (this.action.expert) {
+            console.log('Save expert');
+            this.claims(this.expert, 'expert');
+            this.action = undefined;
+        }
+        else if (this.action.shop) {
+            console.log('Save shop');
+            this.claims(this.shop, 'shop');
+            this.action = undefined;
+        }
+        else if (this.action.bike) {
+            console.log('Save bike');
+            this.claims(this.bike, 'bike');
+            this.action = undefined;
+        }
+        else {
+            console.error('Invalid action');
+            this.action = undefined;
+        }
+    };
+    AdminComponent.prototype.claims = function (phone, claim) {
+        var _this = this;
+        this.process = true;
+        var url = 'https://us-central1-cloud-firestore-test-d95bf.cloudfunctions.net/claims';
+        var data = { mobile: this.mobile, idToken: this.token, phone: phone, claim: claim };
+        this.http.post(url, data, { responseType: 'json' }).subscribe(function (res) {
+            _this.process = false;
+            console.log(res);
+        });
+    };
+    AdminComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-admin',
+            template: __webpack_require__(/*! ./admin.component.html */ "./src/app/admin/admin.component.html"),
+            styles: [__webpack_require__(/*! ./admin.component.css */ "./src/app/admin/admin.component.css")]
+        }),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
+    ], AdminComponent);
+    return AdminComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -151,12 +316,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shopping_shopping_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./shopping/shopping.component */ "./src/app/shopping/shopping.component.ts");
 /* harmony import */ var _item_item_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./item/item.component */ "./src/app/item/item.component.ts");
 /* harmony import */ var _shopping_result_shopping_result_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./shopping-result/shopping-result.component */ "./src/app/shopping-result/shopping-result.component.ts");
+/* harmony import */ var _frame_frame_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./frame/frame.component */ "./src/app/frame/frame.component.ts");
+/* harmony import */ var _admin_admin_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./admin/admin.component */ "./src/app/admin/admin.component.ts");
+/* harmony import */ var _expert_expert_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./expert/expert.component */ "./src/app/expert/expert.component.ts");
+/* harmony import */ var _bikeshop_bikeshop_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./bikeshop/bikeshop.component */ "./src/app/bikeshop/bikeshop.component.ts");
+/* harmony import */ var _order_order_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./order/order.component */ "./src/app/order/order.component.ts");
+/* harmony import */ var _geo_ride_geo_ride_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./geo-ride/geo-ride.component */ "./src/app/geo-ride/geo-ride.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
+
 
 
 
@@ -193,15 +370,25 @@ var routes = [
     { path: 'about', component: _about_about_component__WEBPACK_IMPORTED_MODULE_10__["AboutComponent"] },
     { path: 'update', component: _profile_update_profile_update_component__WEBPACK_IMPORTED_MODULE_11__["ProfileUpdateComponent"] },
     { path: 'ride', component: _ride_ride_component__WEBPACK_IMPORTED_MODULE_12__["RideComponent"] },
+    { path: 'georide', component: _geo_ride_geo_ride_component__WEBPACK_IMPORTED_MODULE_26__["GeoRideComponent"] },
     { path: 'ride/:id', component: _ride_detail_ride_detail_component__WEBPACK_IMPORTED_MODULE_13__["RideDetailComponent"] },
     { path: 'item/:id', component: _item_item_component__WEBPACK_IMPORTED_MODULE_19__["ItemComponent"] },
     { path: 'item/:id/:ref', component: _item_item_component__WEBPACK_IMPORTED_MODULE_19__["ItemComponent"] },
+    { path: 'item/:id/:ref/:locked', component: _item_item_component__WEBPACK_IMPORTED_MODULE_19__["ItemComponent"] },
     { path: 'dashboard', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_14__["DashboardComponent"] },
     { path: 'shopping', component: _shopping_shopping_component__WEBPACK_IMPORTED_MODULE_18__["ShoppingComponent"] },
+    { path: 'shoppingtag/:id', component: _shopping_shopping_component__WEBPACK_IMPORTED_MODULE_18__["ShoppingComponent"] },
     { path: 'shopping/:result', component: _shopping_result_shopping_result_component__WEBPACK_IMPORTED_MODULE_20__["ShoppingResultComponent"] },
     { path: 'getstarted', component: _getstarted_getstarted_component__WEBPACK_IMPORTED_MODULE_15__["GetstartedComponent"] },
     { path: 'use/:acc/:points', component: _use_points_use_points_component__WEBPACK_IMPORTED_MODULE_16__["UsePointsComponent"] },
     { path: 'tnx/:hash', component: _tnx_detail_tnx_detail_component__WEBPACK_IMPORTED_MODULE_17__["TnxDetailComponent"] },
+    { path: 'frame', component: _frame_frame_component__WEBPACK_IMPORTED_MODULE_21__["FrameComponent"] },
+    { path: 'frame/:id', component: _frame_frame_component__WEBPACK_IMPORTED_MODULE_21__["FrameComponent"] },
+    { path: 'frame/:id/:locked', component: _frame_frame_component__WEBPACK_IMPORTED_MODULE_21__["FrameComponent"] },
+    { path: 'admin', component: _admin_admin_component__WEBPACK_IMPORTED_MODULE_22__["AdminComponent"] },
+    { path: 'expert', component: _expert_expert_component__WEBPACK_IMPORTED_MODULE_23__["ExpertComponent"] },
+    { path: 'bikeshop', component: _bikeshop_bikeshop_component__WEBPACK_IMPORTED_MODULE_24__["BikeshopComponent"] },
+    { path: 'order/:ref', component: _order_order_component__WEBPACK_IMPORTED_MODULE_25__["OrderComponent"] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -369,6 +556,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _item_dialog_item_dialog_component__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./item-dialog/item-dialog.component */ "./src/app/item-dialog/item-dialog.component.ts");
 /* harmony import */ var _shopping_result_shopping_result_component__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./shopping-result/shopping-result.component */ "./src/app/shopping-result/shopping-result.component.ts");
 /* harmony import */ var _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! @angular/material/progress-spinner */ "./node_modules/@angular/material/esm5/progress-spinner.es5.js");
+/* harmony import */ var _frame_frame_component__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./frame/frame.component */ "./src/app/frame/frame.component.ts");
+/* harmony import */ var _angular_material_chips__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! @angular/material/chips */ "./node_modules/@angular/material/esm5/chips.es5.js");
+/* harmony import */ var _angular_material_radio__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! @angular/material/radio */ "./node_modules/@angular/material/esm5/radio.es5.js");
+/* harmony import */ var _admin_admin_component__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./admin/admin.component */ "./src/app/admin/admin.component.ts");
+/* harmony import */ var _expert_expert_component__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./expert/expert.component */ "./src/app/expert/expert.component.ts");
+/* harmony import */ var _bikeshop_bikeshop_component__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./bikeshop/bikeshop.component */ "./src/app/bikeshop/bikeshop.component.ts");
+/* harmony import */ var _order_order_component__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./order/order.component */ "./src/app/order/order.component.ts");
+/* harmony import */ var _user_orders_user_orders_component__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./user-orders/user-orders.component */ "./src/app/user-orders/user-orders.component.ts");
+/* harmony import */ var _geo_ride_geo_ride_component__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./geo-ride/geo-ride.component */ "./src/app/geo-ride/geo-ride.component.ts");
+/* harmony import */ var _agm_core__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! @agm/core */ "./node_modules/@agm/core/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -452,6 +649,17 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+
+
+
+
+
+
+
+var gMapsKey = 'AIzaSyDvc8SLjfA0D-hLcNrB01q58Uh2As98A14';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -484,6 +692,13 @@ var AppModule = /** @class */ (function () {
                 _item_item_component__WEBPACK_IMPORTED_MODULE_73__["ItemComponent"],
                 _item_dialog_item_dialog_component__WEBPACK_IMPORTED_MODULE_74__["ItemDialogComponent"],
                 _shopping_result_shopping_result_component__WEBPACK_IMPORTED_MODULE_75__["ShoppingResultComponent"],
+                _frame_frame_component__WEBPACK_IMPORTED_MODULE_77__["FrameComponent"],
+                _admin_admin_component__WEBPACK_IMPORTED_MODULE_80__["AdminComponent"],
+                _expert_expert_component__WEBPACK_IMPORTED_MODULE_81__["ExpertComponent"],
+                _bikeshop_bikeshop_component__WEBPACK_IMPORTED_MODULE_82__["BikeshopComponent"],
+                _order_order_component__WEBPACK_IMPORTED_MODULE_83__["OrderComponent"],
+                _user_orders_user_orders_component__WEBPACK_IMPORTED_MODULE_84__["UserOrdersComponent"],
+                _geo_ride_geo_ride_component__WEBPACK_IMPORTED_MODULE_85__["GeoRideComponent"],
             ],
             entryComponents: [
                 _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_63__["QrcodeDialogComponent"],
@@ -528,7 +743,12 @@ var AppModule = /** @class */ (function () {
                 ngx_kjua__WEBPACK_IMPORTED_MODULE_65__["NgxKjuaModule"],
                 _angular_material_core__WEBPACK_IMPORTED_MODULE_66__["MatRippleModule"],
                 _angular_flex_layout__WEBPACK_IMPORTED_MODULE_67__["FlexLayoutModule"],
-                _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_76__["MatProgressSpinnerModule"]
+                _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_76__["MatProgressSpinnerModule"],
+                _angular_material_chips__WEBPACK_IMPORTED_MODULE_78__["MatChipsModule"],
+                _angular_material_radio__WEBPACK_IMPORTED_MODULE_79__["MatRadioModule"],
+                _agm_core__WEBPACK_IMPORTED_MODULE_86__["AgmCoreModule"].forRoot({
+                    apiKey: gMapsKey
+                })
             ],
             providers: [
                 _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestoreModule"],
@@ -543,6 +763,7 @@ var AppModule = /** @class */ (function () {
                 _transaction_service__WEBPACK_IMPORTED_MODULE_61__["TransactionService"],
                 _order_service__WEBPACK_IMPORTED_MODULE_72__["OrderService"],
                 { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_55__["HttpBackend"], useClass: _cust_ext_browser_xhr__WEBPACK_IMPORTED_MODULE_56__["CustExtBrowserXhr"] },
+                _agm_core__WEBPACK_IMPORTED_MODULE_86__["GoogleMapsAPIWrapper"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -706,6 +927,232 @@ var AuthService = /** @class */ (function () {
         __metadata("design:paramtypes", [angularfire2_auth__WEBPACK_IMPORTED_MODULE_2__["AngularFireAuth"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/bikeshop/bikeshop.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/bikeshop/bikeshop.component.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".message {\n    color: red;\n}\ntable {\n    width: 100%;\n  }\n.mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n.payment {\n  color: gold;\n}\n.bike {\n  color: green;\n}\n.error {\n  color: red;\n}\n.test {\n  color: gray;\n}"
+
+/***/ }),
+
+/***/ "./src/app/bikeshop/bikeshop.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/bikeshop/bikeshop.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-header [title]=\"'Bikes'\"></app-header>\n<br>\n<div *ngIf=\"!action\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    <mat-card (click)=\"action={inspect:true}\" class=\"action-card\">\n        <mat-card-header>\n          <mat-card-title>Bike</mat-card-title>\n          <mat-card-subtitle>Inspect bike</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'bike-shop.png'\">\n    </mat-card>\n\n    <mat-card (click)=\"action={claim:true}\" class=\"action-card\">\n        <mat-card-header>\n          <mat-card-title>Claim</mat-card-title>\n          <mat-card-subtitle>Make Claim</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'claim.png'\">\n    </mat-card>\n\n</div>\n\n<div *ngIf=\"action && action.inspect\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    <mat-card class=\"action-card\">\n      <mat-card-header>\n        <mat-card-title>Bike</mat-card-title>\n        <mat-card-subtitle>Start inspection</mat-card-subtitle>\n      </mat-card-header>\n      <img mat-card-image [src]=\"'../assets/' + 'bike-shop.png'\">\n      <p class=\"message\" *ngIf=\"msg\">{{msg}}</p>\n\n      <mat-card-content >\n          <mat-form-field>\n            <input matInput name=\"tagid\" type=\"text\" placeholder=\"Tag Id or mobile start +\" required [(ngModel)]=\"tagid\">\n          </mat-form-field>\n        </mat-card-content>\n        <mat-card-actions>\n            <button [disabled]=\"!tagid\" (click)=\"startInspection()\" mat-button>START</button>\n            <button (click)=\"action=undefined;msg=undefined;tagid=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card> \n</div>\n\n<div *ngIf=\"action && action.claim\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    <mat-card class=\"action-card\">\n      <mat-card-header>\n        <mat-card-title>Claim</mat-card-title>\n        <mat-card-subtitle>Start claim process</mat-card-subtitle>\n      </mat-card-header>\n      <img mat-card-image [src]=\"'../assets/' + 'claim.png'\">\n      <p class=\"message\" *ngIf=\"msg\">{{msg}}</p>\n\n      <mat-card-content >\n          <mat-form-field>\n            <input matInput name=\"tagid\" type=\"text\" placeholder=\"Enter Tag Id\" required [(ngModel)]=\"tagid\">\n          </mat-form-field>\n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"startInspection()\" mat-button>START</button>\n            <button (click)=\"action=undefined;msg=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card> \n</div>\n\n<div *ngIf=\"action && action.selection\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n\n    <div fxFlex=\"2\"></div>\n    <div fxFlex=\"78\"><h4>Select tag to start</h4></div>\n   \n\n    <div fxFlex=\"8\">\n        <button (click)=\"action={inspect: true}\" mat-icon-button>\n            <mat-icon>close</mat-icon>\n          </button>\n    </div>\n    <div fxFlex=\"2\"></div>\n</div>\n\n<div *ngIf=\"action && action.selection\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    \n    <table *ngIf=\"tags.length>0\" mat-table [dataSource]=\"tags | slice:start:end\" class=\"mat-elevation-z8\">\n\n        <!--- Note that these columns can be defined in any order.\n              The actual rendered columns are set as a property on the row definition\" -->\n      \n        \n  \n        <!-- Position Column -->\n  \n        <ng-container matColumnDef=\"status\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element\"> <mat-icon [ngClass]=\"status(element)\">radio_button_checked</mat-icon></td>\n          </ng-container>\n  \n        <ng-container matColumnDef=\"id\">\n          <th mat-header-cell *matHeaderCellDef> ID </th>\n          <td mat-cell *matCellDef=\"let element\"> {{showTagId(element.id)}}</td>\n        </ng-container>\n  \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"date\">\n          <th mat-header-cell *matHeaderCellDef> Date </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.regDate}}</td>\n        </ng-container>\n      \n        <!-- Name Column -->\n        <ng-container matColumnDef=\"mobile\">\n          <th mat-header-cell *matHeaderCellDef> Mobile </th>\n          <td mat-cell *matCellDef=\"let element\"> {{showMobile(element.reg.mobile)}}</td>\n        </ng-container>\n      \n  \n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"link\">\n            <th mat-header-cell *matHeaderCellDef> Start </th>\n            <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoTagById(element)\" mat-icon-button> <mat-icon>play_arrow</mat-icon></button> </td>\n          </ng-container>\n      \n      \n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      \n  <mat-paginator *ngIf=\"tags.length>0\" [length]=\"tags.length\"\n                [pageSize]=\"10\"\n                [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                (page)=\"setPage($event)\">\n  </mat-paginator>\n  </div>"
+
+/***/ }),
+
+/***/ "./src/app/bikeshop/bikeshop.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/bikeshop/bikeshop.component.ts ***!
+  \************************************************/
+/*! exports provided: BikeshopComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BikeshopComponent", function() { return BikeshopComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
+/* harmony import */ var _order_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../order.service */ "./src/app/order.service.ts");
+/* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../order */ "./src/app/order.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+var BikeshopComponent = /** @class */ (function () {
+    function BikeshopComponent(authService, tagService, router, http, location, route, orderService, datePipe) {
+        this.authService = authService;
+        this.tagService = tagService;
+        this.router = router;
+        this.http = http;
+        this.location = location;
+        this.route = route;
+        this.orderService = orderService;
+        this.datePipe = datePipe;
+        this.displayedColumns = ['status', 'id', 'date', 'mobile', 'link'];
+    }
+    BikeshopComponent.prototype.ngOnInit = function () {
+        this.tag = undefined;
+        this.tagid = undefined;
+        this.action = undefined;
+        this.msg = undefined;
+        this.mobile = undefined;
+        this.start = 0;
+        this.end = 10;
+    };
+    BikeshopComponent.prototype.startInspection = function () {
+        var _this = this;
+        if (!this.action) {
+            return;
+        }
+        if (this.action.inspect) {
+            console.log('Start inspection');
+            if (this.tagid.startsWith('+')) {
+                this.mobile = this.tagid;
+                this.tagService.getTagsByMobile(this.mobile).subscribe(function (tags) {
+                    if (tags.length > 0) {
+                        _this.action = { selection: true };
+                        _this.tags = tags;
+                    }
+                    else {
+                        _this.action = { inspect: true };
+                        _this.msg = "Tag is not found";
+                    }
+                });
+                return;
+            }
+            this.tagService.getTagById(this.tagid)
+                .subscribe(function (tags) {
+                if (tags.length > 0) {
+                    _this.tag = tags[0];
+                    if (!_this.tag.payment) {
+                        _this.msg = 'TAG is not paid';
+                        console.log("TAG " + _this.tag.id + " is not paid");
+                        return;
+                    }
+                    var payment_1 = _this.tag.payment;
+                    _this.orderService.getOrderByRef(payment_1.reference).subscribe(function (orders) {
+                        if (orders.length > 0) {
+                            _this.order = orders[0];
+                            if (_this.order.status === _order__WEBPACK_IMPORTED_MODULE_7__["ORDERSTATUS"].PAID || _this.order.status === _order__WEBPACK_IMPORTED_MODULE_7__["ORDERSTATUS"].CLOSED) {
+                                console.log("Tag status is paid, start bike inspection");
+                                if (_this.tag.bike) {
+                                    // bike inspection is done already
+                                    _this.msg = "Bike is inspected already";
+                                    return;
+                                }
+                                _this.msg = undefined;
+                                _this.router.navigate(["/frame/" + tags[0].id]);
+                            }
+                            else {
+                                _this.msg = "Wrong status " + _this.order.status;
+                                return;
+                            }
+                        }
+                        else {
+                            console.error("The order for reference " + payment_1.reference + " id not found");
+                        }
+                    });
+                }
+                else {
+                    _this.tag = undefined;
+                    _this.msg = 'Tag not found';
+                    console.error('Tag not found');
+                }
+            });
+        }
+        else if (this.action.claim) {
+            console.log('Start claim process');
+            this.tagService.getTagById(this.tagid)
+                .subscribe(function (tags) {
+                if (tags.length > 0) {
+                    _this.tag = tags[0];
+                    _this.msg = 'Process not defined';
+                    // start claim process
+                }
+                else {
+                    _this.tag = undefined;
+                    _this.msg = 'Tag not found';
+                    console.error('Tag not found');
+                }
+            });
+        }
+        else {
+            console.error('Invalid action');
+        }
+    };
+    BikeshopComponent.prototype.status = function (tag) {
+        if (tag.payment && tag.bike) {
+            return 'bike';
+        }
+        else if (tag.bike && !tag.payment) {
+            return 'error';
+        }
+        else if (!tag.bike && tag.payment) {
+            return 'payment';
+        }
+        else {
+            return 'test';
+        }
+    };
+    BikeshopComponent.prototype.setPage = function (e) {
+        console.log(e);
+        var pageIndex = e.pageIndex, pageSize = e.pageSize;
+        this.start = pageIndex * pageSize;
+        this.end = this.start + pageSize;
+    };
+    BikeshopComponent.prototype.showMobile = function (mobile) {
+        var start = mobile.length - 7;
+        if (start < 0) {
+            return mobile;
+        }
+        else {
+            return mobile.slice(start, start + 3) + "-" + mobile.slice(start + 3, start + 5) + "-" + mobile.slice(start + 5);
+        }
+    };
+    BikeshopComponent.prototype.showTagId = function (id) {
+        var start = id.length - 4;
+        if (id.length > 7) {
+            return id.slice(0, 3) + "..." + id.slice(start);
+        }
+        else {
+            return id;
+        }
+    };
+    BikeshopComponent.prototype.gotoTagById = function (tag) {
+        this.action = { inspect: true };
+        this.tagid = tag.id;
+        this.mobile = undefined;
+        this.msg = undefined;
+    };
+    BikeshopComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-bikeshop',
+            template: __webpack_require__(/*! ./bikeshop.component.html */ "./src/app/bikeshop/bikeshop.component.html"),
+            styles: [__webpack_require__(/*! ./bikeshop.component.css */ "./src/app/bikeshop/bikeshop.component.css")]
+        }),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _tag_service__WEBPACK_IMPORTED_MODULE_5__["TagService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+            _order_service__WEBPACK_IMPORTED_MODULE_6__["OrderService"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"]])
+    ], BikeshopComponent);
+    return BikeshopComponent;
 }());
 
 
@@ -1197,6 +1644,985 @@ var WEB3 = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('web
 
 /***/ }),
 
+/***/ "./src/app/expert/expert.component.css":
+/*!*********************************************!*\
+  !*** ./src/app/expert/expert.component.css ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/expert/expert.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/expert/expert.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  expert works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/expert/expert.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/expert/expert.component.ts ***!
+  \********************************************/
+/*! exports provided: ExpertComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExpertComponent", function() { return ExpertComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ExpertComponent = /** @class */ (function () {
+    function ExpertComponent() {
+    }
+    ExpertComponent.prototype.ngOnInit = function () {
+    };
+    ExpertComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-expert',
+            template: __webpack_require__(/*! ./expert.component.html */ "./src/app/expert/expert.component.html"),
+            styles: [__webpack_require__(/*! ./expert.component.css */ "./src/app/expert/expert.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ExpertComponent);
+    return ExpertComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/frame/frame.component.css":
+/*!*******************************************!*\
+  !*** ./src/app/frame/frame.component.css ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".brand-card {\n    max-width: 200px;\n}\n\n.colnago-header-image {\n    background-image: url('colnago-logo.png');\n    background-size: cover;\n}\n\n.pinarello-header-image {\n    background-image: url('data:image/gif;base64,R0lGODdhyADIAOcAAAQCBISChMTCxOwOFPRKTPSChOTi5ERCRPSipPzCxOwuNPRmbPTy9CQiJKSipGRiZPyytPRaXPzS1Ow+RPzi5PSSlBQSFJSSlNTS1OweJFRSVPR2fDQyNLSytHRydPz6/PRSVPyqrPzKzPy6vOxGTPzq7PSKjOw2PPzy9PRiZPza3AwKDIyKjMzKzOwWHOzq7ExKTPRudCwqLKyqrGxqbPQ+RPSanBwaHJyanNza3OwmLFxaXPR+hDw6PLy6vHx6fPROVPSGjPymrPzGxOwyNPy2tPReZPzW1OxCRPzm5PR6fPRWXPyurPzOzPy+vPzu7Pz29AQGBISGhMTGxOwSHPRKVPSCjOTm5ERGRPSmrPRqbPT29CQmJKSmpGRmZPRaZPSWnBQWFJSWlNTW1OwiLFRWVDQ2NLS2tHR2dPz+/PRSXPRGTPSOlOw6RPRibPze3AwODIyOjMzOzOwaJOzu7ExOTPRydCwuLKyurGxubPSepBweHJyenNze3OwqNFxeXDw+PLy+vHx+fPzGzOwyPPy2vPzW3OxCTPzm7PR6hPyutPzO1Py+xPzu9Pz2/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAyADIAAAI/gDTCBxIsKDBgwgTKlzIsKHDhxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fPn0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izat3KtavXr2DDih1LtqzZs2jTql3Ltq3bt3Djyp1Lt67du3jz6t3Lt6/fv4ADCx5MuLDhw4gTK17MuLHjx5AjS55MubLly5gza97MuTPWD45QPCmBKAmiNyooICrRCMoHzxQdPVExIoSNIDyUbIgRQ4sWN0a0xLCjhEcQMIoYvUHhCLbCRk7A8LBjpMqhGjUIESLiR0eGOeDB/rvIkIGMnxpI3GwIImRIo9fOBaoQAqZCEDYV9AjJkgWCf0UhCCFEBSYoEQMQhJDhwhwuNDhHBjqcQEAMQUBAAXyeUTDEIEdQUAIKaWBY0AdQNJKECiIUIUQQC9TwXXgMllfDFwUMIqJmN0rkSAm02RDDCQzCuCAZa2xgY3wXQfEGIya4GN6LD65RwBNIYlSCCEEQAd53UOqgxRtVWunEGls+aGYGbpQQ5kUfLFJDmWbOQUYFa2JUhA5lQgkCFHVaRIEfeb64RiN9VqQHeXCCt0SOhTYkwZtnhudHEY1G9IEiEzxppgtzMlrpQY4kYASeiVKhAAJ8fqrQB2/YAAIZ/jBu6sISR3ha6Qc8ChFDDd7B+OIAZETgBIhVokCBCkcMAoEiikAwAiOKBEEdECfoAKuDkS5YQwEq2OrZayRScAQjbCyhgAsDUEHFgk8iGh4ZIIxArKoFlQAGIYHG+V2wTXj76QciRDCevjAqIMS89A4E2mxCAMHllg/PUYUI/vaJQiMUOGHFEqRCHOccRqiQ8EIlQLAEohG7sEYTI68KRQl6AEmwAkU01/JBxopQAQGwPgilCWrebNCOFOicwglQMgjCIkIz1EgFpO4rRKpNG4RrEyEs0HMGs7Jc9UFQDFJAG+xyaQPVXxtUgg0yM1hDAmk/xwag4PGASNwKSRAB/ng6CFHx146woSABcOOtUBE1ULFBEoYrpEIKc1SAduMFoaCEHyFQntAHQRDAiOYJgWGHIaAjNCDjpRvk3+SppzEIxa0XdITIsRP0BgW1E1Ra7gM1QijvabgGfIh/N1788Mgnr/zyzDfvfFPghih99NGvSvyI0y8EbvHVM0R99t8/9H34Ckvv0PYUfcDACwb0ccUVL9Dxwd8vaLDDH/jnrz/+NAQwQx8MEJEB8rCD+2lgDAJxxB/ut8AdIPAgW5iBBvBXBgfYDCEfwEEBNXCBC4LqDBPcnwjx94AAYGALCNnCC3wQAC+MEH87CAAD0iAHD5RhgR7AAEMkeL8yoAEi/gzAwAU00AALrAAOFkjiDXrwABz0AYUJaQEApkjFKlpxiivAwhkwxIcGUDEMOkyDAcJgxTu84CAv8AAVoxAAKCIEB2ScYhQeiBA6COKKeKwiHFhAh4IwQAB1sIAVo7CCQhpyBQ/oIw5WQEVATIEhGqjiDhzCgEDsAA55tOIK/oABRn2ABVWMQhhGScowGNGKDcDDQH4gyCn2wAACkQMjQ1kGNw6kBYD44gU25wMvVrEMtsLAAfRYylFaAA6zlKMD3JiDHSQzChbgAhZowIILWPMCcRCEA9QnhWR6AZYKccQd1siChhjgB3GcIhxuIAMzAAIQMoBDFKpoATmA6g9U/lyBF+jAT34ywAACEEMuqyiFGX6gDJK8gkCkME8rWkAMN/KBDKjIgTMkRA7jBEAYMDnFFkRxD1TkggP6SYd/yqEDUuhBQwGABXBiYKJfLEMgAmgrBvygim1cyAtAisUwKiQHD9AjFvhggC1sYX4MwINKqyiDGfrRDF8UQ0IcwNMpPqAPaXgBDAgKxUh+cZYNsCdB8MBRAMBArAbJQQ+mmModNJQDtiSID1YKCLQaJBAcCCkCX5BXKjagAw7pQ1CxeIG4prWsYVCoQtJYxRvE4YwHMcABVgqARxbkCum8gQ8S0gEuVJEGsBzDWqnoA3D5EgBRcAA+pwgIxabBEThY/qkXIFsQA2wVAHDowhZakE6LGmQLDqhiHcBpEAbg4LQw6MMHPJBMAPi2IQIYqEa7wBAHJLMBhiXIB7qQTjb2carpBMAPDIKBlXIBq99zhAEE0UrUxgGFDjgtHCx7hRtQEQ4MuEJfLeABpzJAClX8QY5e4AVMRsEDZ/zAMKd4B6cShAGgpOJZc4CBMVA4B2NowQUyitouqPe0qJ3CGCxcYQyT2MLg7MBpASEAhqBhpVjQKRqqiAWPKmQG4f1hQTrQWD4IwAeBCHIgfDADL4QXC5YNQDpl8EA5lHUPAQwET2/Ah9dcYcZTDEMcDPICdE6xDlgVyBk4GoUZGMQAq8Vi/gO4IAMZsJkLXLDASuFQBqzyob2odbOe98zmNgsiRIukYhnomJAdVPHPCmnBgqeIBgcj5AJ43qV286DJIxoSmZSFwwE6AB8vJHMHimVBMs3wmi3wgaMcsGcOEMpgVRKEDizg6R5malRHvMCzU+SCo9Pw0kxeMQoNMEMeciAQGmQ6ichOdhLhcAccpGELLFhpoxeyBZhO8bkIEUBfAbACKWSXIGgoKwDsGiLprjEK6GYkIVcQBi4c4AdopUMdqoiG77qVipMUyAseMM8oaOAKAsA1S336Wj4IXAZS4IMDFB4HgUfB2QSZQlnhYIYDWBwQHBC3DJwIRUfAgLJ5+MEP/tAw8pKTfORx0OEL7ihHFnx7IDtdo2uzve0wSDohDBjtFC1AXIEwwL5yBMQOylBAohN9B/3Dw8zTkINFA0C3IYIqFbc8kBxgYYo3EASk8U3cD5xB6r6uYgNo6/UqHmAMH0DhFuTghfZyoQNu3AIgVhoFYjvEAIPldhz8hYF0wmHpBtF2VBciZeHeqA/J3EML0s74ox41IT7gcBRanNWqAgCwCmuB1KO50jxgSACLjsIeRk/60TegrFGgehqM+8sbYUADKy2D3UNUB8pieyEtuDoV670QH+CZ8gmZgs6jANqE5ODjVLQA8AcigCre4bsQYUE69yDWvq+x58+egeXV/imFW9ZenTuIAw7GT34c8EEQZeUCOF+AZdR63iB42HYULuBgFuAZCz7og/73z/8cKNYAXlBFZuAARZUQfWB5MNAC8oMQgiV2gtACL/B4r3UFPuBM94UGhhVhrOVBDfEBxkZFB2B3XdBeFmBYL9BNVsQF1MVr94ZaD0BoBeEI84ZFgvAafXBbGhUAB/EBUtBeZgB8L/AHGvcARFiERvgAhRUiXQBiXEADF+AAUOgAXeAAOGAA85MHzXUAAaBwUQiFHcAAjoAHIKZpaHAB5BcHeWBtAMAF02YQOBgFfyARdOBVjAZZebeGjNIHhmZ2HpUDNEBmGkBuBjEDYudRGAB0/mu4ggYxBjM4Rd80EH2ABj0QBpSVR1HwAE71AhdgBs3FbcgEB8i0AoHwGi9AA4h4X59oRAeAVS8gBj0gbpkUBVywA1B3EBpwBxxwBz3ABxIBgLnIATLAB071AL/IBXlwUXWAi7iYB1cAXFiQi3egAZalEPqljD2wZRhgBr/oQAmBA4BgjaM4EFsQCBeQBw9QBhqgjcr4i7pYTgPBAGeABmWAcbjIAfZoj3dwdgNBBxfgBcn4i/f4izTwXVsgAIKwA4DQABtVSEi0B1zQAzuABg5wBbbiAx1wBh3QAWEGRAKAB2dwBv8DHwJwkSC5kUMzBnhwkR0gB2nXAimJkSfUoBAW+ZEdEAhpQAckWZO7RhArRJIzkAM5sj7tEwgfWZQ0eQazJ44AlZMYiZEd4AO7Rgc5QJJNmZPTKBAfAHB8cAFSEACCIAVxIAZdIAAF+DxmeZZomZZquZZs2ZZu+ZZwGZdyOZd0WZd2eZd4mZd6uZd82Zd++ZeAGZiCOZiEWZiGeZiImZiKuZiM2ZiO+ZiQGZmSOZmUWZmWeZmYmZlwERAAOw==');\n    background-size: cover;\n}\n\n.argon18-header-image {\n    background-image: url('argon18-logo.png');\n    background-size: cover;\n}\n\n.cervelo-header-image {\n    background-image: url('cervelo-logo.png');\n    background-size: cover;\n}\n\n.noname-header-image {\n    background-image: url('giro_logo_big.png');\n    background-size: cover;\n}\n\n.model-card {\n    max-width: 400px;\n}\n\n.group-radio-group {\n    display: flex;\n    flex-direction: column;\n    margin: 15px 0;\n}\n\n.group-radio-button {\n    margin: 5px;\n}\n\n.mat-spinner {\n    position: absolute;\n    top: 150px;\n    left: 150px;\n}\n\n.file-upload {\n    width: 0px;\n    height: 0px;\n    overflow: hidden;\n}\n\n.custom-file-upload {\n        border: 1px solid #ccc;\n        display: inline-block;\n        padding: 6px 12px;\n        cursor: pointer;\n}\n\n.mat-progress-bar {\n    width: 400px;\n}"
+
+/***/ }),
+
+/***/ "./src/app/frame/frame.component.html":
+/*!********************************************!*\
+  !*** ./src/app/frame/frame.component.html ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<br>\n<div *ngIf=\"!selected\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n  <mat-card *ngFor=\"let brand of brands\" (click)=\"select(brand)\" class=\"brand-card\">\n    <img mat-card-image [src]=\"'../assets/' + brand.logo\">\n  </mat-card>\n</div>\n\n<div *ngIf=\"selected && step==1\" fxLayout=\"column\" fxLayoutAlign.xs=\"center\" fxLayoutGap=\"1.5%\" >\n  <div *ngIf=\"selected.change\">\n    {{selected.name}}\n  </div>\n  <div *ngIf=\"!selected.change\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"2\"></div>\n      <div fxFlex=\"8\">\n          <button (click)=\"unselect()\" class=\"header-btn\" mat-icon-button>\n              <mat-icon>arrow_back_ios</mat-icon>\n          </button>\n      </div>\n  \n      <div fxFlex=\"25\"></div>\n      <div fxFlex=\"65\"><h3 class=\"header-title\">{{selected.name}}</h3></div>\n  </div>\n  <mat-card *ngFor=\"let model of selected.models\" (click)=\"select(model)\" class=\"model-card\">\n      <mat-card-header>\n          <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n          <mat-card-title>{{model.name}}</mat-card-title>\n          <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n        </mat-card-header>\n    <img mat-card-image [src]=\"'../assets/' + model.img\">\n  </mat-card>\n</div>\n\n<div *ngIf=\"model && step==2\" fxLayout=\"column\" fxLayoutAlign.xs=\"center\" fxLayoutGap=\"1.5%\" >\n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"8\">\n            <button (click)=\"unselect()\" class=\"header-btn\" mat-icon-button>\n                <mat-icon>arrow_back_ios</mat-icon>\n            </button>\n        </div>\n    \n        <div fxFlex=\"25\"></div>\n        <div fxFlex=\"65\"><h3 class=\"header-title\">{{model.name}}</h3></div>\n    </div>\n    <mat-card *ngIf=\"!change\" class=\"model-card\">\n        <mat-card-header>\n            <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n            <mat-card-title>{{model.name}}</mat-card-title>\n            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n          </mat-card-header>\n      <img *ngIf=\"frame.images==undefined\" mat-card-image [src]=\"'../assets/' + model.img\">\n      <img *ngIf=\"frame.images!=undefined\" mat-card-image [src]=\"frame.images[0]\">\n      <mat-card-content>\n          <mat-chip-list>\n            <mat-chip>{{frame.model}}</mat-chip>\n            <mat-chip>{{frame.year}}</mat-chip>\n            <mat-chip>{{frame.type}}</mat-chip>\n            <mat-chip>{{frame.material}}</mat-chip>\n            <mat-chip *ngIf=\"frame.electronic==undefined\" (click)=\"edit('group')\" color=\"warn\" [selected]=\"!locked\">Group?</mat-chip>\n            <mat-chip *ngIf=\"frame.electronic!=undefined\" (click)=\"edit('group')\" [selected]=\"!locked\">{{frame.electronic?\"electronic\":\"mechanic\"}}</mat-chip>\n            <mat-chip *ngIf=\"frame.bin==undefined\" (click)=\"edit('bin')\" color=\"warn\" [selected]=\"!locked\">BIN?</mat-chip>\n            <mat-chip *ngIf=\"frame.bin!=undefined\" (click)=\"edit('bin')\" [selected]=\"!locked\">{{frame.bin}}</mat-chip>\n            <mat-chip *ngIf=\"frame.disk==undefined\" (click)=\"edit('disk')\" color=\"warn\" [selected]=\"!locked\">Brakes?</mat-chip>\n            <mat-chip *ngIf=\"frame.disk!=undefined\" (click)=\"edit('disk')\" [selected]=\"!locked\">{{frame.disk?\"disk\":\"rim\"}}</mat-chip>\n            <mat-chip *ngIf=\"frame.new==undefined\" (click)=\"edit('new')\" color=\"warn\" [selected]=\"!locked\">New?</mat-chip>\n            <mat-chip *ngIf=\"frame.new!=undefined\" (click)=\"edit('new')\" [selected]=\"!locked\">{{frame.new?\"new\":\"used\"}}</mat-chip>\n            <mat-chip *ngIf=\"frame.images==undefined\" (click)=\"edit('images')\" color=\"warn\" [selected]=\"!locked\"><mat-icon>photo</mat-icon>&nbsp;0</mat-chip>\n            <mat-chip *ngIf=\"frame.images!=undefined\" (click)=\"edit('images')\" [selected]=\"!locked\"><mat-icon>photo</mat-icon>&nbsp;{{frame.images.length}}</mat-chip>\n          </mat-chip-list>\n        </mat-card-content>\n        <mat-card-actions>\n            <button [disabled]=\"!complited() || locked\" (click)=\"save()\" mat-button>SAVE</button>\n            <button (click)=\"unselect()\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card>\n\n    <mat-card *ngIf=\"change==='group'\" class=\"model-card\">\n        <mat-card-header>\n            <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n            <mat-card-title>{{model.name}}</mat-card-title>\n            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n          </mat-card-header>\n    \n        <mat-card-content >\n          <label id=\"group-radio-group-label\"><h3>Select bike group type</h3></label>\n          <mat-radio-group\n            aria-labelledby=\"group-radio-group-label\"\n            class=\"group-radio-group\"\n            [(ngModel)]=\"grouptype\">\n            <mat-radio-button class=\"group-radio-button\" *ngFor=\"let type of model.group\" [value]=\"type\">\n              {{type}}\n            </mat-radio-button>\n          </mat-radio-group>\n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"grouptype==='electronic'?frame.electronic=true:frame.electronic=false;change=undefined\"mat-button>SAVE</button>\n            <button (click)=\"change=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card>\n\n    <mat-card *ngIf=\"change==='disk'\" class=\"model-card\">\n        <mat-card-header>\n            <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n            <mat-card-title>{{model.name}}</mat-card-title>\n            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n          </mat-card-header>\n    \n        <mat-card-content >\n          <label id=\"group-radio-group-label\"><h3>Select bike brake types</h3></label>\n          <mat-radio-group\n            aria-labelledby=\"group-radio-group-label\"\n            class=\"group-radio-group\"\n            [(ngModel)]=\"braketype\">\n            <mat-radio-button class=\"group-radio-button\" *ngFor=\"let type of model.brakes\" [value]=\"type\">\n              {{type}}\n            </mat-radio-button>\n          </mat-radio-group>\n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"braketype==='disk'?frame.disk=true:frame.disk=false;change=undefined\"mat-button>SAVE</button>\n            <button (click)=\"change=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card>\n\n    <mat-card *ngIf=\"change==='new'\" class=\"model-card\">\n        <mat-card-header>\n            <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n            <mat-card-title>{{model.name}}</mat-card-title>\n            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n          </mat-card-header>\n    \n        <mat-card-content >\n          <label id=\"group-radio-group-label\"><h3>Select new or used</h3></label>\n          <mat-radio-group\n            aria-labelledby=\"group-radio-group-label\"\n            class=\"group-radio-group\"\n            [(ngModel)]=\"neworused\">\n            <mat-radio-button class=\"group-radio-button\" *ngFor=\"let type of options\" [value]=\"type\">\n              {{type}}\n            </mat-radio-button>\n          </mat-radio-group>\n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"neworused==='new'?frame.new=true:frame.new=false;change=undefined\"mat-button>SAVE</button>\n            <button (click)=\"change=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card>\n\n    <mat-card *ngIf=\"change==='bin'\" class=\"model-card\">\n        <mat-card-header>\n            <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n            <mat-card-title>{{model.name}}</mat-card-title>\n            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n          </mat-card-header>\n    \n        <mat-card-content >\n          <mat-form-field>\n            <input matInput name=\"bin\" type=\"text\" placeholder=\"Enter frame id number\" required [(ngModel)]=\"frame.bin\">\n          </mat-form-field>\n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"change=undefined\"mat-button>SAVE</button>\n            <button (click)=\"change=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card>\n\n    <mat-card *ngIf=\"change==='images'\" class=\"model-card\">\n        <mat-card-header>\n            <div mat-card-avatar [ngClass]=\"selected.class\"></div>\n            <mat-card-title>{{model.name}}</mat-card-title>\n            <mat-card-subtitle>{{model.desc}}</mat-card-subtitle>\n          </mat-card-header>\n\n        <img *ngIf=\"!frame.images || progress\" mat-card-image [src]=\"'../assets/' + 'bike-blurred.jpg'\">\n        <img *ngIf=\"frame.images && frame.images.length > 0 && !progress\" mat-card-image [src]=\"frame.images[current]\">\n        <mat-spinner *ngIf=\"progress\"></mat-spinner>\n    \n        <mat-card-content >\n            <mat-chip-list *ngIf=\"frame.images\">\n              <mat-chip *ngFor=\"let image of frame.images; index as i\" [selected]=\"current==i\" (click)=\"current=i\">{{i+1}}</mat-chip>\n              <label for=\"file-upload-1\">\n                  <mat-chip><mat-icon>cloud_upload</mat-icon></mat-chip>\n                 \n                    <input id=\"file-upload-1\"  style=\"display: none\" accept=\"image/*\" type=\"file\" (change)=\"handleFileInput($event.target.files)\"/>\n                  \n                </label>\n            </mat-chip-list>\n\n            <mat-chip-list *ngIf=\"!frame.images\">\n                <label for=\"file-upload-2\">\n                  <mat-chip><mat-icon>cloud_upload</mat-icon></mat-chip>\n                  \n                    <input id=\"file-upload-2\" style=\"display: none\" accept=\"image/*\" type=\"file\" (change)=\"handleFileInput($event.target.files)\"/>\n                 \n                </label>\n              </mat-chip-list>\n          \n        </mat-card-content>\n        <mat-card-actions>\n            <button (click)=\"change=undefined\"mat-button>SAVE</button>\n            <button (click)=\"change=undefined\" mat-button>CANCEL</button>\n          </mat-card-actions>\n    </mat-card>\n    \n  </div>\n"
+
+/***/ }),
+
+/***/ "./src/app/frame/frame.component.ts":
+/*!******************************************!*\
+  !*** ./src/app/frame/frame.component.ts ***!
+  \******************************************/
+/*! exports provided: FrameComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FrameComponent", function() { return FrameComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _rider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../rider */ "./src/app/rider.ts");
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/fire/storage */ "./node_modules/@angular/fire/storage/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var FrameComponent = /** @class */ (function () {
+    function FrameComponent(storage, tagService, location, router, route) {
+        this.storage = storage;
+        this.tagService = tagService;
+        this.location = location;
+        this.router = router;
+        this.route = route;
+        this.options = ['new', 'used'];
+    }
+    FrameComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.tagid = this.route.snapshot.paramMap.get('id');
+        this.locked = this.route.snapshot.paramMap.get('locked');
+        this.brands = _rider__WEBPACK_IMPORTED_MODULE_1__["brands"];
+        this.step = 0;
+        this.selected = undefined;
+        this.change = undefined;
+        this.progress = false;
+        this.tag = undefined;
+        this.current = 0;
+        this.frame = undefined;
+        this.tagService.getTagById(this.tagid)
+            .subscribe(function (tags) {
+            console.log("FrameComponent: Tags fround for tagid: " + _this.tagid);
+            _this.tags = tags;
+            if (_this.tags.length > 0) {
+                _this.tag = _this.tags[0];
+                if (_this.tag.bike) {
+                    console.log('FrameComponent bike record is found');
+                    console.log(_this.tag.bike);
+                    _this.step = 2;
+                    _this.frame = _this.tag.bike.frame;
+                    console.log('FrameComponemt setting frame');
+                    console.log(_this.frame);
+                    _this.model = {
+                        name: _this.frame.model,
+                        desc: _this.frame.brand + " " + _this.frame.model,
+                        img: 'bike-blurred.jpg',
+                        brakes: ['disk'],
+                        group: ['electronic', 'mechanical'],
+                    };
+                    for (var i = 0; i < _this.brands.length; i++) {
+                        if (_this.brands[i].name === _this.frame.brand) {
+                            _this.selected = _this.brands[i];
+                            break;
+                        }
+                    }
+                    if (!_this.selected) {
+                        _this.selected = { name: _this.frame.brand, logo: 'giro_logo_big.png', class: 'noname-header-image' };
+                    }
+                }
+            }
+        });
+    };
+    FrameComponent.prototype.checkstatus = function () {
+        console.log("Check Status: " + this.neworused);
+    };
+    FrameComponent.prototype.select = function (selection) {
+        if (this.step === 0) {
+            console.log("Brand: " + selection.name + " selected");
+            this.step = 1;
+            this.selected = selection;
+        }
+        else {
+            console.log("Model: " + selection.name + " selected");
+            this.step = 2;
+            this.model = selection;
+            this.frame = {
+                year: this.model.year,
+                brand: this.selected.name,
+                type: this.model.type,
+                material: this.model.material,
+                model: this.model.name
+            };
+        }
+    };
+    FrameComponent.prototype.selectImage = function (event) {
+        var index = event.target.innerHTML.indexOf('<div');
+        console.log(event.target.innerHTML.slice(0, index));
+        this.current = parseInt(event.target.innerHTML.slice(0, index), 10) - 1;
+    };
+    FrameComponent.prototype.edit = function (field) {
+        if (this.locked) {
+            return;
+        }
+        this.change = field;
+        console.log("Change: " + this.change);
+    };
+    FrameComponent.prototype.unselect = function () {
+        if (this.step === 1) {
+            this.step = 0;
+            this.selected = undefined;
+        }
+        else {
+            if (this.tagid) {
+                this.location.back();
+            }
+            else {
+                this.step = 1;
+                this.model = undefined;
+                this.frame = undefined;
+            }
+        }
+        this.change = undefined;
+    };
+    FrameComponent.prototype.complited = function () {
+        return this.frame.bin !== undefined &&
+            this.frame.electronic !== undefined &&
+            this.frame.disk !== undefined &&
+            this.frame.new !== undefined &&
+            this.frame.images !== undefined;
+    };
+    FrameComponent.prototype.handleFileInput = function (files) {
+        var _this = this;
+        var file = files[0];
+        var filePath = "bikes/" + file.name;
+        var fileRef = this.storage.ref(filePath);
+        var task = this.storage.upload(filePath, file);
+        // observe percentage changes
+        this.uploadPercent = task.percentageChanges();
+        this.progress = true;
+        // get notified when the download URL is available
+        task.snapshotChanges()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () {
+            _this.downloadURL = fileRef.getDownloadURL();
+            _this.downloadURL.subscribe(function (url) {
+                if (_this.frame.images === undefined) {
+                    _this.frame.images = [];
+                }
+                _this.current = _this.frame.images.length;
+                _this.frame.images.push(url);
+                _this.progress = false;
+            });
+        }))
+            .subscribe();
+    };
+    FrameComponent.prototype.save = function () {
+        if (!this.tag) {
+            console.log('FrameComponent: Save: No Tag to save bike');
+            return;
+        }
+        else {
+            if (this.tag.bike) {
+                this.tag.bike.frame = this.frame;
+            }
+            else {
+                this.tag.bike = { tagid: this.tag.id, frame: this.frame };
+            }
+            console.log("FrameComponent: Save : saving bike to TAG id " + this.tag.id);
+            this.tagService.setBike(this.tag.id, this.tag.bike);
+            this.locked = 'saved';
+        }
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", _rider__WEBPACK_IMPORTED_MODULE_1__["Frame"])
+    ], FrameComponent.prototype, "frame", void 0);
+    FrameComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-frame',
+            template: __webpack_require__(/*! ./frame.component.html */ "./src/app/frame/frame.component.html"),
+            styles: [__webpack_require__(/*! ./frame.component.css */ "./src/app/frame/frame.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_fire_storage__WEBPACK_IMPORTED_MODULE_2__["AngularFireStorage"],
+            _tag_service__WEBPACK_IMPORTED_MODULE_4__["TagService"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__["Location"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"]])
+    ], FrameComponent);
+    return FrameComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/geo-ride/geo-ride.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/geo-ride/geo-ride.component.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "table {\n    width: 100%;\n  }\n\n  .mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n\n  agm-map {\n    height: 300px;\n}"
+
+/***/ }),
+
+/***/ "./src/app/geo-ride/geo-ride.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/geo-ride/geo-ride.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-header [title]=\"'Georide'\" [back]=\"true\" [subtitle]=\"nikname\"></app-header>\n\n\n<mat-accordion>\n      <mat-expansion-panel (opened)=\"getTags()\">\n        <mat-expansion-panel-header>\n          <mat-panel-title>\n            Tags\n          </mat-panel-title>\n          <mat-panel-description>\n            Select tag to start a ride\n          </mat-panel-description>\n        </mat-expansion-panel-header>\n    \n        <span *ngFor=\"let tag of tags\">\n            <button mat-stroked-button [disabled]=\"tagid === tag.id\" (click)=\"select(tag.id)\">{{tag.id}}</button>&nbsp;\n        </span>\n    \n      </mat-expansion-panel>\n  </mat-accordion>\n\n  <agm-map *ngIf=\"ride; else loading\" [(latitude)]=\"loc.lat\" [(longitude)]=\"loc.lng\" [(zoom)]=\"loc.zoom\" [disableDefaultUI]=\"true\" [zoomControl]=\"true\" >\n      <agm-marker iconUrl=\"../assets/icons8-bicycle-48.png\" [(latitude)]=\"loc.marker.lat\" [(longitude)]=\"loc.marker.lng\" [markerDraggable]=\"loc.marker.draggable\" (dragEnd)='markerDragEnd($event)'></agm-marker>\n      <agm-marker [label]=\"startLoc.marker.label\" [(latitude)]=\"startLoc.marker.lat\" [(longitude)]=\"startLoc.marker.lng\" [markerDraggable]=\"startLoc.marker.draggable\" (dragEnd)='markerDragEnd($event)'></agm-marker>\n      <agm-marker [label]=\"eePointLocA.marker.label\" [(latitude)]=\"eePointLocA.marker.lat\" [(longitude)]=\"eePointLocA.marker.lng\" [markerDraggable]=\"eePointLocA.marker.draggable\" (dragEnd)='markerDragEnd($event)'></agm-marker>\n      <agm-marker [label]=\"eePointLocB.marker.label\" [(latitude)]=\"eePointLocB.marker.lat\" [(longitude)]=\"eePointLocB.marker.lng\" [markerDraggable]=\"eePointLocB.marker.draggable\" (dragEnd)='markerDragEnd($event)'></agm-marker>\n      <agm-marker [label]=\"eePointLocC.marker.label\" [(latitude)]=\"eePointLocC.marker.lat\" [(longitude)]=\"eePointLocC.marker.lng\" [markerDraggable]=\"eePointLocC.marker.draggable\" (dragEnd)='markerDragEnd($event)'></agm-marker>\n      <agm-circle *ngIf=\"true\" [latitude]=\"startLoc.marker.lat\" [longitude]=\"startLoc.marker.lng\" [(radius)]=\"radius\" [fillColor]=\"'blue'\" [circleDraggable]=\"true\" [editable]=\"true\"></agm-circle>\n    </agm-map>\n\n  <mat-grid-list *ngIf=\"ride; else loading\" cols=\"3\" rowHeight=\"3em\">\n    <mat-grid-tile [colspan]=\"3\">\n      <h3>Current Ride</h3>\n    </mat-grid-tile>\n  \n    <mat-grid-tile>\n      {{ride.start|date:\"dd-MM-yyyy\"}}\n    </mat-grid-tile>\n  \n    <mat-grid-tile>\n      {{ride.start|date:\"HH:mm:ss\"}}\n    </mat-grid-tile>\n  \n    <mat-grid-tile *ngIf=\"!ride.finish\">\n      {{timestemp|date:\"HH:mm:ss\":\"+00\"}}\n    </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"ride.finish\">\n        {{(ride.finish-ride.start)|date:\"HH:mm:ss\":\"+00\"}}\n      </mat-grid-tile>\n\n      <mat-grid-tile [colspan]=\"3\">\n          {{geomsg}}\n      </mat-grid-tile>\n\n      <mat-grid-tile>\n          U / E [C]\n      </mat-grid-tile>\n\n      <mat-grid-tile>\n          {{geoupdatecount}}\n      </mat-grid-tile>\n\n      <mat-grid-tile>\n          {{geoerrorcount}} [{{geoclearcount}}]\n      </mat-grid-tile>\n\n  </mat-grid-list>\n\n  <mat-grid-list  *ngIf=\"rides; else loading\" cols=\"3\" rowHeight=\"3em\">\n      \n      <mat-grid-tile  [rowspan] = \"2\" [colspan]=\"3\">\n        <button *ngIf=\"!ride\" mat-stroked-button mat-raised-button color=\"primary\" [disabled]=\"progress\" (click)=\"startRide($event)\">Start</button>\n        <button *ngIf=\"ride\" mat-stroked-button mat-raised-button color=\"warn\" [disabled]=\"progress || !ride.open\" (click)=\"finishRide($event)\">End</button>\n      </mat-grid-tile>\n  </mat-grid-list>\n  \n  <div *ngIf=\"rides\">\n      <table *ngIf=\"rides.length>0\" mat-table [dataSource]=\"rides | slice:start:end\" class=\"mat-elevation-z8\">\n\n          <!--- Note that these columns can be defined in any order.\n                The actual rendered columns are set as a property on the row definition\" -->\n        \n          <!-- Position Column -->\n          <ng-container matColumnDef=\"date\">\n              <th mat-header-cell *matHeaderCellDef> Date </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.start|date:\"dd-MM-yyyy\"}}</td>\n            </ng-container>\n\n          <!-- Position Column -->\n          <ng-container matColumnDef=\"start\">\n            <th mat-header-cell *matHeaderCellDef> Start </th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.start|date:\"HH:mm:ss\"}}</td>\n          </ng-container>\n        \n          <!-- Name Column -->\n          <ng-container matColumnDef=\"finish\">\n            <th mat-header-cell *matHeaderCellDef> Finish </th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.finish|date:\"HH:mm:ss\"}}</td>\n          </ng-container>\n        \n          <!-- Weight Column -->\n          <ng-container matColumnDef=\"time\">\n            <th mat-header-cell *matHeaderCellDef> Time </th>\n            <td mat-cell *matCellDef=\"let element\"> {{(element.finish-element.start)|date:\"HH:mm:ss\":\"+00\"}} </td>\n          </ng-container>\n        \n          <!-- Weight Column -->\n          <ng-container matColumnDef=\"link\">\n              <th mat-header-cell *matHeaderCellDef> Details </th>\n              <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoRide(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n            </ng-container>\n        \n          <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n          <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n        </table>\n        <br>\n        \n    <mat-paginator *ngIf=\"rides.length>0\" [length]=\"rides.length\"\n                  [pageSize]=\"10\"\n                  [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                  (page)=\"setPage($event)\">\n    </mat-paginator>\n  </div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/geo-ride/geo-ride.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/geo-ride/geo-ride.component.ts ***!
+  \************************************************/
+/*! exports provided: GeoRideComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GeoRideComponent", function() { return GeoRideComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
+/* harmony import */ var _rider_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../rider.service */ "./src/app/rider.service.ts");
+/* harmony import */ var _ride_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ride.service */ "./src/app/ride.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _parameters__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../parameters */ "./src/app/parameters.ts");
+/* harmony import */ var _agm_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @agm/core */ "./node_modules/@agm/core/index.js");
+/* harmony import */ var _agm_core_services__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @agm/core/services */ "./node_modules/@agm/core/services.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+var GeoRideComponent = /** @class */ (function () {
+    function GeoRideComponent(zone, tagService, authService, route, router, riderService, rideService, datePipe, location, param, mapsApiLoader, wrapper) {
+        var _this = this;
+        this.zone = zone;
+        this.tagService = tagService;
+        this.authService = authService;
+        this.route = route;
+        this.router = router;
+        this.riderService = riderService;
+        this.rideService = rideService;
+        this.datePipe = datePipe;
+        this.location = location;
+        this.param = param;
+        this.mapsApiLoader = mapsApiLoader;
+        this.wrapper = wrapper;
+        this.displayedColumns = ['date', 'start', 'finish', 'time', 'link'];
+        this.startLoc = {
+            lat: 45.6707502641053,
+            lng: 9.955278242626946,
+            zoom: 15,
+            marker: { lat: 45.6707502641053, lng: 9.955278242626946, label: 'S', draggable: false }
+        };
+        this.eePointLocA = {
+            lat: 45.671042650321844,
+            lng: 9.954087341824334,
+            zoom: 15,
+            marker: { lat: 45.671042650321844, lng: 9.954087341824334, label: 'A', draggable: false }
+        };
+        this.eePointLocB = {
+            lat: 45.670742767002764,
+            lng: 9.956576431790154,
+            zoom: 15,
+            marker: { lat: 45.670742767002764, lng: 9.956576431790154, label: 'B', draggable: false }
+        };
+        this.eePointLocC = {
+            lat: 45.66985810185053,
+            lng: 9.955288971463006,
+            zoom: 15,
+            marker: { lat: 45.66985810185053, lng: 9.955288971463006, label: 'C', draggable: false }
+        };
+        this.checkPoint = {
+            id: 0,
+            loc: this.startLoc,
+            type: 'start/finish',
+            scope: 500,
+            radius: 100,
+            eep: [
+                { loc: this.eePointLocA, next: 0, slow: true },
+                { loc: this.eePointLocB, next: 0, slow: false },
+                { loc: this.eePointLocC, next: 0, slow: false },
+            ]
+        };
+        this.girodiseo = {
+            id: 0,
+            name: 'Giro d\'Iseo',
+            desc: 'Giro d\'Iseo ride',
+            length: 62,
+            points: [this.checkPoint]
+        };
+        this.options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        };
+        this.zoom = 15;
+        this.radius = 100;
+        console.log(this.param);
+        this.mapsApiLoader.load().then(function () {
+            _this.geocoder = new google.maps.Geocoder();
+        });
+    }
+    GeoRideComponent.prototype.ngOnInit = function () {
+        this.clear();
+        this.getTags();
+        this.getRider();
+        this.getLocation();
+        this.setGeoWatch();
+    };
+    GeoRideComponent.prototype.setGeoWatch = function () {
+        var _this = this;
+        window.setInterval(function () {
+            if (_this.geolastupdate) {
+                if (new Date().getTime() - _this.geolastupdate > 5000 && navigator.geolocation) {
+                    if (_this.geoid) {
+                        navigator.geolocation.clearWatch(_this.geoid);
+                        _this.geoclearcount++;
+                        console.log("Clear Geo Watch for " + _this.geoid);
+                    }
+                    _this.geoid = navigator.geolocation.watchPosition(function (position) {
+                        if (position) {
+                            _this.zone.run(function () { return _this.updateLocation(position); });
+                        }
+                    }, function (error) {
+                        console.log(error);
+                        _this.geoerrorcount++;
+                        _this.geolock = false;
+                        _this.geomsg = "Position Error: " + error.message;
+                    }, _this.options);
+                }
+            }
+        }, 5000);
+    };
+    GeoRideComponent.prototype.updateLocation = function (position) {
+        if (position) {
+            console.log("Latitude: " + position.coords.latitude + " Longitude:  " + position.coords.longitude);
+            this.geolock = false;
+            this.geolastupdate = new Date().getTime();
+            this.lat = position.coords.latitude;
+            this.lng = position.coords.longitude;
+            this.geoupdatecount++;
+            if (this.ride) {
+                this.geomsg = "Lat: " + position.coords.latitude + " Lng:  " + position.coords.longitude;
+                if (this.loc) {
+                    if (this.loc.lat !== this.lat || this.loc.lng !== this.lng) {
+                        this.loc.lat = this.lat;
+                        this.loc.lng = this.lng;
+                        this.loc.marker.lat = this.lat;
+                        this.loc.marker.lng = this.lng;
+                    }
+                }
+                else {
+                    this.loc = {
+                        lat: this.lat,
+                        lng: this.lng,
+                        marker: { lat: this.lat, lng: this.lng, draggable: true },
+                        zoom: 15
+                    };
+                }
+                // trace current ride
+                this.traceRide(this.girodiseo);
+            }
+        }
+    };
+    GeoRideComponent.prototype.getCurrentLocation = function () {
+        var _this = this;
+        console.log('getCurrentLocation');
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                _this.zone.run(function () { return _this.updateLocation(position); });
+            }, function (error) {
+                console.log(error);
+                _this.geoerrorcount++;
+                _this.geolock = false;
+                _this.geomsg = "Position Error: " + error.message;
+            }, this.options);
+        }
+        else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    };
+    GeoRideComponent.prototype.getLocation = function () {
+        var _this = this;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                if (position) {
+                    _this.zone.run(function () {
+                        console.log("Latitude: " + position.coords.latitude + " Longitude:  " + position.coords.longitude);
+                        _this.lat = position.coords.latitude;
+                        _this.lng = position.coords.longitude;
+                        console.log(_this.lat);
+                        console.log(_this.lng);
+                        // set location
+                        _this.loc = {
+                            lat: _this.lat,
+                            lng: _this.lng,
+                            marker: { lat: _this.lat, lng: _this.lng, draggable: true },
+                            zoom: 15,
+                            address_level_1: 'via San Michele 12',
+                            address_level_2: 'Foresto Sparso',
+                            address_state: 'BG',
+                            address_country: 'Italia',
+                            address_zip: '24060'
+                        };
+                        _this.mapsApiLoader.load().then(function () {
+                            _this.findLocation(_this.getFullAddress());
+                        });
+                    });
+                }
+            }, function (error) {
+                console.log(error);
+                _this.geolock = false;
+                _this.geomsg = "Position Error: " + error.message;
+            }, this.options);
+            this.geoid = navigator.geolocation.watchPosition(function (position) {
+                if (position) {
+                    _this.zone.run(function () { return _this.updateLocation(position); });
+                }
+            }, function (error) {
+                console.log(error);
+                _this.geoerrorcount++;
+                _this.geolock = false;
+                _this.geomsg = "Position Error: " + error.message;
+            }, this.options);
+        }
+        else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    };
+    GeoRideComponent.prototype.getFullAddress = function () {
+        var full_address = this.loc.address_level_1 || '';
+        if (this.loc.address_level_2) {
+            full_address = full_address + ' ' + this.loc.address_level_2;
+        }
+        if (this.loc.address_state) {
+            full_address = full_address + ' ' + this.loc.address_state;
+        }
+        if (this.loc.address_country) {
+            full_address = full_address + ' ' + this.loc.address_country;
+        }
+        return full_address;
+    };
+    GeoRideComponent.prototype.findLocation = function (address) {
+        var _this = this;
+        if (!this.geocoder) {
+            this.geocoder = new google.maps.Geocoder();
+        }
+        this.geocoder.geocode({ 'address': address }, function (results, status) {
+            console.log(results);
+            if (status === google.maps.GeocoderStatus.OK) {
+                for (var i = 0; i < results[0].address_components.length; i++) {
+                    var types = results[0].address_components[i].types;
+                    if (types.indexOf('locality') !== -1) {
+                        _this.loc.address_level_2 = results[0].address_components[i].long_name;
+                    }
+                    if (types.indexOf('country') !== -1) {
+                        _this.loc.address_country = results[0].address_components[i].long_name;
+                    }
+                    if (types.indexOf('postal_code') !== -1) {
+                        _this.loc.address_zip = results[0].address_components[i].long_name;
+                    }
+                    if (types.indexOf('administrative_area_level_1') !== -1) {
+                        _this.loc.address_state = results[0].address_components[i].long_name;
+                    }
+                }
+                if (results[0].geometry.location) {
+                    _this.loc.lat = results[0].geometry.location.lat();
+                    _this.loc.lng = results[0].geometry.location.lng();
+                    _this.loc.marker.lat = results[0].geometry.location.lat();
+                    _this.loc.marker.lng = results[0].geometry.location.lng();
+                    _this.loc.marker.draggable = true;
+                    _this.loc.viewport = results[0].geometry.viewport;
+                }
+            }
+            else {
+                alert('Sorry, this search produced no results.');
+            }
+        });
+    };
+    GeoRideComponent.prototype.computeDistanceBetween = function (from, to) {
+        var llfrom = new google.maps.LatLng(from.lat, from.lng);
+        var llto = new google.maps.LatLng(to.lat, to.lng);
+        return google.maps.geometry.spherical.computeDistanceBetween(llfrom, llto);
+    };
+    GeoRideComponent.prototype.inScope = function (point) {
+        var distance = this.computeDistanceBetween(this.loc, point.loc);
+        console.log("Distance to check point is " + distance + " for scope is " + point.scope);
+        if (distance <= point.scope) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    GeoRideComponent.prototype.currentEEP = function (point) {
+        var current = -1;
+        var distance = this.computeDistanceBetween(this.loc, point.loc);
+        if (distance > point.scope) {
+            return -1;
+        }
+        else if (distance <= point.radius) {
+            return point.eep.length;
+        }
+        distance = point.scope + 1;
+        for (var i = 0; i < point.eep.length; i++) {
+            var dist = this.computeDistanceBetween(this.loc, point.eep[i].loc);
+            if (dist < distance) {
+                distance = dist;
+                current = i;
+            }
+        }
+        return current;
+    };
+    GeoRideComponent.prototype.traceRide = function (giro) {
+        if (!this.ride) {
+            console.log('Nothing to trace, no active ride');
+            return;
+        }
+        if (!this.trace) {
+            console.log("Creating new trace for " + giro.name + " ride " + this.ride.id);
+            this.trace = { rideId: this.ride.id, points: [], next: 0, currentEEP: -1 };
+        }
+        var chekPoint = giro.points[this.trace.next];
+        var eep = this.currentEEP(chekPoint);
+        var timestamp = new Date().getTime();
+        if (eep === -1) {
+            console.log("Out of scope. No trace record added");
+        }
+        else if (eep === this.trace.currentEEP) {
+            // the same exit / entry point need to update current record
+            if (this.trace.points.length === 0) {
+                console.log('No trace record to update');
+            }
+            else {
+                var point = this.trace.points[this.trace.points.length - 1];
+                if (eep === chekPoint.eep.length) {
+                    // inside radius, update timestamp if distance is better
+                    var distance = this.computeDistanceBetween(this.loc, chekPoint.loc);
+                    if (distance < point.distance) {
+                        point.timestamp = timestamp;
+                        point.distance = distance;
+                        this.geomsg = "Check point pass time is updated " + this.datePipe.transform(timestamp, 'dd-MM-yy hh:mm:ss');
+                        console.log(this.geomsg);
+                        console.log("Here it is the trace record");
+                        console.log(this.trace);
+                    }
+                    else {
+                        console.log("Check point pass time is NOT updated");
+                    }
+                }
+                else {
+                    // inside scope the same EEP update timestemp
+                    if (point.eep.length === 0) {
+                        console.log('No trace record to update for EEP');
+                    }
+                    else {
+                        // let's update time only for entry point
+                        if (point.eep[point.eep.length - 1].entry) {
+                            point.eep[point.eep.length - 1].timestamp = timestamp;
+                            this.geomsg = "Check point Entry time is updated " + this.datePipe.transform(timestamp, 'dd-MM-yy hh:mm:ss');
+                            console.log(this.geomsg);
+                            console.log("Here it is the trace record");
+                            console.log(this.trace);
+                        }
+                        else {
+                            console.log("Check point Exit time is not updated");
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            // the new Entry / Exit point, first check if we are entering the radius
+            if (eep === chekPoint.eep.length) {
+                // entering radius record pass time
+                if (this.trace.points.length === 0) {
+                    console.log('No trace record is found for enter point but we are entering radius');
+                }
+                else {
+                    var point = this.trace.points[this.trace.points.length - 1];
+                    var distance = this.computeDistanceBetween(this.loc, chekPoint.loc);
+                    point.timestamp = timestamp;
+                    point.distance = distance;
+                    this.trace.currentEEP = eep;
+                    this.geomsg = "Check point pass time is recorded " + this.datePipe.transform(timestamp, 'dd-MM-yy hh:mm:ss');
+                    console.log(this.geomsg);
+                    console.log("Here it is the trace record");
+                    console.log(this.trace);
+                }
+            }
+            else {
+                // new Entry / Exit point
+                if (this.trace.currentEEP === -1) {
+                    // addind new record for check point because we are in the scope
+                    var cp = {
+                        id: chekPoint.id,
+                        loc: chekPoint.loc,
+                        type: chekPoint.type,
+                        scope: chekPoint.scope,
+                        radius: chekPoint.radius,
+                        eep: [{
+                                loc: chekPoint.eep[eep].loc,
+                                next: chekPoint.eep[eep].next,
+                                slow: chekPoint.eep[eep].slow,
+                                timestamp: timestamp,
+                                entry: true
+                            }]
+                    };
+                    this.trace.points.push(cp);
+                    this.trace.currentEEP = eep;
+                    this.geomsg = "Check point Entry time is recorded " + this.datePipe.transform(timestamp, 'dd-MM-yy hh:mm:ss');
+                    console.log(this.geomsg);
+                    console.log("Here it is the trace record");
+                    console.log(this.trace);
+                }
+                else {
+                    // check if we are exiting the radius first
+                    if (this.trace.currentEEP === chekPoint.eep.length) {
+                        // yes we have passed checkpoint and exit radius, need to add exit point record
+                        if (this.trace.points.length === 0) {
+                            console.log('No trace record is found for enter point but we are exiting radius');
+                        }
+                        else {
+                            var point = this.trace.points[this.trace.points.length - 1];
+                            var exit = {
+                                loc: chekPoint.eep[eep].loc,
+                                next: chekPoint.eep[eep].next,
+                                slow: chekPoint.eep[eep].slow,
+                                timestamp: timestamp,
+                                entry: false
+                            };
+                            point.eep.push(exit);
+                            point.passed = true;
+                            this.trace.currentEEP = eep;
+                            this.trace.next = chekPoint.eep[eep].next;
+                            if (chekPoint.eep[eep].nextEEP) {
+                                this.trace.nextEEP = chekPoint.eep[eep].nextEEP;
+                            }
+                            this.geomsg = "Check point Exit time is recorded " + this.datePipe.transform(timestamp, 'dd-MM-yy hh:mm:ss');
+                            console.log(this.geomsg);
+                            console.log("Here it is the trace record");
+                            console.log(this.trace);
+                        }
+                    }
+                    else {
+                        // current EEP is not radius and we have got new exit / etry point, so let's add new etry point now
+                        if (this.trace.points.length === 0) {
+                            console.log('No trace record is found for enter point but we are have got the new entry point here');
+                        }
+                        else {
+                            var point = this.trace.points[this.trace.points.length - 1];
+                            this.trace.points[0].eep = [chekPoint.eep[eep]];
+                            this.trace.points[0].eep[0].timestamp = timestamp;
+                            this.trace.points[0].eep[0].entry = true;
+                            this.trace.currentEEP = eep;
+                            this.geomsg = "Check point New Enter time is recorded " + this.datePipe.transform(timestamp, 'dd-MM-yy hh:mm:ss');
+                            console.log(this.geomsg);
+                            console.log("Here it is the trace record");
+                            console.log(this.trace);
+                        }
+                    }
+                }
+            }
+        }
+    };
+    GeoRideComponent.prototype.ngOnDestroy = function () {
+        if (this.tags_subs) {
+            this.tags_subs.unsubscribe();
+        }
+        if (this.rides_subs) {
+            this.rides_subs.unsubscribe();
+        }
+        if (this.ride_subs) {
+            this.ride_subs.unsubscribe();
+        }
+        if (this.timer_subs) {
+            this.timer_subs.unsubscribe();
+        }
+        if (this.rider_subs) {
+            this.rider_subs.unsubscribe();
+        }
+        if (this.geotimer) {
+            window.clearInterval(this.geotimer);
+        }
+    };
+    GeoRideComponent.prototype.clear = function () {
+        this.tagid = null;
+        this.start = 0;
+        this.end = 10;
+        this.progress = false;
+        this.geolock = false;
+        this.geoupdatecount = 0;
+        this.geoerrorcount = 0;
+        this.geoclearcount = 0;
+    };
+    GeoRideComponent.prototype.gotoRide = function (id) {
+        this.router.navigate(["/ride/" + id]);
+    };
+    GeoRideComponent.prototype.getTags = function () {
+        var _this = this;
+        this.tags_subs = this.tagService.getTagsByMobile(this.authService.getUserPhone())
+            .subscribe(function (tags) { return _this.tags = tags; });
+    };
+    GeoRideComponent.prototype.getRider = function () {
+        var _this = this;
+        this.rider_subs = this.riderService.getRiderByMobile(this.authService.getUserPhone())
+            .subscribe(function (riders) {
+            if (riders) {
+                if (riders.length > 0) {
+                    _this.rider = riders[0];
+                    _this.nikname = _this.rider.nikname;
+                    _this.avatar = _this.rider.avatar;
+                }
+            }
+        });
+    };
+    GeoRideComponent.prototype.getRides = function () {
+        var _this = this;
+        this.rides_subs = this.rideService.getRidesByTagId(this.tagid)
+            .subscribe(function (rides) { return _this.rides = rides; });
+    };
+    GeoRideComponent.prototype.getRide = function () {
+        var _this = this;
+        this.ride_subs = this.rideService.getRideByTagId(this.tagid)
+            .subscribe(function (rides) {
+            if (rides.length > 0) {
+                _this.ride = rides[0];
+                _this.timer = Object(rxjs__WEBPACK_IMPORTED_MODULE_7__["timer"])(0, 1000);
+                _this.timer_subs = _this.timer.subscribe(function (t) {
+                    _this.timestemp = new Date().getTime() - _this.ride.start;
+                    _this.hours = Math.floor(_this.timestemp / 1000 / 60 / 60);
+                    _this.minutes = Math.floor(_this.timestemp / 1000 / 60);
+                    _this.seconds = Math.floor(_this.timestemp / 1000);
+                });
+            }
+        });
+    };
+    GeoRideComponent.prototype.select = function (tagid) {
+        this.tagid = tagid;
+        this.getRides();
+        this.getRide();
+    };
+    GeoRideComponent.prototype.setPage = function (e) {
+        console.log(e);
+        var pageIndex = e.pageIndex, pageSize = e.pageSize;
+        this.start = pageIndex * pageSize;
+        this.end = this.start + pageSize;
+    };
+    GeoRideComponent.prototype.markerDragEnd = function (e) {
+        console.log(e.coords);
+        this.loc.lat = e.coords.lat;
+        this.loc.lng = e.coords.lng;
+        // console.log(`In the scope: ${this.inScope(this.checkPoint)} current Exit/Entry is ${this.currentEEP(this.checkPoint)}`);
+        this.traceRide(this.girodiseo);
+    };
+    GeoRideComponent.prototype.startRide = function (e) {
+        var _this = this;
+        if (!this.tagid) {
+            return;
+        }
+        this.progress = true;
+        e.preventDefault();
+        e.stopPropagation();
+        var start = new Date().getTime();
+        var tagid = this.tagid;
+        var id = Math.random() * 1000 + start;
+        var open = true;
+        var rider = this.rider;
+        this.trace = { rideId: id, points: [], next: 0, currentEEP: -1 };
+        var ride;
+        if (rider) {
+            ride = { id: id, tagid: tagid, start: start, open: open, rider: rider, trace: this.trace };
+        }
+        else {
+            ride = { id: id, tagid: tagid, start: start, open: open, trace: this.trace };
+        }
+        this.rideService.addNewRideCB(ride, function (err, ref) {
+            if (err) {
+                _this.progress = false;
+                console.error(err);
+            }
+            else {
+                _this.progress = false;
+                _this.getRides();
+            }
+        });
+    };
+    GeoRideComponent.prototype.finishRide = function (e) {
+        var _this = this;
+        this.progress = true;
+        e.preventDefault();
+        e.stopPropagation();
+        var finish = new Date().getTime();
+        this.ride.finish = finish;
+        this.ride.open = false;
+        if (this.trace) {
+            this.ride.trace = this.trace;
+        }
+        var time = finish - this.ride.start;
+        if (time > this.param.mintime && time < this.param.maxtime) {
+            this.ride.time = time;
+            console.log("RideComponent: finishRide: record ride time: " + time);
+        }
+        else {
+            this.ride.time = 0;
+            console.log("RideComponent: finishRide: ride time: " + time + " is out of range [" + this.param.mintime + ", " + this.param.maxtime + "]");
+        }
+        this.rideService.updateRideByIdCB(this.ride, function (err, ref) {
+            if (err) {
+                _this.progress = false;
+                console.error(err);
+            }
+            else {
+                _this.progress = false;
+                _this.getRides();
+            }
+        });
+    };
+    GeoRideComponent.prototype.gotoBack = function () {
+        this.location.back();
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_agm_core__WEBPACK_IMPORTED_MODULE_9__["AgmMap"]),
+        __metadata("design:type", _agm_core__WEBPACK_IMPORTED_MODULE_9__["AgmMap"])
+    ], GeoRideComponent.prototype, "map", void 0);
+    GeoRideComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-geo-ride',
+            template: __webpack_require__(/*! ./geo-ride.component.html */ "./src/app/geo-ride/geo-ride.component.html"),
+            styles: [__webpack_require__(/*! ./geo-ride.component.css */ "./src/app/geo-ride/geo-ride.component.css")],
+            providers: [_parameters__WEBPACK_IMPORTED_MODULE_8__["RideParameters"]]
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"],
+            _tag_service__WEBPACK_IMPORTED_MODULE_3__["TagService"],
+            _auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _rider_service__WEBPACK_IMPORTED_MODULE_5__["RiderService"],
+            _ride_service__WEBPACK_IMPORTED_MODULE_6__["RideService"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"],
+            _parameters__WEBPACK_IMPORTED_MODULE_8__["RideParameters"],
+            _agm_core__WEBPACK_IMPORTED_MODULE_9__["MapsAPILoader"],
+            _agm_core_services__WEBPACK_IMPORTED_MODULE_10__["GoogleMapsAPIWrapper"]])
+    ], GeoRideComponent);
+    return GeoRideComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/getstarted/getstarted.component.css":
 /*!*****************************************************!*\
   !*** ./src/app/getstarted/getstarted.component.css ***!
@@ -1508,7 +2934,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header *ngIf=\"!scanning\" [back]=\"true\" [title]=\"'Item'\"></app-header>\n\n<div *ngIf=\"!scanning\" fxLayout=\"column\">\n    <div *ngIf=\"loading\" fxFlex=\"100\"><br><br><br><br><br><br></div>\n    <div *ngIf=\"loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"40\"></div><div fxFlex=\"20\"><h2>Loading...</h2></div><div fxFlex=\"40\"></div>\n    </div>\n\n    <div *ngIf=\"!loading\" fxFlex=\"100\"><br></div>\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"88\">{{schemaProductName}}</div>\n\n        <div fxFlex=\"8\">\n          <button (click)=\"addItem()\" mat-icon-button>\n              <mat-icon>add_circle_outline</mat-icon>\n          </button>\n        </div>\n        <div fxFlex=\"2\"></div>\n    </div>\n\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"88\">{{schemaProductId}}</div>\n        <div fxFlex=\"8\">\n            <button (click)=\"plusOne()\" mat-icon-button>\n                <mat-icon>expand_less</mat-icon>\n            </button>\n          </div>\n          <div fxFlex=\"2\"></div>\n    </div>\n\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"45\" [innerHTML]=\"schemaProductPrice\"></div>\n        <div fxFlex=\"8\">{{itemQty}}</div>\n        <div fxFlex=\"35\"></div>\n        \n        <div fxFlex=\"8\">\n            <button (click)=\"minusOne()\" mat-icon-button>\n                <mat-icon>expand_more</mat-icon>\n            </button>\n          </div>\n          <div fxFlex=\"2\"></div>\n    </div>\n\n    \n\n\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"100\">\n            <img *ngIf=\"!loading\" [src]=\"schemaProductImg\">\n        </div>\n        \n    </div>\n</div>\n\n\n<div *ngIf=\"scanning\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n\n    <div fxFlex=\"2\"></div>\n    <div fxFlex=\"8\">\n        <button (click)=\"getItemId()\" mat-icon-button>\n            <mat-icon>add_circle_outline</mat-icon>\n        </button>\n    </div>\n\n    <div fxFlex=\"35\"></div>\n    <div fxFlex=\"10\"><h4>Scan</h4></div>\n    <div fxFlex=\"35\"></div>\n\n    <div fxFlex=\"8\">\n        <button (click)=\"close()\" mat-icon-button>\n            <mat-icon>close</mat-icon>\n          </button>\n    </div>\n    <div fxFlex=\"2\"></div>\n</div>\n\n\n<zxing-scanner [formats]=\"['QR_CODE', 'EAN_13', 'CODE_128', 'CODABAR', 'UPC_A', 'UPC_E', 'UPC_EAN_EXTENSION', 'CODE_39', 'ITF']\" *ngIf=\"scanning\" #scanner (camerasFound)=\"camerasFoundHandler($event)\" (scanComplete)=\"scanCompleteHandler($event)\"></zxing-scanner>\n"
+module.exports = "<app-header *ngIf=\"!scanning\" [back]=\"true\" [title]=\"'Item'\"></app-header>\n\n<div *ngIf=\"!scanning\" fxLayout=\"column\">\n    <div *ngIf=\"loading\" fxFlex=\"100\"><br><br><br><br><br><br></div>\n    <div *ngIf=\"loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"40\"></div><div fxFlex=\"20\"><h2>Loading...</h2></div><div fxFlex=\"40\"></div>\n    </div>\n\n    <div *ngIf=\"!loading\" fxFlex=\"100\"><br></div>\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"88\">{{schemaProductName}}</div>\n\n        <div fxFlex=\"8\">\n          <button [disabled]=\"locked\" (click)=\"addItem()\" mat-icon-button>\n              <mat-icon>add_circle_outline</mat-icon>\n          </button>\n        </div>\n        <div fxFlex=\"2\"></div>\n    </div>\n\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"88\">{{schemaProductId}}</div>\n        <div fxFlex=\"8\">\n            <button [disabled]=\"locked\" (click)=\"plusOne()\" mat-icon-button>\n                <mat-icon>expand_less</mat-icon>\n            </button>\n          </div>\n          <div fxFlex=\"2\"></div>\n    </div>\n\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"45\" [innerHTML]=\"schemaProductPrice\"></div>\n        <div fxFlex=\"8\">{{itemQty}}</div>\n        <div fxFlex=\"35\"></div>\n        \n        <div fxFlex=\"8\">\n            <button [disabled]=\"locked\" (click)=\"minusOne()\" mat-icon-button>\n                <mat-icon>expand_more</mat-icon>\n            </button>\n          </div>\n          <div fxFlex=\"2\"></div>\n    </div>\n\n    \n\n\n    <div *ngIf=\"!loading\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"100\">\n            <img *ngIf=\"!loading\" [src]=\"schemaProductImg\">\n        </div>\n        \n    </div>\n\n    <div *ngIf=\"!loading && tagid\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n            <div fxFlex=\"100\">\n                    <button (click)=\"tagInfo()\" mat-icon-button>\n                        <mat-icon>info</mat-icon>\n                    </button>\n            </div>\n            \n        </div>\n</div>\n\n\n<div *ngIf=\"scanning\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n\n    <div fxFlex=\"2\"></div>\n    <div fxFlex=\"8\">\n        <button (click)=\"getItemId()\" mat-icon-button>\n            <mat-icon>add_circle_outline</mat-icon>\n        </button>\n    </div>\n\n    <div fxFlex=\"35\"></div>\n    <div fxFlex=\"10\"><h4>Scan</h4></div>\n    <div fxFlex=\"35\"></div>\n\n    <div fxFlex=\"8\">\n        <button (click)=\"close()\" mat-icon-button>\n            <mat-icon>close</mat-icon>\n          </button>\n    </div>\n    <div fxFlex=\"2\"></div>\n</div>\n\n\n<zxing-scanner [formats]=\"['QR_CODE', 'EAN_13', 'CODE_128', 'CODABAR', 'UPC_A', 'UPC_E', 'UPC_EAN_EXTENSION', 'CODE_39', 'ITF']\" *ngIf=\"scanning\" #scanner (camerasFound)=\"camerasFoundHandler($event)\" (scanComplete)=\"scanCompleteHandler($event)\"></zxing-scanner>\n"
 
 /***/ }),
 
@@ -1553,12 +2979,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var ItemComponent = /** @class */ (function () {
-    function ItemComponent(location, route, http, dialog, orderService) {
+    function ItemComponent(location, route, http, dialog, orderService, router) {
         this.location = location;
         this.route = route;
         this.http = http;
         this.dialog = dialog;
         this.orderService = orderService;
+        this.router = router;
     }
     ItemComponent.prototype.loadItem = function () {
         var _this = this;
@@ -1602,7 +3029,23 @@ var ItemComponent = /** @class */ (function () {
         if (index >= 0) {
             console.log("Item is found on index: " + index);
             this.index = index;
+            if (this.order.items[index].code.startsWith('TAG')) {
+                this.locked = 'locked TAG';
+                this.tagid = this.order.items[index].code.slice(3);
+                if (this.tagid.startsWith('-Gold-')) {
+                    this.tagid = this.tagid.slice(6);
+                }
+                else if (this.tagid.startsWith('-Silver-')) {
+                    this.tagid = this.tagid.slice(8);
+                }
+                else if (this.tagid.startsWith('-Bronze-')) {
+                    this.tagid = this.tagid.slice(8);
+                }
+            }
         }
+    };
+    ItemComponent.prototype.tagInfo = function () {
+        this.router.navigate(["/tag/" + this.tagid]);
     };
     ItemComponent.prototype.showItemByIndex = function () {
         if (this.index < 0) {
@@ -1629,12 +3072,14 @@ var ItemComponent = /** @class */ (function () {
         var _this = this;
         this.id = this.route.snapshot.paramMap.get('id');
         this.ref = this.route.snapshot.paramMap.get('ref');
+        this.locked = this.route.snapshot.paramMap.get('locked');
         this.index = -1;
         this.invalid = false;
         this.qr_code = '';
         this.url = '';
         this.loading = true;
         this.itemQty = 0;
+        this.tagid = undefined;
         if (this.id === 'NEW') {
             this.scanning = true;
         }
@@ -1755,7 +3200,8 @@ var ItemComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"],
             _angular_material__WEBPACK_IMPORTED_MODULE_7__["MatDialog"],
-            _order_service__WEBPACK_IMPORTED_MODULE_9__["OrderService"]])
+            _order_service__WEBPACK_IMPORTED_MODULE_9__["OrderService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], ItemComponent);
     return ItemComponent;
 }());
@@ -1968,7 +3414,7 @@ module.exports = ".nav-bar {\n    background-color: #010020;\n    color: #ffffff
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\"  class=\"nav-bar\">\n\n    <div fxFlex.gt-sm=\"2\" fxFlex=\"5\"></div>\n    <div fxFlex.gt-sm=\"8\" fxFlex=\"20\" (click)=\"gotoHome()\">\n      <img  src=\"../assets/group-6-logo.png\">\n    </div>\n\n    <div fxLayout=\"row\" fxFlex.gt-sm=\"80\" fxFlex=\"22\">\n        <div fxFlex=\"10\" fxHide fxShow.gt-sm></div>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoHome()\">Home</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoRide()\">Ride</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoDashboard()\">Dashboard</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoTags()\">Tag list</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoAbout()\">About</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoShopping()\">Shopping</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" (click)=\"logout()\" mat-menu-item>{{authenticated()?\"Logout\":\"Login\"}}</button>\n        <div fxFlex=\"10\" fxHide fxShow.gt-sm></div>\n    </div>\n\n    <div fxFlex.gt-sm=\"10\" fxFlex=\"43\">\n        <button (click)=\"gotoReg()\" mat-icon-button>\n            <mat-icon>{{authenticated()?\"account_circle\":\"add_circle_outline\"}}</mat-icon>\n        </button>\n    </div>\n\n    <div fxHide.gt-sm fxFlex.gt-sm=\"0\" fxFlex=\"5\">\n        <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n            <mat-icon>more_vert</mat-icon>\n        </button>\n        <mat-menu #menu=\"matMenu\">\n            <button mat-menu-item (click)=\"gotoHome()\">Home</button>\n            <button mat-menu-item (click)=\"gotoRide()\">Ride</button>\n            <button mat-menu-item (click)=\"gotoDashboard()\">Dashboard</button>\n            <button mat-menu-item (click)=\"gotoTags()\">Tag list</button>\n            <button mat-menu-item (click)=\"gotoAbout()\">About</button>\n            <button mat-menu-item (click)=\"gotoShopping()\">Shopping</button>\n            <button (click)=\"logout()\" mat-menu-item>{{authenticated()?\"Logout\":\"Login\"}}</button>\n        </mat-menu>\n    </div>\n    <div fxHide.gt-sm fxFlex.gt-sm=\"0\" fxFlex=\"5\"></div>\n</div>\n\n"
+module.exports = " <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\"  class=\"nav-bar\">\n\n    <div fxFlex.gt-sm=\"2\" fxFlex=\"5\"></div>\n    <div fxFlex.gt-sm=\"8\" fxFlex=\"20\" (click)=\"gotoHome()\">\n      <img src=\"../assets/group-6-logo.png\">\n    </div>\n\n    <div fxLayout=\"row\" fxFlex.gt-sm=\"80\" fxFlex=\"22\">\n        <div fxFlex=\"10\" fxHide fxShow.gt-sm></div>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoHome()\">{{admin?\"Admin\":expert?\"Expert\":bike?\"Shop\":\"Home\"}}</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoRide()\">Ride</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoDashboard()\">Dashboard</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoTags()\">Tag list</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoAbout()\">About</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" mat-menu-item (click)=\"gotoShopping()\">Shopping</button>\n        <button fxHide fxShow.gt-sm class=\"hometop-btn\" (click)=\"logout()\" mat-menu-item>{{authenticated()?\"Logout\":\"Login\"}}</button>\n        <div fxFlex=\"10\" fxHide fxShow.gt-sm></div>\n    </div>\n\n    <div fxFlex.gt-sm=\"10\" fxFlex=\"43\">\n        <button (click)=\"gotoReg()\" mat-icon-button>\n            <mat-icon>{{authenticated()?loginIcon:\"add_circle_outline\"}}</mat-icon>\n        </button>\n    </div>\n\n    <div fxHide.gt-sm fxFlex.gt-sm=\"0\" fxFlex=\"5\">\n        <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n            <mat-icon>more_vert</mat-icon>\n        </button>\n        <mat-menu #menu=\"matMenu\">\n            <button mat-menu-item (click)=\"gotoHome()\">{{admin?\"Admin\":expert?\"Expert\":bike?\"Shop\":\"Home\"}}</button>\n            <button mat-menu-item (click)=\"gotoRide()\">Ride</button>\n            <button mat-menu-item (click)=\"gotoDashboard()\">Dashboard</button>\n            <button mat-menu-item (click)=\"gotoTags()\">Tag list</button>\n            <button mat-menu-item (click)=\"gotoAbout()\">About</button>\n            <button mat-menu-item (click)=\"gotoShopping()\">Shopping</button>\n            <button (click)=\"logout()\" mat-menu-item>{{authenticated()?\"Logout\":\"Login\"}}</button>\n        </mat-menu>\n    </div>\n    <div fxHide.gt-sm fxFlex.gt-sm=\"0\" fxFlex=\"5\"></div>\n</div>\n\n"
 
 /***/ }),
 
@@ -2007,10 +3453,37 @@ var NavBarComponent = /** @class */ (function () {
     }
     NavBarComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.admin = false;
+        this.expert = false;
+        this.bike = false;
+        this.loginIcon = 'add_circle_outline';
         this.user_subs = this.authService.getUser().subscribe(function (user) {
             if (user) {
                 _this.mobile = user.phoneNumber;
                 _this.getRider();
+                user.getIdTokenResult()
+                    .then(function (idTokenResult) {
+                    if (!!idTokenResult.claims.admin) {
+                        _this.admin = true;
+                        _this.loginIcon = 'star_border';
+                    }
+                    else if (!!idTokenResult.claims.expert) {
+                        console.log('Expert');
+                        _this.expert = true;
+                        _this.loginIcon = 'stars';
+                    }
+                    else if (!!idTokenResult.claims.bike) {
+                        console.log('Bike Shop');
+                        _this.bike = true;
+                        _this.loginIcon = 'radio_button_checked';
+                    }
+                    else {
+                        _this.loginIcon = 'account_circle';
+                    }
+                })
+                    .catch(function (error) {
+                    console.log(error);
+                });
             }
             else {
                 _this.mobile = null;
@@ -2050,6 +3523,8 @@ var NavBarComponent = /** @class */ (function () {
     };
     NavBarComponent.prototype.logout = function () {
         if (this.authenticated()) {
+            this.admin = false;
+            this.loginIcon = 'add_circle_outline';
             this.authService.logout();
         }
         else {
@@ -2080,7 +3555,18 @@ var NavBarComponent = /** @class */ (function () {
         }
     };
     NavBarComponent.prototype.gotoHome = function () {
-        this.router.navigate(['/']);
+        if (this.admin) {
+            this.router.navigate(['/admin']);
+        }
+        else if (this.expert) {
+            this.router.navigate(['/expert']);
+        }
+        else if (this.bike) {
+            this.router.navigate(['/bikeshop']);
+        }
+        else {
+            this.router.navigate(['/']);
+        }
     };
     NavBarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2221,6 +3707,23 @@ var OrderService = /** @class */ (function () {
             .catch(console.error);
         return order;
     };
+    OrderService.prototype.newOrderWithItems = function (client, items) {
+        var timestamp = new Date();
+        var ref = Math.floor(Math.random() * 100000000);
+        var date = this.datePipe.transform(timestamp, 'dd-MM-yy');
+        var order = {
+            ref: date + "-" + ref,
+            date: date,
+            status: _order__WEBPACK_IMPORTED_MODULE_4__["ORDERSTATUS"].NEW,
+            client: client,
+            items: items,
+            total: 0
+        };
+        this.db.collection('orders').add(order)
+            .then(function () { return order; })
+            .catch(console.error);
+        return order;
+    };
     OrderService.prototype.updateOrder = function (order) {
         var _this = this;
         this.db.collection('orders').ref.where('ref', '==', order.ref)
@@ -2231,8 +3734,40 @@ var OrderService = /** @class */ (function () {
             }
             else {
                 var doc = querySnapshot.docs[0];
-                _this.db.collection('orders').doc(doc.id).update(order)
-                    .catch(console.error);
+                if (order.items && order.items.length === 0) {
+                    // delete empty order
+                    _this.db.collection('orders').doc(doc.id).delete()
+                        .catch(console.error);
+                }
+                else {
+                    _this.db.collection('orders').doc(doc.id).update(order)
+                        .catch(console.error);
+                }
+            }
+        });
+    };
+    OrderService.prototype.updateOrderCB = function (order, cb) {
+        var _this = this;
+        this.db.collection('orders').ref.where('ref', '==', order.ref)
+            .get()
+            .then(function (querySnapshot) {
+            if (querySnapshot.empty) {
+                console.error('Order not found');
+                cb('Order not found', null);
+            }
+            else {
+                var doc = querySnapshot.docs[0];
+                if (order.items && order.items.length === 0) {
+                    // delete empty order
+                    cb('Order will be delited', null);
+                    _this.db.collection('orders').doc(doc.id).delete()
+                        .catch(console.error);
+                }
+                else {
+                    _this.db.collection('orders').doc(doc.id).update(order)
+                        .then(function (res) { return cb(null, res); })
+                        .catch(function (err) { return cb(err, null); });
+                }
             }
         });
     };
@@ -2253,19 +3788,30 @@ var OrderService = /** @class */ (function () {
 /*!**************************!*\
   !*** ./src/app/order.ts ***!
   \**************************/
-/*! exports provided: ORDERSTATUS, Item, Order */
+/*! exports provided: ORDERSTATUS, Payment, Item, Order */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ORDERSTATUS", function() { return ORDERSTATUS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Payment", function() { return Payment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Item", function() { return Item; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Order", function() { return Order; });
 var ORDERSTATUS = {
     NEW: 'new',
     OPEN: 'open',
+    REG: 'registered',
+    AUTH: 'authorized',
+    PAID: 'paid',
+    FAILED: 'failed',
     CLOSED: 'closed'
 };
+var Payment = /** @class */ (function () {
+    function Payment() {
+    }
+    return Payment;
+}());
+
 var Item = /** @class */ (function () {
     function Item() {
     }
@@ -2276,6 +3822,179 @@ var Order = /** @class */ (function () {
     function Order() {
     }
     return Order;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/order/order.component.css":
+/*!*******************************************!*\
+  !*** ./src/app/order/order.component.css ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "table {\n    width: 100%;\n  }\n\n.mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n\n.example-margin {\n    margin: 0 10px;\n  }\n\n.mat-progress-bar {\n    width: 400px;\n}\n\n.mat-spinner {\n    position: absolute;\n    top: 150px;\n    left: 150px;\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/order/order.component.html":
+/*!********************************************!*\
+  !*** ./src/app/order/order.component.html ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-header [back]=\"true\" [title]=\"'Order'\"></app-header>\n<mat-spinner *ngIf=\"!order\"></mat-spinner>\n<div *ngIf=\"order\">\n  <br>\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex.gt-sm=\"2\" fxFlex=\"5\"></div>\n      <div fxFlex.gt-sm=\"48\" fxFlex=\"45\" fxItemAlign=\"right\"><small>{{order.ref}}</small></div>\n      <div fxFlex.gt-sm=\"10\" fxFlex=\"10\"></div>\n      <div fxFlex.gt-sm=\"40\" fxFlex=\"40\" fxItemAlign=\"right\"><small>{{order.status}}</small></div>\n  </div>\n  <br>\n  <table *ngIf=\"order.items.length>0\" mat-table [dataSource]=\"order.items | slice:start:end\" class=\"mat-elevation-z8\">\n\n      <!--- Note that these columns can be defined in any order.\n            The actual rendered columns are set as a property on the row definition\" -->\n\n      <ng-container matColumnDef=\"position\">\n          <th mat-header-cell *matHeaderCellDef> </th>\n          <td mat-cell *matCellDef=\"let element; let i = index;\"> {{i+1}} </td>\n      </ng-container>\n    \n      <!-- Position Column -->\n      <ng-container matColumnDef=\"name\">\n          <th mat-header-cell *matHeaderCellDef> Name </th>\n          <td mat-cell (click)=\"gotoItem(element.id)\" *matCellDef=\"let element\"> {{shortName(element.name)}}</td>\n          \n        </ng-container>\n\n      <!-- Position Column -->\n      <ng-container matColumnDef=\"price\">\n        <th mat-header-cell *matHeaderCellDef> Price </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.price | currency:' ':'symbol':'2.0-2'}}</td>\n        \n      </ng-container>\n    \n      <!-- Name Column -->\n      <ng-container matColumnDef=\"qty\">\n        <th mat-header-cell *matHeaderCellDef> Qty </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.qty}}</td>\n      </ng-container>\n    \n    \n      <!-- Weight Column -->\n      <ng-container matColumnDef=\"link\">\n          <th mat-header-cell *matHeaderCellDef> </th>\n          <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoItem(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n        </ng-container>\n\n        <!-- Weight Column -->\n      <ng-container matColumnDef=\"delete\">\n          <th mat-header-cell *matHeaderCellDef> </th>\n          <td mat-cell *matCellDef=\"let element; let i = index;\"> <button (click)=\"deleteItem(i)\" mat-icon-button> <mat-icon>delete_outline</mat-icon></button> </td>\n        </ng-container>\n    \n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n    <br>\n    \n<mat-paginator *ngIf=\"order.items.length>0\" [length]=\"order.items.length\"\n              [pageSize]=\"10\"\n              [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n              (page)=\"setPage($event)\">\n</mat-paginator>\n</div>\n<button *ngIf=\"order\" mat-raised-button color=\"primary\" [disabled]=\"process\" (click)=\"checkOrder()\">Payment status</button>\n\n<div *ngIf=\"paymentStatus\" fxLayout=\"column\">\n    <div fxLayout=\"row\">\n      <br>\n    </div>\n    <div *ngIf=\"paymentStatus.id\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">ID</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.id}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.state\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">State</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.state}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.inprogress\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">Inprogress</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.inprogress}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.date\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">Date</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.date}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.amount\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">Amount</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.amount}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.currency\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">Currency</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.currency}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.email\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">EMail</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.email}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.reference\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">Reference</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.reference}}</div>\n    </div>\n\n    <div *ngIf=\"paymentStatus.description\" fxLayout=\"row\">\n        <div fxFlex=\"2\"></div>\n        <div fxFlex=\"20\">Description</div>\n        <div fxFlex=\"20\"></div>\n        <div fxFlex=\"58\">{{paymentStatus.description}}</div>\n    </div>\n    \n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/order/order.component.ts":
+/*!******************************************!*\
+  !*** ./src/app/order/order.component.ts ***!
+  \******************************************/
+/*! exports provided: OrderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderComponent", function() { return OrderComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
+/* harmony import */ var _order_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../order.service */ "./src/app/order.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var OrderComponent = /** @class */ (function () {
+    function OrderComponent(authService, router, orderService, http, route, tagService) {
+        this.authService = authService;
+        this.router = router;
+        this.orderService = orderService;
+        this.http = http;
+        this.route = route;
+        this.tagService = tagService;
+        this.displayedColumns = ['position', 'name', 'price', 'qty'];
+    }
+    OrderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.start = 0;
+        this.end = 10;
+        this.ref = this.route.snapshot.paramMap.get('ref');
+        this.process = false;
+        this.paymentStatus = undefined;
+        this.orderService.getOrderByRef(this.ref).subscribe(function (res) {
+            if (res.length > 0) {
+                _this.order = res[0];
+                console.log('Loading order');
+                console.log(_this.order);
+            }
+            else {
+                console.error("Order " + _this.ref + " is not found");
+            }
+        });
+    };
+    OrderComponent.prototype.shortName = function (name) {
+        if (name.length <= 20) {
+            return "" + name;
+        }
+        else {
+            return name.slice(0, 17) + "...";
+        }
+    };
+    OrderComponent.prototype.gotoItem = function (id) {
+        if (this.order) {
+            this.router.navigate(["/item/" + id + "/" + this.order.ref + "/locked"]);
+        }
+    };
+    OrderComponent.prototype.checkOrder = function () {
+        var _this = this;
+        if (!this.order) {
+            return;
+        }
+        else if (!this.order.payment) {
+            return;
+        }
+        this.process = true;
+        var payment = this.order.payment;
+        var url = "https://us-central1-cloud-firestore-test-d95bf.cloudfunctions.net/order";
+        var data = {
+            sector: payment.sector,
+            id: payment.id,
+            reference: payment.reference
+        };
+        this.http.post(url, data, { responseType: 'text' }).subscribe(function (res) {
+            _this.process = false;
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(res, 'application/xml');
+            console.log(doc);
+            if (doc.getElementsByTagName('order').length > 0) {
+                _this.operations = doc.getElementsByTagName('order').item(0);
+                if (_this.operations.getElementsByTagName('id').length > 0) {
+                    _this.paymentStatus = { id: _this.operations.getElementsByTagName('id').item(0).innerHTML };
+                }
+                if (_this.operations.getElementsByTagName('state').length > 0) {
+                    _this.paymentStatus.state = _this.operations.getElementsByTagName('state').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('inprogress').length > 0) {
+                    _this.paymentStatus.inprogress = _this.operations.getElementsByTagName('inprogress').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('date').length > 0) {
+                    _this.paymentStatus.date = _this.operations.getElementsByTagName('date').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('amount').length > 0) {
+                    _this.paymentStatus.amount = _this.operations.getElementsByTagName('amount').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('currency').length > 0) {
+                    _this.paymentStatus.currency = _this.operations.getElementsByTagName('currency').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('email').length > 0) {
+                    _this.paymentStatus.email = _this.operations.getElementsByTagName('email').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('reference').length > 0) {
+                    _this.paymentStatus.reference = _this.operations.getElementsByTagName('reference').item(0).innerHTML;
+                }
+                if (_this.operations.getElementsByTagName('description').length > 0) {
+                    _this.paymentStatus.description = _this.operations.getElementsByTagName('description').item(0).innerHTML;
+                }
+            }
+        });
+    };
+    OrderComponent.prototype.setPage = function (e) {
+        console.log(e);
+        var pageIndex = e.pageIndex, pageSize = e.pageSize;
+        this.start = pageIndex * pageSize;
+        this.end = this.start + pageSize;
+    };
+    OrderComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-order',
+            template: __webpack_require__(/*! ./order.component.html */ "./src/app/order/order.component.html"),
+            styles: [__webpack_require__(/*! ./order.component.css */ "./src/app/order/order.component.css")]
+        }),
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _order_service__WEBPACK_IMPORTED_MODULE_3__["OrderService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _tag_service__WEBPACK_IMPORTED_MODULE_5__["TagService"]])
+    ], OrderComponent);
+    return OrderComponent;
 }());
 
 
@@ -3376,6 +5095,152 @@ var RiderService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/rider.ts":
+/*!**************************!*\
+  !*** ./src/app/rider.ts ***!
+  \**************************/
+/*! exports provided: brands, Frame, Wheel, Group, Bike, Rider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "brands", function() { return brands; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Frame", function() { return Frame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Wheel", function() { return Wheel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Group", function() { return Group; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bike", function() { return Bike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rider", function() { return Rider; });
+var brands = [
+    {
+        name: 'Colnago',
+        logo: 'colnago-logo.png',
+        class: 'colnago-header-image',
+        models: [
+            {
+                name: 'E64',
+                desc: 'E-Bike, Monocoque frame',
+                img: 'colnago-e64.jpg',
+                year: '2019',
+                type: 'Road E-Bike',
+                material: 'Carbon',
+                brakes: ['disk'],
+                group: ['electronic', 'mechanical'],
+                ebike: true
+            },
+            {
+                name: 'C64',
+                desc: 'The C64 frame is full and made in Italy and is the result of more than 2 years of research',
+                img: 'colnago-c64.jpg',
+                year: '2019',
+                type: 'Road',
+                material: 'Carbon',
+                brakes: ['rim', 'disk'],
+                group: ['electronic', 'mechanical'],
+                ebike: false
+            },
+            {
+                name: 'Concept',
+                desc: 'A monocoque frame designed for power and speed, with a superior aerodynamic performance',
+                img: 'colnago-concept.jpg',
+                year: '2019',
+                type: 'Road',
+                material: 'Carbon',
+                brakes: ['rim', 'disk'],
+                group: ['electronic', 'mechanical'],
+                ebike: false
+            },
+            {
+                name: 'V2-r',
+                descr: 'Monocoque in carbon fiber of the highest quality, for lightness and performance without compromise on any terrain.',
+                img: 'colnago-v2r.jpg',
+                year: '2019',
+                type: 'Road',
+                material: 'Carbon',
+                brakes: ['rim', 'disk'],
+                group: ['electronic', 'mechanical'],
+                ebike: false
+            }
+        ]
+    },
+    {
+        name: 'Pinarello',
+        logo: 'pinarello-logo.gif',
+        class: 'pinarello-header-image',
+        models: [
+            {
+                name: 'DOGMA F10',
+                desc: 'Asymmetric Carbon Frame with Nanoalloy Technology',
+                img: 'pinarello-f10.jpeg',
+                year: '2019',
+                type: 'Road',
+                material: 'Carbon',
+                brakes: ['rim'],
+                group: ['electronic', 'mechanical'],
+                ebike: false
+            },
+            {
+                name: 'DOGMA F10 DISK',
+                desc: 'Asymmetric Carbon Frame with Nanoalloy Technology and disk brakes',
+                img: 'pinarello-f10-disk.jpeg',
+                year: '2019',
+                type: 'Road',
+                material: 'Carbon',
+                brakes: ['rim'],
+                group: ['electronic', 'mechanical'],
+                ebike: false
+            }
+        ]
+    },
+    {
+        name: 'Argone 18',
+        logo: 'argon18-logo.png',
+        class: 'argon18-header-image',
+    },
+    {
+        name: 'Cervelo',
+        logo: 'cervelo-logo.png',
+        class: 'cervelo-header-image',
+    },
+    {
+        name: 'Add new brand',
+        change: true,
+        logo: 'add.png'
+    }
+];
+var Frame = /** @class */ (function () {
+    function Frame() {
+    }
+    return Frame;
+}());
+
+var Wheel = /** @class */ (function () {
+    function Wheel() {
+    }
+    return Wheel;
+}());
+
+var Group = /** @class */ (function () {
+    function Group() {
+    }
+    return Group;
+}());
+
+var Bike = /** @class */ (function () {
+    function Bike() {
+    }
+    return Bike;
+}());
+
+var Rider = /** @class */ (function () {
+    function Rider() {
+    }
+    return Rider;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shopping-result/shopping-result.component.css":
 /*!***************************************************************!*\
   !*** ./src/app/shopping-result/shopping-result.component.css ***!
@@ -3383,7 +5248,7 @@ var RiderService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".error {\n    color: red;\n}"
+module.exports = ".error {\n    color: red;\n}\n\ntable {\n    width: 100%;\n  }\n\n.mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n\n.example-margin {\n    margin: 0 10px;\n  }"
 
 /***/ }),
 
@@ -3394,7 +5259,7 @@ module.exports = ".error {\n    color: red;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n  <div fxFlex=\"100\"><br></div>\n</div>\n\n<div *ngIf=\"result\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"30\"></div>\n    <div *ngIf=\"result ==='fail'\" fxFlex=\"60\" class=\"error\"><h2>Payment is failed</h2></div>\n    <div *ngIf=\"result ==='accept'\" fxFlex=\"60\"><h2>Payment is accepted</h2></div>\n    <div fxFlex=\"10\"></div>\n</div>\n\n<div *ngIf=\"result\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"30\"></div>\n    <div *ngIf=\"result ==='fail'\" fxFlex=\"60\" ><h3>{{getErrorMessage()}}</h3></div>\n    <div *ngIf=\"result ==='accept'\" fxFlex=\"60\"><h3>{{code}}</h3></div>\n    <div fxFlex=\"10\"></div>\n</div>\n\n<div *ngIf=\"result\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"30\"></div>\n    <div *ngIf=\"result ==='fail'\" fxFlex=\"60\" >\n        <button mat-raised-button color=\"warn\" (click)=\"gotoShopping()\">Back</button>\n    </div>\n    <div *ngIf=\"result ==='accept'\" fxFlex=\"60\" >\n        <button mat-raised-button color=\"primary\" [disabled]=\"process\" (click)=\"gotoShopping()\">Back</button>\n    </div>\n    <div fxFlex=\"10\"></div>\n</div>\n\n\n"
+module.exports = "<div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n  <div fxFlex=\"100\"><br></div>\n</div>\n\n<div *ngIf=\"order\">\n        <table *ngIf=\"order.items.length>0\" mat-table [dataSource]=\"order.items | slice:start:end\" class=\"mat-elevation-z8\">\n      \n            <!--- Note that these columns can be defined in any order.\n                  The actual rendered columns are set as a property on the row definition\" -->\n      \n            <ng-container matColumnDef=\"position\">\n                <th mat-header-cell *matHeaderCellDef> </th>\n                <td mat-cell *matCellDef=\"let element; let i = index;\"> {{i+1}} </td>\n            </ng-container>\n          \n            <!-- Position Column -->\n            <ng-container matColumnDef=\"name\">\n                <th mat-header-cell *matHeaderCellDef> Name </th>\n                <td mat-cell (click)=\"gotoItem(element.id)\" *matCellDef=\"let element\"> {{shortName(element.name)}}</td>\n                \n              </ng-container>\n      \n            <!-- Position Column -->\n            <ng-container matColumnDef=\"price\">\n              <th mat-header-cell *matHeaderCellDef> Price </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.price | currency:' ':'symbol':'2.0-2'}}</td>\n              \n            </ng-container>\n          \n            <!-- Name Column -->\n            <ng-container matColumnDef=\"qty\">\n              <th mat-header-cell *matHeaderCellDef> Qty </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.qty}}</td>\n            </ng-container>\n          \n          \n            <!-- Weight Column -->\n            <ng-container matColumnDef=\"link\">\n                <th mat-header-cell *matHeaderCellDef> </th>\n                <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoItem(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n              </ng-container>\n      \n              <!-- Weight Column -->\n            <ng-container matColumnDef=\"delete\">\n                <th mat-header-cell *matHeaderCellDef> </th>\n                <td mat-cell *matCellDef=\"let element; let i = index;\"> <button (click)=\"deleteItem(i)\" mat-icon-button> <mat-icon>delete_outline</mat-icon></button> </td>\n              </ng-container>\n          \n            <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n            <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n          </table>\n          <br>\n          \n      <mat-paginator *ngIf=\"order.items.length>0\" [length]=\"order.items.length\"\n                    [pageSize]=\"10\"\n                    [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                    (page)=\"setPage($event)\">\n      </mat-paginator>\n</div>\n\n<div *ngIf=\"result\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"30\"></div>\n    <div *ngIf=\"result ==='fail'\" fxFlex=\"60\" class=\"error\"><h2>Payment is failed</h2></div>\n    <div *ngIf=\"result ==='accept'\" fxFlex=\"60\"><h2>Payment is accepted</h2></div>\n    <div fxFlex=\"10\"></div>\n</div>\n\n<div *ngIf=\"result\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"30\"></div>\n    <div *ngIf=\"result ==='fail'\" fxFlex=\"60\" ><h3>{{getErrorMessage()}}</h3></div>\n    <div *ngIf=\"result ==='accept'\" fxFlex=\"60\"><h3>{{code}}</h3></div>\n    <div fxFlex=\"10\"></div>\n</div>\n\n<div *ngIf=\"result\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"30\"></div>\n    <div *ngIf=\"result ==='fail'\" fxFlex=\"60\" >\n        <button mat-raised-button color=\"warn\" (click)=\"gotoShopping()\">Back</button>\n    </div>\n    <div *ngIf=\"result ==='accept'\" fxFlex=\"60\" >\n        <button mat-raised-button color=\"primary\" [disabled]=\"process\" (click)=\"gotoShopping()\">Back</button>\n    </div>\n    <div fxFlex=\"10\"></div>\n</div>\n\n\n"
 
 /***/ }),
 
@@ -3415,6 +5280,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../order */ "./src/app/order.ts");
 /* harmony import */ var _order_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../order.service */ "./src/app/order.service.ts");
+/* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../auth.service */ "./src/app/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3431,17 +5298,28 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var merchantID = 1093;
 var ShoppingResultComponent = /** @class */ (function () {
-    function ShoppingResultComponent(route, location, router, http, orderService) {
+    function ShoppingResultComponent(route, location, router, http, orderService, tagService, authService, datePipe) {
         this.route = route;
         this.location = location;
         this.router = router;
         this.http = http;
         this.orderService = orderService;
+        this.tagService = tagService;
+        this.authService = authService;
+        this.datePipe = datePipe;
+        this.displayedColumns = ['position', 'name', 'price', 'qty'];
     }
     ShoppingResultComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.start = 0;
+        this.end = 10;
         this.process = false;
+        this.updated = false;
         this.result = this.route.snapshot.paramMap.get('result');
         this.id = this.route.snapshot.queryParamMap.get('id');
         this.operation = this.route.snapshot.queryParamMap.get('operation');
@@ -3450,6 +5328,32 @@ var ShoppingResultComponent = /** @class */ (function () {
         if (this.result === 'accept') {
             this.checkResult();
         }
+        else {
+            this.completeOrder(_order__WEBPACK_IMPORTED_MODULE_5__["ORDERSTATUS"].FAILED);
+        }
+        this.authService.getUser().subscribe(function (user) {
+            _this.mobile = user.phoneNumber;
+            _this.uid = user.uid;
+        });
+    };
+    ShoppingResultComponent.prototype.shortName = function (name) {
+        if (name.length <= 20) {
+            return "" + name;
+        }
+        else {
+            return name.slice(0, 17) + "...";
+        }
+    };
+    ShoppingResultComponent.prototype.gotoItem = function (id) {
+        if (this.order) {
+            this.router.navigate(["/item/" + id + "/" + this.order.ref + "/locked"]);
+        }
+    };
+    ShoppingResultComponent.prototype.setPage = function (e) {
+        console.log(e);
+        var pageIndex = e.pageIndex, pageSize = e.pageSize;
+        this.start = pageIndex * pageSize;
+        this.end = this.start + pageSize;
     };
     ShoppingResultComponent.prototype.getErrorMessage = function () {
         var msg = '';
@@ -3486,24 +5390,60 @@ var ShoppingResultComponent = /** @class */ (function () {
                 var state = doc.getElementsByTagName('order_state').item(0);
                 console.log("Order State " + state.innerHTML);
                 if (state.innerHTML === 'COMPLETED') {
-                    _this.completeOrder();
+                    _this.completeOrder(_order__WEBPACK_IMPORTED_MODULE_5__["ORDERSTATUS"].CLOSED);
                 }
+            }
+            else {
+                _this.completeOrder(_order__WEBPACK_IMPORTED_MODULE_5__["ORDERSTATUS"].PAID);
             }
         });
     };
-    ShoppingResultComponent.prototype.completeOrder = function () {
+    ShoppingResultComponent.prototype.completeOrder = function (status) {
         var _this = this;
-        if (this.reference && this.result === 'accept') {
+        if (this.reference) {
             this.process = true;
             console.log("Complete the Order " + this.reference);
             this.orderService.getOrderByRef(this.reference).subscribe(function (res) {
                 _this.process = false;
+                if (_this.updated) {
+                    return;
+                }
                 if (res.length > 0) {
-                    var order = res[0];
+                    var order_1 = res[0];
+                    _this.order = res[0];
                     // change order status
-                    order.status = _order__WEBPACK_IMPORTED_MODULE_5__["ORDERSTATUS"].CLOSED;
+                    order_1.status = status;
+                    _this.updated = true;
                     // update order
-                    _this.orderService.updateOrder(order);
+                    _this.orderService.updateOrderCB(order_1, function (err, result) {
+                        if (err) {
+                            console.error(err);
+                        }
+                        else {
+                            console.log("Order Status " + order_1.status + " is changing for client " + order_1.client + " by user " + _this.uid);
+                            if (status === _order__WEBPACK_IMPORTED_MODULE_5__["ORDERSTATUS"].PAID && order_1.client === _this.uid) {
+                                console.log('Check if order has TAG');
+                                for (var i = 0; i < order_1.items.length; i++) {
+                                    if (order_1.items[i].code.startsWith('TAG')) {
+                                        // adding tag to user
+                                        console.log("Add tag " + order_1.items[i].id + " to client " + order_1.client);
+                                        var regDate = _this.datePipe.transform(new Date(), 'dd-MM-yy');
+                                        var reg = {
+                                            mobile: _this.mobile,
+                                            sms: 'auto reg / paid'
+                                        };
+                                        var tag = {
+                                            id: order_1.items[i].id,
+                                            regDate: regDate,
+                                            reg: reg,
+                                            payment: order_1.payment
+                                        };
+                                        _this.tagService.addNewTag(tag);
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
                 else {
                     console.error('Order is not found');
@@ -3521,7 +5461,10 @@ var ShoppingResultComponent = /** @class */ (function () {
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["Location"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
-            _order_service__WEBPACK_IMPORTED_MODULE_6__["OrderService"]])
+            _order_service__WEBPACK_IMPORTED_MODULE_6__["OrderService"],
+            _tag_service__WEBPACK_IMPORTED_MODULE_7__["TagService"],
+            _auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["DatePipe"]])
     ], ShoppingResultComponent);
     return ShoppingResultComponent;
 }());
@@ -3537,7 +5480,7 @@ var ShoppingResultComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\n    width: 100%;\n  }\n\n  .mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n\n  .example-margin {\n    margin: 0 10px;\n  }\n\n"
+module.exports = "table {\n    width: 100%;\n  }\n\n  .mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n\n  .example-margin {\n    margin: 0 10px;\n  }\n\n  .tag-card {\n    max-width: 200px;\n}\n\n  .bronze-header-image {\n  background-image: url(\"data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22230%22 height%3D%22230%22 viewBox%3D%220 0 230 230%22%3E    %3Cg fill%3D%22%23A38568%22 fill-rule%3D%22evenodd%22%3E        %3Cpath d%3D%22M150.941 114.6c5.494 1.47 8.755 7.11 7.285 12.59-1.472 5.482-7.123 8.736-12.616 7.27-5.503-1.473-8.755-7.11-7.285-12.59 1.472-5.482 7.115-8.74 12.616-7.27m18.743-2.405c-6.825-11.804-21.943-15.847-33.777-9.03a24.67 24.67 0 0 1-18.757 2.467 4.12 4.12 0 0 1-2.607-5.84l7.534-18.443 9.359-22.931 7.555-18.498-.007-.002a4.11 4.11 0 0 0-2.637-5.779 4.154 4.154 0 0 0-3.127.409c-.173.1-.343.215-.489.336l-27.442 21.29-39.823 30.885c-9.545 7.45-12.385 20.968-6.15 31.742 6.832 11.801 21.952 15.843 33.775 9.031a24.667 24.667 0 0 1 18.76-2.464 4.112 4.112 0 0 1 2.604 5.839l-7.53 18.436-9.36 22.936-7.556 18.5.007.002a4.12 4.12 0 0 0 .133 3.864 4.155 4.155 0 0 0 2.504 1.915 4.136 4.136 0 0 0 3.127-.41c.18-.104.34-.216.489-.342l.005.009 27.435-21.285 39.824-30.893c9.546-7.45 12.386-20.967 6.151-31.744%22%2F%3E        %3Cpath d%3D%22M114.7 213.509c-54.24 0-98.21-43.97-98.21-98.208 0-54.241 43.97-98.21 98.21-98.21 54.24 0 98.21 43.969 98.21 98.21 0 54.239-43.97 98.208-98.21 98.208M114.7.6C51.354.6 0 51.953 0 115.3S51.353 230 114.7 230c63.346 0 114.7-51.353 114.7-114.7S178.046.6 114.7.6%22%2F%3E    %3C%2Fg%3E%3C%2Fsvg%3E\");\n  background-size: cover;\n}\n\n  .silver-header-image {\n  background-image: url(\"data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22230%22 height%3D%22230%22 viewBox%3D%220 0 230 230%22%3E    %3Cg fill%3D%22%239A999C%22 fill-rule%3D%22evenodd%22%3E        %3Cpath d%3D%22M150.941 114.6c5.494 1.47 8.755 7.11 7.285 12.59-1.472 5.482-7.123 8.736-12.616 7.27-5.503-1.473-8.755-7.11-7.285-12.59 1.472-5.482 7.115-8.74 12.616-7.27m18.743-2.405c-6.825-11.804-21.943-15.847-33.777-9.03a24.67 24.67 0 0 1-18.757 2.467 4.12 4.12 0 0 1-2.607-5.84l7.534-18.443 9.359-22.931 7.555-18.498-.007-.002a4.11 4.11 0 0 0-2.637-5.779 4.154 4.154 0 0 0-3.127.409c-.173.1-.343.215-.489.336l-27.442 21.29-39.823 30.885c-9.545 7.45-12.385 20.968-6.15 31.742 6.832 11.801 21.952 15.843 33.775 9.031a24.667 24.667 0 0 1 18.76-2.464 4.112 4.112 0 0 1 2.604 5.839l-7.53 18.436-9.36 22.936-7.556 18.5.007.002a4.12 4.12 0 0 0 .133 3.864 4.155 4.155 0 0 0 2.504 1.915 4.136 4.136 0 0 0 3.127-.41c.18-.104.34-.216.489-.342l.005.009 27.435-21.285 39.824-30.893c9.546-7.45 12.386-20.967 6.151-31.744%22%2F%3E        %3Cpath d%3D%22M114.7 213.509c-54.24 0-98.21-43.97-98.21-98.208 0-54.241 43.97-98.21 98.21-98.21 54.24 0 98.21 43.969 98.21 98.21 0 54.239-43.97 98.208-98.21 98.208M114.7.6C51.354.6 0 51.953 0 115.3S51.353 230 114.7 230c63.346 0 114.7-51.353 114.7-114.7S178.046.6 114.7.6%22%2F%3E    %3C%2Fg%3E%3C%2Fsvg%3E\");\n  background-size: cover;\n}\n\n  .gold-header-image {\n  background-image: url(\"data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22230%22 height%3D%22230%22 viewBox%3D%220 0 230 230%22%3E    %3Cg fill%3D%22%23DDC086%22 fill-rule%3D%22evenodd%22%3E        %3Cpath d%3D%22M150.941 114.6c5.494 1.47 8.755 7.11 7.285 12.59-1.472 5.482-7.123 8.736-12.616 7.27-5.503-1.473-8.755-7.11-7.285-12.59 1.472-5.482 7.115-8.74 12.616-7.27m18.743-2.405c-6.825-11.804-21.943-15.847-33.777-9.03a24.67 24.67 0 0 1-18.757 2.467 4.12 4.12 0 0 1-2.607-5.84l7.534-18.443 9.359-22.931 7.555-18.498-.007-.002a4.11 4.11 0 0 0-2.637-5.779 4.154 4.154 0 0 0-3.127.409c-.173.1-.343.215-.489.336l-27.442 21.29-39.823 30.885c-9.545 7.45-12.385 20.968-6.15 31.742 6.832 11.801 21.952 15.843 33.775 9.031a24.667 24.667 0 0 1 18.76-2.464 4.112 4.112 0 0 1 2.604 5.839l-7.53 18.436-9.36 22.936-7.556 18.5.007.002a4.12 4.12 0 0 0 .133 3.864 4.155 4.155 0 0 0 2.504 1.915 4.136 4.136 0 0 0 3.127-.41c.18-.104.34-.216.489-.342l.005.009 27.435-21.285 39.824-30.893c9.546-7.45 12.386-20.967 6.151-31.744%22%2F%3E        %3Cpath d%3D%22M114.7 213.509c-54.24 0-98.21-43.97-98.21-98.208 0-54.241 43.97-98.21 98.21-98.21 54.24 0 98.21 43.969 98.21 98.21 0 54.239-43.97 98.208-98.21 98.208M114.7.6C51.354.6 0 51.953 0 115.3S51.353 230 114.7 230c63.346 0 114.7-51.353 114.7-114.7S178.046.6 114.7.6%22%2F%3E    %3C%2Fg%3E%3C%2Fsvg%3E\");\n  background-size: cover;\n}"
 
 /***/ }),
 
@@ -3548,7 +5491,7 @@ module.exports = "table {\n    width: 100%;\n  }\n\n  .mat-cell .mat-icon {\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header [back]=\"true\" [title]=\"'Shopping'\"></app-header>\n\n<div *ngIf=\"authenticated()\" fxLayout=\"column\">\n\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"100\">\n        <br>\n      </div>\n  </div>\n\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"2\"></div>\n      <div *ngIf=\"order\" fxFlex=\"8\">TOTAL:</div>\n      <div *ngIf=\"order\" fxFlex=\"10\"></div>\n      <div *ngIf=\"order\" fxFlex=\"60\">{{getTotalCost() | currency:' '}}&nbsp; руб</div>\n      <div *ngIf=\"order\" fxFlex=\"10\"></div>\n\n      <div *ngIf=\"!order\" fxFlex=\"88\"><h3>{{msg}}</h3></div>\n      \n      <div *ngIf=\"order || new\" fxFlex=\"8\">\n        <button (click)=\"gotoItem('NEW')\" mat-icon-button>\n            <mat-icon>add_circle_outline</mat-icon>\n        </button>\n      </div>\n      <div fxFlex=\"2\"></div>\n  </div>\n\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"100\">\n        <br>\n      </div>\n  </div>\n\n</div>\n\n<div *ngIf=\"order\">\n    <table *ngIf=\"order.items.length>0\" mat-table [dataSource]=\"order.items | slice:start:end\" class=\"mat-elevation-z8\">\n\n        <!--- Note that these columns can be defined in any order.\n              The actual rendered columns are set as a property on the row definition\" -->\n\n        <ng-container matColumnDef=\"position\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element; let i = index;\"> {{i+1}} </td>\n        </ng-container>\n      \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"name\">\n            <th mat-header-cell *matHeaderCellDef> Name </th>\n            <td mat-cell (click)=\"gotoItem(element.id)\" *matCellDef=\"let element\"> {{shortName(element.name)}}</td>\n            \n          </ng-container>\n\n        <!-- Position Column -->\n        <ng-container matColumnDef=\"price\">\n          <th mat-header-cell *matHeaderCellDef> Price </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.price | currency:' ':'symbol':'2.0-2'}}</td>\n          \n        </ng-container>\n      \n        <!-- Name Column -->\n        <ng-container matColumnDef=\"qty\">\n          <th mat-header-cell *matHeaderCellDef> Qty </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.qty}}</td>\n        </ng-container>\n      \n      \n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"link\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoItem(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n          </ng-container>\n\n          <!-- Weight Column -->\n        <ng-container matColumnDef=\"delete\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element; let i = index;\"> <button (click)=\"deleteItem(i)\" mat-icon-button> <mat-icon>delete_outline</mat-icon></button> </td>\n          </ng-container>\n      \n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      \n  <mat-paginator *ngIf=\"order.items.length>0\" [length]=\"order.items.length\"\n                [pageSize]=\"10\"\n                [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                (page)=\"setPage($event)\">\n  </mat-paginator>\n</div>\n\n<div *ngIf=\"order\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"15\">\n        <button mat-raised-button color=\"warn\" [disabled]=\"order.items.length == 0 || process\" (click)=\"register()\">Pay</button>\n    </div>\n    <div *ngIf=\"process\" fxFlex=\"10\">\n        <mat-progress-spinner\n        class=\"example-margin\"\n        [diameter]=\"25\"\n        [color]=\"color\"\n        [mode]=\"mode\"\n        [value]=\"value\">\n      </mat-progress-spinner>\n    </div>\n</div>\n\n\n\n\n<div *ngIf=\"!authenticated()\" fxLayout=\"column\">\n    \n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"100\"><br></div>\n    </div>\n\n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"30\"></div>\n      <div fxFlex=\"40\">\n        <h3>To start Shopping</h3>\n      </div>\n      <div fxFlex=\"30\"></div>\n    </div>\n  \n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"30\"></div>\n      <div fxFlex=\"40\">\n          <h3>Need to login first</h3>\n      </div>\n      <div fxFlex=\"30\"></div>\n    </div>\n\n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"45\"></div>\n        <div fxFlex=\"10\">\n            <button mat-raised-button color=\"primary\" (click)=\"gotoLogin()\">Login</button>\n        </div>\n        <div fxFlex=\"45\"></div>\n      </div>\n  \n  </div>"
+module.exports = "<app-header [back]=\"true\" [title]=\"'Shopping'\"></app-header>\n\n<div *ngIf=\"authenticated()\" fxLayout=\"column\">\n\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"100\">\n        <br>\n      </div>\n  </div>\n\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"2\"></div>\n      <div *ngIf=\"order\" fxFlex=\"8\">TOTAL:</div>\n      <div *ngIf=\"order\" fxFlex=\"10\"></div>\n      <div *ngIf=\"order\" fxFlex=\"60\">{{getTotalCost() | currency:' '}}&nbsp; руб</div>\n      <div *ngIf=\"order\" fxFlex=\"10\">\n          <button [disabled]=\"order.items.length>0\" (click)=\"deleteOrder()\" mat-icon-button>\n              <mat-icon>delete_outline</mat-icon>\n          </button>\n      </div>\n\n      <div *ngIf=\"!order\" fxFlex=\"88\">\n        <h3>{{msg}}</h3>\n      </div>\n      \n      <div *ngIf=\"order || new\" fxFlex=\"8\">\n        <button (click)=\"gotoItem('NEW')\" mat-icon-button>\n            <mat-icon>add_circle_outline</mat-icon>\n        </button>\n      </div>\n      <div fxFlex=\"2\"></div>\n  </div>\n\n  <div *ngIf=\"!order && !action\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    \n    <mat-card (click)=\"action={bronze:true}\" class=\"tag-card\">\n      <mat-card-header>\n        <mat-card-title>Bronze Tag</mat-card-title>\n        <mat-card-subtitle>Giro d'Iseo Bronze</mat-card-subtitle>\n      </mat-card-header>\n      <img mat-card-image [src]=\"'../assets/' + 'tag-bronze.svg'\">\n    </mat-card>\n\n    \n    <mat-card (click)=\"action={silver:true}\" class=\"tag-card\">\n        <mat-card-header>\n          <mat-card-title>Silver Tag</mat-card-title>\n          <mat-card-subtitle>Giro d'Iseo Silver</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'tag-silver.svg'\">\n    </mat-card>\n\n    \n    <mat-card (click)=\"action={gold:true}\" class=\"tag-card\">\n        <mat-card-header>\n          <mat-card-title>Gold Tag</mat-card-title>\n          <mat-card-subtitle>Giro d'Iseo Gold</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'tag-gold.svg'\">\n    </mat-card>\n  </div>\n\n  <div *ngIf=\"!order && action\" fxLayout=\"row\"  fxLayout.xs=\"column\" fxLayoutAlign.xs=\"start center\" fxLayoutWrap fxLayoutGap=\"1.5%\" fxLayoutAlign=\"left\">\n    \n      <mat-card *ngIf=\"action.bronze\" (click)=\"select()\" class=\"tag-card\">\n        <mat-card-header>\n          <div mat-card-avatar class=\"bronze-header-image\"></div>\n          <mat-card-title>Bronze Tag</mat-card-title>\n          <mat-card-subtitle>Giro d'Iseo Bronze</mat-card-subtitle>\n        </mat-card-header>\n        <img mat-card-image [src]=\"'../assets/' + 'tag-bronze.svg'\">\n        <mat-card-content >\n            <mat-chip-list>\n                <mat-chip color=\"primary\" selected>Competition</mat-chip>\n                <mat-chip color=\"primary\" selected>Points</mat-chip>\n              </mat-chip-list>\n              <br>\n              <mat-divider></mat-divider>\n        </mat-card-content>\n          <mat-card-actions>\n              <button (click)=\"select()\" mat-raised-button color=\"warn\" mat-button>₽ 1,000</button>\n              <button (click)=\"action=undefined\" mat-button>CANCEL</button>\n            </mat-card-actions>\n      </mat-card>\n  \n      \n      <mat-card *ngIf=\"action.silver\" (click)=\"select()\" class=\"tag-card\">\n          <mat-card-header>\n              <div mat-card-avatar class=\"silver-header-image\"></div>\n              <mat-card-title>Silver Tag</mat-card-title>\n              <mat-card-subtitle>Giro d'Iseo Silver</mat-card-subtitle>\n            </mat-card-header>\n            <img mat-card-image [src]=\"'../assets/' + 'tag-silver.svg'\">\n          <mat-card-content >\n              <mat-chip-list>\n                  <mat-chip color=\"primary\" selected>Competition</mat-chip>\n                  <mat-chip color=\"primary\" selected>Points</mat-chip>\n                  <mat-chip color=\"primary\" selected>₽ 30,000 сoverage</mat-chip>\n                </mat-chip-list>\n                <br>\n                <mat-divider></mat-divider>\n            </mat-card-content>\n            <mat-card-actions>\n              <button (click)=\"select()\" mat-raised-button color=\"warn\" mat-button>₽ 6,000</button>\n              <button (click)=\"action=undefined\" mat-button>CANCEL</button>\n            </mat-card-actions>\n      </mat-card>\n  \n      \n      <mat-card *ngIf=\"action.gold\" (click)=\"select()\" class=\"tag-card\">\n          <mat-card-header>\n              <div mat-card-avatar class=\"gold-header-image\"></div>\n              <mat-card-title>Gold Tag</mat-card-title>\n              <mat-card-subtitle>Giro d'Iseo Silver</mat-card-subtitle>\n            </mat-card-header>\n            <img mat-card-image [src]=\"'../assets/' + 'tag-gold.svg'\">\n          <mat-card-content >\n              <mat-chip-list>\n                  <mat-chip color=\"primary\" selected>Competition</mat-chip>\n                  <mat-chip color=\"primary\" selected>Points</mat-chip>\n                  <mat-chip color=\"primary\" selected>₽ 70,000 сoverage</mat-chip>\n                </mat-chip-list>\n                <br>\n                <mat-divider></mat-divider>\n            </mat-card-content>\n            <mat-card-actions>\n              <button (click)=\"select()\" mat-raised-button color=\"warn\" mat-button>₽ 10,000</button>\n              <button (click)=\"action=undefined\" mat-button>CANCEL</button>\n            </mat-card-actions>\n      </mat-card>\n    </div>\n\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"100\">\n        <br>\n      </div>\n  </div>\n\n</div>\n\n<div *ngIf=\"order\">\n    <table *ngIf=\"order.items.length>0\" mat-table [dataSource]=\"order.items | slice:start:end\" class=\"mat-elevation-z8\">\n\n        <!--- Note that these columns can be defined in any order.\n              The actual rendered columns are set as a property on the row definition\" -->\n\n        <ng-container matColumnDef=\"position\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element; let i = index;\"> {{i+1}} </td>\n        </ng-container>\n      \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"name\">\n            <th mat-header-cell *matHeaderCellDef> Name </th>\n            <td mat-cell (click)=\"gotoItem(element.id)\" *matCellDef=\"let element\"> {{shortName(element.name)}}</td>\n            \n          </ng-container>\n\n        <!-- Position Column -->\n        <ng-container matColumnDef=\"price\">\n          <th mat-header-cell *matHeaderCellDef> Price </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.price | currency:' ':'symbol':'2.0-2'}}</td>\n          \n        </ng-container>\n      \n        <!-- Name Column -->\n        <ng-container matColumnDef=\"qty\">\n          <th mat-header-cell *matHeaderCellDef> Qty </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.qty}}</td>\n        </ng-container>\n      \n      \n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"link\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoItem(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n          </ng-container>\n\n          <!-- Weight Column -->\n        <ng-container matColumnDef=\"delete\">\n            <th mat-header-cell *matHeaderCellDef> </th>\n            <td mat-cell *matCellDef=\"let element; let i = index;\"> <button (click)=\"deleteItem(i)\" mat-icon-button> <mat-icon>delete_outline</mat-icon></button> </td>\n          </ng-container>\n      \n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      \n  <mat-paginator *ngIf=\"order.items.length>0\" [length]=\"order.items.length\"\n                [pageSize]=\"10\"\n                [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                (page)=\"setPage($event)\">\n  </mat-paginator>\n</div>\n\n<div *ngIf=\"order\" fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <div fxFlex=\"15\">\n        <button mat-raised-button color=\"warn\" [disabled]=\"order.items.length == 0 || process\" (click)=\"register()\">Pay</button>\n    </div>\n    <div *ngIf=\"process\" fxFlex=\"10\">\n        <mat-progress-spinner\n        class=\"example-margin\"\n        [diameter]=\"25\"\n        [color]=\"color\"\n        [mode]=\"mode\"\n        [value]=\"value\">\n      </mat-progress-spinner>\n    </div>\n</div>\n\n\n\n\n<div *ngIf=\"!authenticated()\" fxLayout=\"column\">\n    \n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"100\"><br></div>\n    </div>\n\n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"30\"></div>\n      <div fxFlex=\"40\">\n        <h3>To start Shopping</h3>\n      </div>\n      <div fxFlex=\"30\"></div>\n    </div>\n  \n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n      <div fxFlex=\"30\"></div>\n      <div fxFlex=\"40\">\n          <h3>Need to login first</h3>\n      </div>\n      <div fxFlex=\"30\"></div>\n    </div>\n\n    <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n        <div fxFlex=\"45\"></div>\n        <div fxFlex=\"10\">\n            <button mat-raised-button color=\"primary\" (click)=\"gotoLogin()\">Login</button>\n        </div>\n        <div fxFlex=\"45\"></div>\n      </div>\n  \n  </div>"
 
 /***/ }),
 
@@ -3568,6 +5511,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _order_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../order.service */ "./src/app/order.service.ts");
 /* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../order */ "./src/app/order.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3583,13 +5527,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var merchantID = 1743;
 var ShoppingComponent = /** @class */ (function () {
-    function ShoppingComponent(authService, router, orderService, http) {
+    function ShoppingComponent(authService, router, orderService, http, route, tagService) {
         this.authService = authService;
         this.router = router;
         this.orderService = orderService;
         this.http = http;
+        this.route = route;
+        this.tagService = tagService;
         this.color = 'primary';
         this.mode = 'determinate';
         this.value = 50;
@@ -3603,35 +5550,124 @@ var ShoppingComponent = /** @class */ (function () {
         this.new = false;
         this.msg = '';
         this.order = undefined;
+        this.ordersubs = undefined;
+        this.action = undefined;
+        this.tagid = this.route.snapshot.queryParamMap.get('tagid');
+        this.ref = this.route.snapshot.queryParamMap.get('ref');
         this.authService.getUser().subscribe(function (res) {
             var userId = _this.authService.getUID();
-            _this.orderService.getClientOrders(userId).subscribe(function (result) {
+            _this.ordersubs = _this.orderService.getClientCurrentOrder(userId).subscribe(function (result) {
                 if (result.length > 0) {
-                    _this.order = _this.getCurrentOrder(result);
-                    if (_this.order) {
-                        console.log('Loading current order...');
-                        console.log(_this.order);
-                    }
-                    else {
-                        console.log('Did not find any order with new status');
-                        _this.new = true;
-                        _this.msg = 'Order is closed, add a new one';
-                        _this.userId = userId;
-                    }
+                    _this.order = result[0];
+                    _this.new = false;
+                    console.log('Loading current order...');
+                    console.log(_this.order);
+                    _this.addTagToOrder();
                 }
                 else {
                     console.log('Adding new order...');
-                    // this.order = this.orderService.newOrder(userId);
                     _this.new = true;
-                    _this.msg = 'Add new order';
+                    _this.msg = 'Select a product';
                     _this.userId = userId;
+                    _this.addTagToOrder();
                 }
             });
         });
     };
+    ShoppingComponent.prototype.ngOnDestroy = function () {
+        if (this.ordersubs) {
+            this.ordersubs.unsubscribe();
+        }
+    };
+    ShoppingComponent.prototype.generate = function () {
+        var tagid = Math.random();
+        tagid = tagid * 1e14;
+        tagid = Math.floor(tagid);
+        return tagid.toString();
+    };
+    ShoppingComponent.prototype.select = function () {
+        if (!this.action) {
+            return;
+        }
+        var type;
+        var price;
+        var priceTag;
+        var img;
+        var id = this.generate();
+        if (this.action.bronze) {
+            type = 'Bronze';
+            price = 1000;
+            priceTag = '₽ 1,000';
+            img = '../assets/tag-bronze.svg';
+        }
+        else if (this.action.silver) {
+            type = 'Silver';
+            price = 6000;
+            priceTag = '₽ 6,000';
+            img = '../assets/tag-silver.svg';
+        }
+        else {
+            type = 'Gold';
+            price = 10000;
+            priceTag = '₽ 10,000';
+            img = '../assets/tag-gold.svg';
+        }
+        var item = {
+            id: id,
+            code: "TAG-" + type + "-" + id,
+            name: "Giro d'Iseo " + type + " Tag " + id,
+            qty: 1,
+            currency: 'RUB',
+            priceTag: priceTag,
+            price: price,
+            img: img
+        };
+        this.new = false;
+        this.order = this.orderService.newOrderWithItems(this.userId, [item]);
+    };
+    ShoppingComponent.prototype.addTagToOrder = function () {
+        if (!this.tagid) {
+            console.log('Nothing to add to the order. Tagid is undefined');
+            return;
+        }
+        var item = {
+            id: this.tagid,
+            code: "TAG" + this.tagid,
+            name: "Giro d'Iseo Tag " + this.tagid,
+            qty: 1,
+            currency: 'RUB',
+            priceTag: "10,000 rub",
+            price: 10000,
+            img: '../assets/tag.png'
+        };
+        if (this.new) {
+            console.log("Adding tag " + this.tagid + " to new order");
+            this.new = false;
+            this.order = this.orderService.newOrderWithItems(this.userId, [item]);
+        }
+        else {
+            // check if tag is already in the order
+            var index = -1;
+            for (var i = 0; i < this.order.items.length; i++) {
+                if (this.order.items[i].code === "TAG" + this.tagid) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index === -1) {
+                console.log("Adding tag " + this.tagid + " to existing order");
+                // add tag to order
+                this.order.items.push(item);
+                this.orderService.updateOrder(this.order);
+            }
+            else {
+                console.log("TAG" + this.tagid + " is already in the order");
+            }
+        }
+    };
     ShoppingComponent.prototype.getCurrentOrder = function (orders) {
         var order = null;
-        for (var i = 1; i < orders.length; i++) {
+        for (var i = 0; i < orders.length; i++) {
             if (orders[i].status === _order__WEBPACK_IMPORTED_MODULE_4__["ORDERSTATUS"].NEW) {
                 order = orders[i];
                 break;
@@ -3653,6 +5689,15 @@ var ShoppingComponent = /** @class */ (function () {
     ShoppingComponent.prototype.deleteItem = function (index) {
         this.order.items.splice(index, 1);
         this.orderService.updateOrder(this.order);
+        if (this.order.items && this.order.items.length === 0) {
+            // empty orders deleted so make it undefined
+            this.order = undefined;
+        }
+    };
+    ShoppingComponent.prototype.deleteOrder = function () {
+        this.order.items = [];
+        this.orderService.updateOrder(this.order);
+        this.order = undefined;
     };
     ShoppingComponent.prototype.authenticated = function () {
         return this.authService.authenticated();
@@ -3697,6 +5742,7 @@ var ShoppingComponent = /** @class */ (function () {
         var _this = this;
         this.process = true;
         this.value = 50; // progress spinner value
+        this.ordersubs.unsubscribe();
         var url = "https://us-central1-cloud-firestore-test-d95bf.cloudfunctions.net/register";
         var data = {
             sector: merchantID,
@@ -3714,6 +5760,17 @@ var ShoppingComponent = /** @class */ (function () {
             console.log(doc);
             if (doc.getElementsByTagName('id').length > 0) {
                 var id = doc.getElementsByTagName('id').item(0);
+                var payment = { id: "" + id.innerHTML, reference: _this.order.ref, sector: merchantID.toString() };
+                _this.order.payment = payment;
+                _this.order.status = _order__WEBPACK_IMPORTED_MODULE_4__["ORDERSTATUS"].REG;
+                _this.orderService.updateOrder(_this.order);
+                if (_this.tagid) {
+                    console.log("Update tag for tagid " + _this.tagid);
+                    _this.tagService.setPayment(_this.tagid, payment);
+                }
+                else {
+                    console.log('!No tag in the order!');
+                }
                 console.log("Transaction ID " + id.innerHTML);
                 _this.authorize(parseInt(id.innerHTML, 10));
             }
@@ -3730,6 +5787,8 @@ var ShoppingComponent = /** @class */ (function () {
         };
         this.http.post(url, data, { responseType: 'text' }).subscribe(function (res) {
             _this.process = false;
+            _this.order.status = _order__WEBPACK_IMPORTED_MODULE_4__["ORDERSTATUS"].AUTH;
+            _this.orderService.updateOrder(_this.order);
             console.log(res);
             window.location.assign(res);
         });
@@ -3740,7 +5799,12 @@ var ShoppingComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./shopping.component.html */ "./src/app/shopping/shopping.component.html"),
             styles: [__webpack_require__(/*! ./shopping.component.css */ "./src/app/shopping/shopping.component.css")]
         }),
-        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _order_service__WEBPACK_IMPORTED_MODULE_3__["OrderService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]])
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _order_service__WEBPACK_IMPORTED_MODULE_3__["OrderService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
+            _tag_service__WEBPACK_IMPORTED_MODULE_6__["TagService"]])
     ], ShoppingComponent);
     return ShoppingComponent;
 }());
@@ -3879,7 +5943,7 @@ module.exports = ".example-form {\n    min-width: 150px;\n    max-width: 500px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header [title]=\"'Tag'\" [back]=\"true\"></app-header>\n<mat-grid-list *ngIf=\"tags; else loading;\"cols=\"3\" rowHeight=\"3em\">\n    \n    \n\n    <mat-grid-tile  *ngIf=\"tags.length > 0\" [colspan]=\"3\">\n        <h3>{{tags[0].id}}</h3>\n      </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"tags.length > 0\">\n        Registered:\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"2\" *ngIf=\"tags.length > 0\">\n        {{tags[0].regDate}}\n    </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"tags.length > 0 && tags[0].reg\">\n        Mobile:\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"2\" *ngIf=\"tags.length > 0 && tags[0].reg\">\n        {{tags[0].reg.mobile}}\n    </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"tags.length > 0 && tags[0].reg\">\n        SMS code:\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"2\" *ngIf=\"tags.length > 0 && tags[0].reg\">\n        {{tags[0].reg.sms}}\n    </mat-grid-tile>\n    \n</mat-grid-list>\n\n<div *ngIf=\"rides\">\n    <table *ngIf=\"rides.length>0\" mat-table [dataSource]=\"rides | slice:start:end\" class=\"mat-elevation-z8\">\n\n        <!--- Note that these columns can be defined in any order.\n              The actual rendered columns are set as a property on the row definition\" -->\n      \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"date\">\n            <th mat-header-cell *matHeaderCellDef> Date </th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.start|date:\"dd-MM-yyyy\"}}</td>\n          </ng-container>\n\n        <!-- Position Column -->\n        <ng-container matColumnDef=\"start\">\n          <th mat-header-cell *matHeaderCellDef> Start </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.start|date:\"HH:mm:ss\"}}</td>\n        </ng-container>\n      \n        <!-- Name Column -->\n        <ng-container matColumnDef=\"finish\">\n          <th mat-header-cell *matHeaderCellDef> Finish </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.finish|date:\"HH:mm:ss\"}}</td>\n        </ng-container>\n      \n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"time\">\n          <th mat-header-cell *matHeaderCellDef> Time </th>\n          <td mat-cell *matCellDef=\"let element\"> {{(element.finish-element.start)|date:\"HH:mm:ss\":\"+00\"}} </td>\n        </ng-container>\n\n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"link\">\n            <th mat-header-cell *matHeaderCellDef> Details </th>\n            <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoRide(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n          </ng-container>\n      \n      \n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      \n  <mat-paginator *ngIf=\"rides.length>0\" [length]=\"rides.length\"\n                [pageSize]=\"10\"\n                [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                (page)=\"setPage($event)\">\n  </mat-paginator>\n</div>"
+module.exports = "<app-header [title]=\"'Tag'\" [back]=\"true\"></app-header>\n<mat-grid-list *ngIf=\"tags; else loading;\"cols=\"3\" rowHeight=\"3em\">\n    \n    \n\n    <mat-grid-tile  *ngIf=\"tags.length > 0\" [colspan]=\"3\">\n        <h3>{{tags[0].id}}</h3>\n      </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"tags.length > 0\">\n        Registered:\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"2\" *ngIf=\"tags.length > 0\">\n        {{tags[0].regDate}}\n    </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"tags.length > 0 && tags[0].reg\">\n        Mobile:\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"2\" *ngIf=\"tags.length > 0 && tags[0].reg\">\n        {{tags[0].reg.mobile}}\n    </mat-grid-tile>\n\n    <mat-grid-tile *ngIf=\"tags.length > 0 && tags[0].reg\">\n        SMS code:\n    </mat-grid-tile>\n\n    <mat-grid-tile [colspan]=\"2\" *ngIf=\"tags.length > 0 && tags[0].reg\">\n        {{tags[0].reg.sms}}\n    </mat-grid-tile>\n\n   \n\n    <mat-grid-tile [colspan]=\"3\" *ngIf=\"tags.length > 0 && tags[0].bike\">\n        <button  mat-raised-button (click)=\"gotoBike()\" mat-button>&nbsp;Bycicle&nbsp;</button>\n    </mat-grid-tile>\n\n    \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"tags.length > 0 && tags[0].payment\">\n      <button  mat-raised-button (click)=\"gotoPayment()\" mat-button>Payment</button>\n  </mat-grid-tile>\n    \n</mat-grid-list>\n\n<div *ngIf=\"rides\">\n    <table *ngIf=\"rides.length>0\" mat-table [dataSource]=\"rides | slice:start:end\" class=\"mat-elevation-z8\">\n\n        <!--- Note that these columns can be defined in any order.\n              The actual rendered columns are set as a property on the row definition\" -->\n      \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"date\">\n            <th mat-header-cell *matHeaderCellDef> Date </th>\n            <td mat-cell *matCellDef=\"let element\"> {{element.start|date:\"dd-MM-yyyy\"}}</td>\n          </ng-container>\n\n        <!-- Position Column -->\n        <ng-container matColumnDef=\"start\">\n          <th mat-header-cell *matHeaderCellDef> Start </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.start|date:\"HH:mm:ss\"}}</td>\n        </ng-container>\n      \n        <!-- Name Column -->\n        <ng-container matColumnDef=\"finish\">\n          <th mat-header-cell *matHeaderCellDef> Finish </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.finish|date:\"HH:mm:ss\"}}</td>\n        </ng-container>\n      \n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"time\">\n          <th mat-header-cell *matHeaderCellDef> Time </th>\n          <td mat-cell *matCellDef=\"let element\"> {{(element.finish-element.start)|date:\"HH:mm:ss\":\"+00\"}} </td>\n        </ng-container>\n\n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"link\">\n            <th mat-header-cell *matHeaderCellDef> Details </th>\n            <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoRide(element.id)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n          </ng-container>\n      \n      \n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      \n  <mat-paginator *ngIf=\"rides.length>0\" [length]=\"rides.length\"\n                [pageSize]=\"10\"\n                [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                (page)=\"setPage($event)\">\n  </mat-paginator>\n</div>"
 
 /***/ }),
 
@@ -3937,6 +6001,9 @@ var TagDetailComponent = /** @class */ (function () {
     TagDetailComponent.prototype.gotoTags = function () {
         this.router.navigate(["/tags"]);
     };
+    TagDetailComponent.prototype.gotoBike = function () {
+        this.router.navigate(["/frame/" + this.tags[0].id + "/locked"]);
+    };
     TagDetailComponent.prototype.gotoBack = function () {
         this.location.back();
     };
@@ -3948,6 +6015,13 @@ var TagDetailComponent = /** @class */ (function () {
         var pageIndex = e.pageIndex, pageSize = e.pageSize;
         this.start = pageIndex * pageSize;
         this.end = this.start + pageSize;
+    };
+    TagDetailComponent.prototype.gotoPayment = function () {
+        if (!this.tags || this.tags.length === 0) {
+            return;
+        }
+        var payment = this.tags[0].payment;
+        this.router.navigate(["/order/" + payment.reference]);
     };
     TagDetailComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -4076,7 +6150,9 @@ var TagRegSmsComponent = /** @class */ (function () {
                             _this.msg = "Tag registration date updated";
                             _this.progress = false;
                             _this.registered = true;
-                            _this.router.navigate(["/profile"]);
+                            _this.router.navigate(["/shoppingtag/" + _this.tagid]);
+                            // this.router.navigate([`/profile`]);
+                            // this.router.navigate([`/frame/${this.tagid}`]);
                         }
                     });
                 }
@@ -4086,7 +6162,9 @@ var TagRegSmsComponent = /** @class */ (function () {
                     _this.msg = "Tag is registered";
                     _this.progress = false;
                     _this.registered = true;
-                    _this.router.navigate(["/profile"]);
+                    _this.router.navigate(["/shoppingtag/" + _this.tagid]);
+                    // this.router.navigate([`/frame/${this.tagid}`]);
+                    // this.router.navigate([`/profile`]);
                 }
             }
         });
@@ -4311,6 +6389,15 @@ var TagService = /** @class */ (function () {
                 return query;
             }).valueChanges();
         }));
+        this.date$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
+        this.dateTags = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(this.date$).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (_a) {
+            var date = _a[0];
+            return db.collection('tags', function (ref) {
+                var query = ref;
+                query = query.where('regDate', '==', date);
+                return query;
+            }).valueChanges();
+        }));
     }
     TagService.prototype.getTagById = function (id) {
         this.where$.next(id);
@@ -4331,6 +6418,25 @@ var TagService = /** @class */ (function () {
     TagService.prototype.getTagsByMobile = function (mobile) {
         this.mobile$.next(mobile);
         return this.userTags;
+    };
+    TagService.prototype.getTagsByDate = function (date) {
+        console.log("TagService: get tags by date: " + date);
+        this.date$.next(date);
+        return this.dateTags;
+    };
+    TagService.prototype.addNewTag = function (tag) {
+        var _this = this;
+        this.db.collection('tags').ref.where('id', '==', tag.id)
+            .get()
+            .then(function (querySnapshot) {
+            if (querySnapshot.empty) {
+                console.log("TagService: addNewTag: adding new tag for id: " + tag.id);
+                _this.db.collection('tags').add(tag);
+            }
+            else {
+                console.log("TagService: addNewTag: tag has found with id: " + tag.id + ". Can't add new tag");
+            }
+        });
     };
     TagService.prototype.setRegistration = function (id, docRef, reg) {
         var regDate = this.datePipe.transform(new Date(), 'dd-MM-yy');
@@ -4359,6 +6465,40 @@ var TagService = /** @class */ (function () {
                 console.log("TagService: setRegDate: set regDate: " + regDate + " for id: " + id);
                 _this.db.collection('tags').doc(doc.id).update({ regDate: regDate });
                 cb(null, doc);
+            }
+        });
+    };
+    TagService.prototype.setBike = function (id, bike) {
+        var _this = this;
+        this.db.collection('tags').ref.where('id', '==', id)
+            .get()
+            .then(function (querySnapshot) {
+            if (querySnapshot.empty) {
+                console.error("TagService: setBike: tag not found for id " + id);
+            }
+            else {
+                var doc = querySnapshot.docs[0];
+                // update tag doc
+                console.log("TagService: setBike: set bike field for id: " + id);
+                console.log(bike);
+                _this.db.collection('tags').doc(doc.id).update({ bike: bike });
+            }
+        });
+    };
+    TagService.prototype.setPayment = function (id, payment) {
+        var _this = this;
+        this.db.collection('tags').ref.where('id', '==', id)
+            .get()
+            .then(function (querySnapshot) {
+            if (querySnapshot.empty) {
+                console.error("TagService: setPayment: tag not found for id " + id);
+            }
+            else {
+                var doc = querySnapshot.docs[0];
+                // update tag doc
+                console.log("TagService: setPayment: set payment field for id: " + id);
+                console.log(payment);
+                _this.db.collection('tags').doc(doc.id).update({ payment: payment });
             }
         });
     };
@@ -4394,7 +6534,7 @@ var TagService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\n    width: 100%;\n  }\n\n.mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}"
+module.exports = "table {\n    width: 100%;\n  }\n\n.mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}\n\n.payment {\n  color: gold;\n}\n\n.bike {\n  color: green;\n}\n\n.error {\n  color: red;\n}\n\n.test {\n  color: gray;\n}"
 
 /***/ }),
 
@@ -4405,7 +6545,7 @@ module.exports = "table {\n    width: 100%;\n  }\n\n.mat-cell .mat-icon {\n    -
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header [back]=\"true\" [title]=\"'Tags'\"></app-header>\n\n<div *ngIf=\"tags\">\n  <table *ngIf=\"tags.length>0\" mat-table [dataSource]=\"tags | slice:start:end\" class=\"mat-elevation-z8\">\n\n      <!--- Note that these columns can be defined in any order.\n            The actual rendered columns are set as a property on the row definition\" -->\n    \n      \n\n      <!-- Position Column -->\n      <ng-container matColumnDef=\"id\">\n        <th mat-header-cell *matHeaderCellDef> ID </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.id}}</td>\n      </ng-container>\n\n      <!-- Position Column -->\n      <ng-container matColumnDef=\"date\">\n        <th mat-header-cell *matHeaderCellDef> Date </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.regDate}}</td>\n      </ng-container>\n    \n      <!-- Name Column -->\n      <ng-container matColumnDef=\"mobile\">\n        <th mat-header-cell *matHeaderCellDef> Mobile </th>\n        <td mat-cell *matCellDef=\"let element\"> {{showMobile(element.reg.mobile)}}</td>\n      </ng-container>\n    \n\n      <!-- Weight Column -->\n      <ng-container matColumnDef=\"link\">\n          <th mat-header-cell *matHeaderCellDef> Details </th>\n          <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoTagById(element)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n        </ng-container>\n    \n    \n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n    <br>\n    \n<mat-paginator *ngIf=\"tags.length>0\" [length]=\"tags.length\"\n              [pageSize]=\"10\"\n              [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n              (page)=\"setPage($event)\">\n</mat-paginator>\n</div>\n\n"
+module.exports = "<app-header [back]=\"true\" [title]=\"'Tags'\"></app-header>\n\n<div *ngIf=\"tags\">\n  <br>\n  <div fxLayout=\"row\" fxLayoutWrap=\"wrap\" fxLayoutAlign=\"start center\">\n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          <mat-icon>search</mat-icon>\n        </mat-panel-title>\n        <mat-panel-description>\n          Enter search critaria\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n      <mat-form-field>\n        <input matInput [value]=\"date\" [matDatepicker]=\"picker\" placeholder=\"Choose a date\" (dateChange)=\"handleDateInput($event.value)\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker startView=\"month\" [startAt]=\"startDate\"></mat-datepicker>\n      </mat-form-field>\n      &nbsp;&nbsp;\n      <mat-form-field>\n          <input matInput name=\"mobile\" type=\"text\" placeholder=\"or mobile\" [(ngModel)]=\"mobile\" (change)=\"handleMobileInput($event.target.value)\">\n        </mat-form-field>\n        \n    \n            <button (click)=\"clearDate()\" mat-icon-button>\n                <mat-icon>close</mat-icon>\n              </button>\n      </mat-expansion-panel>\n    \n  </div>\n  <br>\n\n  <table *ngIf=\"tags.length>0\" mat-table [dataSource]=\"tags | slice:start:end\" class=\"mat-elevation-z8\">\n\n      <!--- Note that these columns can be defined in any order.\n            The actual rendered columns are set as a property on the row definition\" -->\n    \n      \n\n      <!-- Position Column -->\n\n      <ng-container matColumnDef=\"status\">\n          <th mat-header-cell *matHeaderCellDef> </th>\n          <td mat-cell *matCellDef=\"let element\"> <mat-icon [ngClass]=\"status(element)\">radio_button_checked</mat-icon></td>\n        </ng-container>\n\n      <ng-container matColumnDef=\"id\">\n        <th mat-header-cell *matHeaderCellDef> ID </th>\n        <td mat-cell *matCellDef=\"let element\"> {{showTagId(element.id)}}</td>\n      </ng-container>\n\n      <!-- Position Column -->\n      <ng-container matColumnDef=\"date\">\n        <th mat-header-cell *matHeaderCellDef> Date </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.regDate}}</td>\n      </ng-container>\n    \n      <!-- Name Column -->\n      <ng-container matColumnDef=\"mobile\">\n        <th mat-header-cell *matHeaderCellDef> Mobile </th>\n        <td mat-cell *matCellDef=\"let element\"> {{showMobile(element.reg.mobile)}}</td>\n      </ng-container>\n    \n\n      <!-- Weight Column -->\n      <ng-container matColumnDef=\"link\">\n          <th mat-header-cell *matHeaderCellDef> Details </th>\n          <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoTagById(element)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n        </ng-container>\n    \n    \n      <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n    <br>\n    \n<mat-paginator *ngIf=\"tags.length>0\" [length]=\"tags.length\"\n              [pageSize]=\"10\"\n              [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n              (page)=\"setPage($event)\">\n</mat-paginator>\n</div>\n\n"
 
 /***/ }),
 
@@ -4422,6 +6562,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _tag_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tag.service */ "./src/app/tag.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4434,20 +6575,80 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var TagsComponent = /** @class */ (function () {
-    function TagsComponent(tagService, route, router) {
+    function TagsComponent(tagService, route, router, datePipe) {
         this.tagService = tagService;
         this.route = route;
         this.router = router;
-        this.displayedColumns = ['id', 'date', 'mobile', 'link'];
+        this.datePipe = datePipe;
+        this.displayedColumns = ['status', 'id', 'date', 'mobile', 'link'];
     }
     TagsComponent.prototype.ngOnInit = function () {
         this.getTags();
         this.clear();
+        this.startDate = new Date();
+    };
+    TagsComponent.prototype.filterDate = function () {
+        var regDate = this.datePipe.transform(this.date, 'dd-MM-yy');
+        var result = [];
+        for (var i = 0; i < this.tags.length; i++) {
+            if (this.tags[i].regDate === regDate) {
+                result.push(this.tags[i]);
+            }
+        }
+        this.tags = result;
+    };
+    TagsComponent.prototype.handleDateInput = function (date) {
+        var _this = this;
+        console.log(date);
+        this.date = date;
+        if (!this.mobile) {
+            this.tagService.getTagsByDate(this.datePipe.transform(date, 'dd-MM-yy')).subscribe(function (tags) { return _this.tags = tags; });
+        }
+        else {
+            this.tagService.getTagsByMobile(this.mobile).subscribe(function (tags) {
+                _this.tags = tags;
+                if (_this.date) {
+                    _this.filterDate();
+                }
+            });
+        }
+    };
+    TagsComponent.prototype.status = function (tag) {
+        if (tag.payment && tag.bike) {
+            return 'bike';
+        }
+        else if (tag.bike && !tag.payment) {
+            return 'error';
+        }
+        else if (!tag.bike && tag.payment) {
+            return 'payment';
+        }
+        else {
+            return 'test';
+        }
+    };
+    TagsComponent.prototype.handleMobileInput = function (mobile) {
+        var _this = this;
+        console.log(mobile);
+        this.tagService.getTagsByMobile(mobile).subscribe(function (tags) {
+            _this.tags = tags;
+            if (_this.date) {
+                _this.filterDate();
+            }
+        });
     };
     TagsComponent.prototype.clear = function () {
         this.start = 0;
         this.end = 10;
+        this.date = undefined;
+        this.mobile = undefined;
+    };
+    TagsComponent.prototype.clearDate = function () {
+        this.date = undefined;
+        this.mobile = undefined;
+        this.getTags();
     };
     TagsComponent.prototype.getTags = function () {
         var _this = this;
@@ -4465,7 +6666,22 @@ var TagsComponent = /** @class */ (function () {
         this.end = this.start + pageSize;
     };
     TagsComponent.prototype.showMobile = function (mobile) {
-        return "... " + mobile.slice(6);
+        var start = mobile.length - 7;
+        if (start < 0) {
+            return mobile;
+        }
+        else {
+            return mobile.slice(start, start + 3) + "-" + mobile.slice(start + 3, start + 5) + "-" + mobile.slice(start + 5);
+        }
+    };
+    TagsComponent.prototype.showTagId = function (id) {
+        var start = id.length - 4;
+        if (id.length > 7) {
+            return id.slice(0, 3) + "..." + id.slice(start);
+        }
+        else {
+            return id;
+        }
     };
     TagsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -4473,7 +6689,7 @@ var TagsComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./tags.component.html */ "./src/app/tags/tags.component.html"),
             styles: [__webpack_require__(/*! ./tags.component.css */ "./src/app/tags/tags.component.css")]
         }),
-        __metadata("design:paramtypes", [_tag_service__WEBPACK_IMPORTED_MODULE_2__["TagService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_tag_service__WEBPACK_IMPORTED_MODULE_2__["TagService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["DatePipe"]])
     ], TagsComponent);
     return TagsComponent;
 }());
@@ -4804,6 +7020,88 @@ var UsePointsComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/user-orders/user-orders.component.css":
+/*!*******************************************************!*\
+  !*** ./src/app/user-orders/user-orders.component.css ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "table {\n    width: 100%;\n  }\n\n.mat-cell .mat-icon {\n    -webkit-transform: scale(0.6);\n            transform: scale(0.6);\n}"
+
+/***/ }),
+
+/***/ "./src/app/user-orders/user-orders.component.html":
+/*!********************************************************!*\
+  !*** ./src/app/user-orders/user-orders.component.html ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"orders\">\n    <table *ngIf=\"orders.length>0\" mat-table [dataSource]=\"orders | slice:start:end\" class=\"mat-elevation-z8\">\n  \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"position\">\n            <th mat-header-cell *matHeaderCellDef> No. </th>\n            <td mat-cell *matCellDef=\"let element; let i = index;\"> {{i+1}} </td>\n        </ng-container>\n  \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"ref\">\n          <th mat-header-cell *matHeaderCellDef> Ref </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.ref}}</td>\n        </ng-container>\n  \n        <!-- Position Column -->\n        <ng-container matColumnDef=\"date\">\n          <th mat-header-cell *matHeaderCellDef> Date </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.date}}</td>\n        </ng-container>\n  \n         <!-- Position Column -->\n         <ng-container matColumnDef=\"status\">\n          <th mat-header-cell *matHeaderCellDef> Status </th>\n          <td mat-cell *matCellDef=\"let element\"> {{element.status}}</td>\n        </ng-container>\n      \n  \n        <!-- Weight Column -->\n        <ng-container matColumnDef=\"link\">\n            <th mat-header-cell *matHeaderCellDef> Details </th>\n            <td mat-cell *matCellDef=\"let element\"> <button (click)=\"gotoOrder(element.ref)\" mat-icon-button> <mat-icon>call_made</mat-icon></button> </td>\n          </ng-container>\n      \n      \n        <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n        <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n      </table>\n      <br>\n      \n  <mat-paginator *ngIf=\"orders.length>0\" [length]=\"orders.length\"\n                [pageSize]=\"10\"\n                [pageSizeOptions]=\"[1, 5, 10, 25, 100]\"\n                (page)=\"setPage($event)\">\n  </mat-paginator>\n  </div>"
+
+/***/ }),
+
+/***/ "./src/app/user-orders/user-orders.component.ts":
+/*!******************************************************!*\
+  !*** ./src/app/user-orders/user-orders.component.ts ***!
+  \******************************************************/
+/*! exports provided: UserOrdersComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserOrdersComponent", function() { return UserOrdersComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var UserOrdersComponent = /** @class */ (function () {
+    function UserOrdersComponent(router) {
+        this.router = router;
+        this.displayedColumns = ['position', 'date', 'status', 'link'];
+    }
+    UserOrdersComponent.prototype.ngOnInit = function () {
+        this.start = 0;
+        this.end = 10;
+    };
+    UserOrdersComponent.prototype.gotoOrder = function (ref) {
+        this.router.navigate(["/order/" + ref]);
+    };
+    UserOrdersComponent.prototype.setPage = function (e) {
+        console.log(e);
+        var pageIndex = e.pageIndex, pageSize = e.pageSize;
+        this.start = pageIndex * pageSize;
+        this.end = this.start + pageSize;
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Array)
+    ], UserOrdersComponent.prototype, "orders", void 0);
+    UserOrdersComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-user-orders',
+            template: __webpack_require__(/*! ./user-orders.component.html */ "./src/app/user-orders/user-orders.component.html"),
+            styles: [__webpack_require__(/*! ./user-orders.component.css */ "./src/app/user-orders/user-orders.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+    ], UserOrdersComponent);
+    return UserOrdersComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/user-profile/user-profile.component.css":
 /*!*********************************************************!*\
   !*** ./src/app/user-profile/user-profile.component.css ***!
@@ -4822,7 +7120,7 @@ module.exports = ".example-headers-align .mat-expansion-panel-header-title,\n.ex
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header [back]=\"true\" [title]=\"'Profile'\"></app-header>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile *ngIf=\"name()\">Name</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">{{name()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">Mobile</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">{{phone()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"rider\">Nikname</mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\"></mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\">{{rider.nikname}}</mat-grid-tile>\n</mat-grid-list>\n\n<mat-accordion>\n    <mat-expansion-panel (opened)=\"getTags()\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Tags\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see your tags\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <app-user-tags [tags]=\"tags\"></app-user-tags>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n\n<mat-divider *ngIf=\"wallet\"></mat-divider>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\"><h3>Wallet</h3></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Account</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n      <button (click)=\"qrcode()\" mat-icon-button>\n          <mat-icon>view_agenda</mat-icon>\n      </button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n    <button mat-stroked-button ngxClipboard [cbContent]=\"account\">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Balance</mat-grid-tile>\n    \n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{balance}} Ether</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Points</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{points}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{token}} Ether</mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-accordion *ngIf=\"wallet\"> \n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Transactions\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see all\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n\n      <app-user-tnx [transactions]=\"transactions | async\"></app-user-tnx>\n  \n  \n    </mat-expansion-panel>\n</mat-accordion>\n<br>\n\n\n  \n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile [colspan]=\"3\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"warn\" [disabled]=\"!authenticated()\" (click)=\"logout()\">Logout</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n      <button mat-raised-button color=\"accent\" [disabled]=\"!authenticated() || !wallet || !havePoints()\" (click)=\"use()\">Use points</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"primary\" [disabled]=\"!authenticated()\" (click)=\"gotoUpdate()\">Update</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"!authenticated()\" [colspan]=\"3\">\n    No user logged in\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n\n  "
+module.exports = "<app-header [back]=\"true\" [title]=\"'Profile'\"></app-header>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile *ngIf=\"name()\">Name</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"name()\">{{name()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">Mobile</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"phone()\">{{phone()}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"rider\">Nikname</mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\"></mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"rider\">{{rider.nikname}}</mat-grid-tile>\n</mat-grid-list>\n\n<mat-accordion>\n    <mat-expansion-panel (opened)=\"getTags()\">\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Tags\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see your tags\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n  \n      <app-user-tags [tags]=\"tags\"></app-user-tags>\n  \n    </mat-expansion-panel>\n</mat-accordion>\n\n<mat-divider *ngIf=\"wallet\"></mat-divider>\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"wallet\"><h3>Wallet</h3></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Account</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n      <button (click)=\"qrcode()\" mat-icon-button>\n          <mat-icon>view_agenda</mat-icon>\n      </button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">\n    <button mat-stroked-button ngxClipboard [cbContent]=\"account\">{{account.slice(0,6)+'...'+account.slice(36,42)}}</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Balance</mat-grid-tile>\n    \n  <mat-grid-tile *ngIf=\"wallet\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{balance}} Ether</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">Points</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{points}}</mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"wallet\">{{token}} Ether</mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-accordion *ngIf=\"wallet\"> \n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Transactions\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see all\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n\n      <app-user-tnx [transactions]=\"transactions | async\"></app-user-tnx>\n  \n  \n    </mat-expansion-panel>\n</mat-accordion>\n<br>\n\n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n  \n  <mat-grid-tile [colspan]=\"3\" *ngIf=\"orders\"><h3>Shopping</h3></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"orders\">Order #</mat-grid-tile>\n    \n  <mat-grid-tile *ngIf=\"orders\"></mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"orders\">{{orders.length}}</mat-grid-tile>\n\n</mat-grid-list>\n\n<mat-accordion *ngIf=\"orders\"> \n    <mat-expansion-panel>\n      <mat-expansion-panel-header>\n        <mat-panel-title>\n          Orders\n        </mat-panel-title>\n        <mat-panel-description>\n          Open to see all\n        </mat-panel-description>\n      </mat-expansion-panel-header>\n\n      <app-user-orders [orders]=\"orders\"></app-user-orders>\n  \n  \n    </mat-expansion-panel>\n</mat-accordion>\n<br>\n\n\n  \n<mat-grid-list cols=\"3\" rowHeight=\"3em\">\n\n  <mat-grid-tile [colspan]=\"3\">\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"warn\" [disabled]=\"!authenticated()\" (click)=\"logout()\">Logout</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n      <button mat-raised-button color=\"accent\" [disabled]=\"!authenticated() || !wallet || !havePoints()\" (click)=\"use()\">Use points</button>\n  </mat-grid-tile>\n  \n  <mat-grid-tile *ngIf=\"authenticated()\">\n    <button mat-raised-button color=\"primary\" [disabled]=\"!authenticated()\" (click)=\"gotoUpdate()\">Update</button>\n  </mat-grid-tile>\n\n  <mat-grid-tile *ngIf=\"!authenticated()\" [colspan]=\"3\">\n    No user logged in\n  </mat-grid-tile>\n\n</mat-grid-list>\n\n\n  "
 
 /***/ }),
 
@@ -4846,6 +7144,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _transaction_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../transaction.service */ "./src/app/transaction.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _qrcode_dialog_qrcode_dialog_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../qrcode-dialog/qrcode-dialog.component */ "./src/app/qrcode-dialog/qrcode-dialog.component.ts");
+/* harmony import */ var _order_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../order.service */ "./src/app/order.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4865,8 +7164,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var UserProfileComponent = /** @class */ (function () {
-    function UserProfileComponent(tagService, authService, riderService, route, router, contractService, zone, tnxService, dialog) {
+    function UserProfileComponent(tagService, authService, riderService, route, router, contractService, zone, tnxService, dialog, orderService) {
         this.tagService = tagService;
         this.authService = authService;
         this.riderService = riderService;
@@ -4876,6 +7176,7 @@ var UserProfileComponent = /** @class */ (function () {
         this.zone = zone;
         this.tnxService = tnxService;
         this.dialog = dialog;
+        this.orderService = orderService;
     }
     UserProfileComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -4902,6 +7203,9 @@ var UserProfileComponent = /** @class */ (function () {
                     }
                 }
             }
+        });
+        this.authService.getUser().subscribe(function (user) {
+            _this.orderService.getClientOrders(user.uid).subscribe(function (orders) { return _this.orders = orders; });
         });
     };
     UserProfileComponent.prototype.ngAfterViewInit = function () {
@@ -4992,7 +7296,8 @@ var UserProfileComponent = /** @class */ (function () {
             _ethereum_ethcontract_service__WEBPACK_IMPORTED_MODULE_5__["EthcontractService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"],
             _transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialog"]])
+            _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialog"],
+            _order_service__WEBPACK_IMPORTED_MODULE_10__["OrderService"]])
     ], UserProfileComponent);
     return UserProfileComponent;
 }());
@@ -5181,7 +7486,7 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    production: false,
+    production: true,
     firebase: {
         apiKey: 'AIzaSyARllasipU-7JhdvtkRV25er--zMyOPEW0',
         authDomain: 'cloud-firestore-test-d95bf.firebaseapp.com',

@@ -79,7 +79,9 @@ export class TagRegSmsComponent implements OnInit {
               this.msg = `Tag registration date updated`;
               this.progress = false;
               this.registered = true;
-              this.router.navigate([`/profile`]);
+              this.router.navigate([`/shoppingtag/${this.tagid}`]);
+              // this.router.navigate([`/profile`]);
+              // this.router.navigate([`/frame/${this.tagid}`]);
             }
           });
         } else {
@@ -88,7 +90,9 @@ export class TagRegSmsComponent implements OnInit {
           this.msg = `Tag is registered`;
           this.progress = false;
           this.registered = true;
-          this.router.navigate([`/profile`]);
+          this.router.navigate([`/shoppingtag/${this.tagid}`]);
+          // this.router.navigate([`/frame/${this.tagid}`]);
+          // this.router.navigate([`/profile`]);
         }
       }
     });

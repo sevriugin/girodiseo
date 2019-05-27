@@ -30,6 +30,17 @@
     <mat-grid-tile [colspan]="2" *ngIf="tags.length > 0 && tags[0].reg">
         {{tags[0].reg.sms}}
     </mat-grid-tile>
+
+   
+
+    <mat-grid-tile [colspan]="3" *ngIf="tags.length > 0 && tags[0].bike">
+        <button  mat-raised-button (click)="gotoBike()" mat-button>&nbsp;Bycicle&nbsp;</button>
+    </mat-grid-tile>
+
+    
+  <mat-grid-tile [colspan]="3" *ngIf="tags.length > 0 && tags[0].payment">
+      <button  mat-raised-button (click)="gotoPayment()" mat-button>Payment</button>
+  </mat-grid-tile>
     
 </mat-grid-list>
 

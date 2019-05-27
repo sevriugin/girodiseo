@@ -85,6 +85,36 @@
 </mat-accordion>
 <br>
 
+<mat-grid-list cols="3" rowHeight="3em">
+  
+  <mat-grid-tile [colspan]="3" *ngIf="orders"><h3>Shopping</h3></mat-grid-tile>
+
+  <mat-grid-tile *ngIf="orders">Order #</mat-grid-tile>
+    
+  <mat-grid-tile *ngIf="orders"></mat-grid-tile>
+
+  <mat-grid-tile *ngIf="orders">{{orders.length}}</mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-accordion *ngIf="orders"> 
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Orders
+        </mat-panel-title>
+        <mat-panel-description>
+          Open to see all
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <app-user-orders [orders]="orders"></app-user-orders>
+  
+  
+    </mat-expansion-panel>
+</mat-accordion>
+<br>
+
 
   
 <mat-grid-list cols="3" rowHeight="3em">

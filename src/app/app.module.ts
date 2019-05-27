@@ -77,6 +77,18 @@ import { ItemComponent } from './item/item.component';
 import { ItemDialogComponent } from './item-dialog/item-dialog.component';
 import { ShoppingResultComponent } from './shopping-result/shopping-result.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FrameComponent } from './frame/frame.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatRadioModule } from '@angular/material/radio';
+import { AdminComponent } from './admin/admin.component';
+import { ExpertComponent } from './expert/expert.component';
+import { BikeshopComponent } from './bikeshop/bikeshop.component';
+import { OrderComponent } from './order/order.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { GeoRideComponent } from './geo-ride/geo-ride.component';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+
+const gMapsKey = 'AIzaSyDvc8SLjfA0D-hLcNrB01q58Uh2As98A14';
 
 
 @NgModule({
@@ -107,6 +119,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ItemComponent,
     ItemDialogComponent,
     ShoppingResultComponent,
+    FrameComponent,
+    AdminComponent,
+    ExpertComponent,
+    BikeshopComponent,
+    OrderComponent,
+    UserOrdersComponent,
+    GeoRideComponent,
   ],
   entryComponents: [
     QrcodeDialogComponent,
@@ -151,7 +170,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgxKjuaModule,
     MatRippleModule,
     FlexLayoutModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatRadioModule,
+    AgmCoreModule.forRoot({
+      apiKey: gMapsKey
+    })
   ],
   providers: [
     AngularFirestoreModule,
@@ -166,6 +190,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     TransactionService,
     OrderService,
     { provide: HttpBackend, useClass: CustExtBrowserXhr },
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent]
 })

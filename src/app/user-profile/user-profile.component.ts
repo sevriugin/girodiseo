@@ -17,6 +17,8 @@ import { TransactionService } from '../transaction.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { QrcodeDialogComponent } from '../qrcode-dialog/qrcode-dialog.component';
 import { UserTagsComponent } from '../user-tags/user-tags.component';
+import { OrderService } from '../order.service';
+import { Order } from '../order';
 
 @Component({
   selector: 'app-user-profile',
@@ -35,6 +37,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   showqr: boolean;
   result: string;
   transactions: Observable<Transaction[]>;
+  orders: Order[];
+
   constructor(
     private tagService: TagService,
     private authService: AuthService,
@@ -44,7 +48,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private contractService: EthcontractService,
     private zone: NgZone,
     private tnxService: TransactionService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private orderService: OrderService
     ) { }
 
   ngOnInit() {
@@ -72,6 +77,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
           }
         }
        });
+
+    this.authService.getUser().subscribe(user => {
+      this.orderService.getClientOrders(user.uid).subscribe(orders => this.orders = orders);
+    });
   }
 
   ngAfterViewInit() {

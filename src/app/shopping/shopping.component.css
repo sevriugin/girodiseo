@@ -10,3 +10,21 @@ table {
     margin: 0 10px;
   }
 
+.tag-card {
+    max-width: 200px;
+}
+
+.bronze-header-image {
+  background-image: url('../../assets/tag-bronze.svg');
+  background-size: cover;
+}
+
+.silver-header-image {
+  background-image: url('../../assets/tag-silver.svg');
+  background-size: cover;
+}
+
+.gold-header-image {
+  background-image: url('../../assets/tag-gold.svg');
+  background-size: cover;
+}

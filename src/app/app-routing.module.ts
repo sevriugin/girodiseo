@@ -19,6 +19,12 @@ import { TnxDetailComponent } from './tnx-detail/tnx-detail.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { ItemComponent } from './item/item.component';
 import { ShoppingResultComponent } from './shopping-result/shopping-result.component';
+import { FrameComponent } from './frame/frame.component';
+import { AdminComponent } from './admin/admin.component';
+import { ExpertComponent } from './expert/expert.component';
+import { BikeshopComponent } from './bikeshop/bikeshop.component';
+import { OrderComponent } from './order/order.component';
+import { GeoRideComponent } from './geo-ride/geo-ride.component';
 
 
 const routes: Routes = [
@@ -36,15 +42,25 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'update', component: ProfileUpdateComponent },
   { path: 'ride', component: RideComponent },
+  { path: 'georide', component: GeoRideComponent },
   { path: 'ride/:id', component: RideDetailComponent },
   { path: 'item/:id', component: ItemComponent },
   { path: 'item/:id/:ref', component: ItemComponent },
+  { path: 'item/:id/:ref/:locked', component: ItemComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'shopping', component: ShoppingComponent },
+  { path: 'shoppingtag/:id', component: ShoppingComponent },
   { path: 'shopping/:result', component: ShoppingResultComponent },
   { path: 'getstarted', component: GetstartedComponent },
   { path: 'use/:acc/:points', component: UsePointsComponent },
   { path: 'tnx/:hash', component: TnxDetailComponent },
+  { path: 'frame', component: FrameComponent },
+  { path: 'frame/:id', component: FrameComponent },
+  { path: 'frame/:id/:locked', component: FrameComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'expert', component: ExpertComponent },
+  { path: 'bikeshop', component: BikeshopComponent },
+  { path: 'order/:ref', component: OrderComponent },
 ];
 
 @NgModule({

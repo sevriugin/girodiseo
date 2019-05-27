@@ -17,14 +17,41 @@ export class NavBarComponent implements OnInit, OnDestroy {
   rider_subs: Subscription;
   user_subs: Subscription;
   mobile: string;
+  admin: boolean;
+  expert: boolean;
+  bike: boolean;
 
   constructor(private authService: AuthService, private router: Router, private riderService: RiderService) { }
 
   ngOnInit() {
+    this.admin = false;
+    this.expert = false;
+    this.bike = false;
+    this.loginIcon = 'add_circle_outline';
     this.user_subs = this.authService.getUser().subscribe((user) => {
       if (user) {
         this.mobile = user.phoneNumber;
         this.getRider();
+        user.getIdTokenResult()
+          .then((idTokenResult) => {
+            if (!!idTokenResult.claims.admin) {
+              this.admin = true;
+              this.loginIcon = 'star_border';
+            } else if (!!idTokenResult.claims.expert) {
+              console.log('Expert');
+              this.expert = true;
+              this.loginIcon = 'stars';
+            } else if (!!idTokenResult.claims.bike) {
+              console.log('Bike Shop');
+              this.bike = true;
+              this.loginIcon = 'radio_button_checked';
+            } else {
+              this.loginIcon = 'account_circle';
+            }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       } else {
         this.mobile = null;
         this.nikname = null;
@@ -63,6 +90,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   logout(): void {
     if (this.authenticated()) {
+      this.admin = false;
+      this.loginIcon = 'add_circle_outline';
       this.authService.logout();
     } else {
       this.router.navigate(['/login']);
@@ -98,6 +127,14 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   gotoHome(): void {
-    this.router.navigate(['/']);
+    if (this.admin) {
+      this.router.navigate(['/admin']);
+    } else if (this.expert) {
+      this.router.navigate(['/expert']);
+    } else if (this.bike) {
+      this.router.navigate(['/bikeshop']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

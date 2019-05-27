@@ -12,7 +12,7 @@
         <div fxFlex="88">{{schemaProductName}}</div>
 
         <div fxFlex="8">
-          <button (click)="addItem()" mat-icon-button>
+          <button [disabled]="locked" (click)="addItem()" mat-icon-button>
               <mat-icon>add_circle_outline</mat-icon>
           </button>
         </div>
@@ -23,7 +23,7 @@
         <div fxFlex="2"></div>
         <div fxFlex="88">{{schemaProductId}}</div>
         <div fxFlex="8">
-            <button (click)="plusOne()" mat-icon-button>
+            <button [disabled]="locked" (click)="plusOne()" mat-icon-button>
                 <mat-icon>expand_less</mat-icon>
             </button>
           </div>
@@ -37,7 +37,7 @@
         <div fxFlex="35"></div>
         
         <div fxFlex="8">
-            <button (click)="minusOne()" mat-icon-button>
+            <button [disabled]="locked" (click)="minusOne()" mat-icon-button>
                 <mat-icon>expand_more</mat-icon>
             </button>
           </div>
@@ -53,6 +53,15 @@
         </div>
         
     </div>
+
+    <div *ngIf="!loading && tagid" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+            <div fxFlex="100">
+                    <button (click)="tagInfo()" mat-icon-button>
+                        <mat-icon>info</mat-icon>
+                    </button>
+            </div>
+            
+        </div>
 </div>
 
 

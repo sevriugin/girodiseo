@@ -1,6 +1,36 @@
 <app-header [back]="true" [title]="'Tags'"></app-header>
 
 <div *ngIf="tags">
+  <br>
+  <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>search</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          Enter search critaria
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput [value]="date" [matDatepicker]="picker" placeholder="Choose a date" (dateChange)="handleDateInput($event.value)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+      &nbsp;&nbsp;
+      <mat-form-field>
+          <input matInput name="mobile" type="text" placeholder="or mobile" [(ngModel)]="mobile" (change)="handleMobileInput($event.target.value)">
+        </mat-form-field>
+        
+    
+            <button (click)="clearDate()" mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+      </mat-expansion-panel>
+    
+  </div>
+  <br>
+
   <table *ngIf="tags.length>0" mat-table [dataSource]="tags | slice:start:end" class="mat-elevation-z8">
 
       <!--- Note that these columns can be defined in any order.
@@ -9,9 +39,15 @@
       
 
       <!-- Position Column -->
+
+      <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element"> <mat-icon [ngClass]="status(element)">radio_button_checked</mat-icon></td>
+        </ng-container>
+
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}}</td>
+        <td mat-cell *matCellDef="let element"> {{showTagId(element.id)}}</td>
       </ng-container>
 
       <!-- Position Column -->

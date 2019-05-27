@@ -35,13 +35,16 @@ export class ItemComponent implements OnInit {
   price: number;
   ref: string;
   order: Order;
+  locked: string;
+  tagid: string;
 
   constructor(
     private location: Location,
     private route: ActivatedRoute,
     private http: HttpClient,
     public dialog: MatDialog,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
     ) { }
 
   loadItem(): void {
@@ -84,7 +87,22 @@ export class ItemComponent implements OnInit {
     if (index >= 0) {
       console.log(`Item is found on index: ${index}`);
       this.index = index;
+      if (this.order.items[index].code.startsWith('TAG')) {
+        this.locked = 'locked TAG';
+        this.tagid = this.order.items[index].code.slice(3);
+        if (this.tagid.startsWith('-Gold-')) {
+          this.tagid = this.tagid.slice(6);
+        } else if (this.tagid.startsWith('-Silver-')) {
+          this.tagid = this.tagid.slice(8);
+        } else if (this.tagid.startsWith('-Bronze-')) {
+          this.tagid = this.tagid.slice(8);
+        }
+      }
     }
+  }
+
+  tagInfo() {
+    this.router.navigate([`/tag/${this.tagid}`]);
   }
 
   showItemByIndex(): void {
@@ -104,12 +122,14 @@ export class ItemComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.ref = this.route.snapshot.paramMap.get('ref');
+    this.locked = this.route.snapshot.paramMap.get('locked');
     this.index = -1;
     this.invalid = false;
     this.qr_code = '';
     this.url = '';
     this.loading = true;
     this.itemQty = 0;
+    this.tagid = undefined;
 
     if (this.id === 'NEW') {
       this.scanning = true;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject, combineLatest  } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Order, ORDERSTATUS } from './order';
+import { Order, Item, ORDERSTATUS } from './order';
 import { DatePipe } from '@angular/common';
 
 @Injectable({
@@ -113,6 +113,24 @@ export class OrderService {
     return order;
   }
 
+  newOrderWithItems(client: string, items: Item[]): Order | null {
+    const timestamp = new Date();
+    const ref = Math.floor( Math.random() * 100000000 );
+    const date = this.datePipe.transform(timestamp, 'dd-MM-yy');
+    const order: Order = {
+      ref: `${date}-${ref}`,
+      date: date,
+      status: ORDERSTATUS.NEW,
+      client: client,
+      items: items,
+      total: 0
+    };
+    this.db.collection('orders').add(order)
+      .then(() => order )
+      .catch(console.error);
+    return order;
+  }
+
   updateOrder(order: Order): void {
     this.db.collection('orders').ref.where('ref', '==', order.ref)
       .get()
@@ -121,8 +139,37 @@ export class OrderService {
             console.error('Order not found');
           } else {
             const doc = querySnapshot.docs[0];
-            this.db.collection('orders').doc(doc.id).update(order)
-              .catch(console.error);
+            if (order.items && order.items.length === 0) {
+              // delete empty order
+              this.db.collection('orders').doc(doc.id).delete()
+                .catch(console.error);
+            } else {
+              this.db.collection('orders').doc(doc.id).update(order)
+                .catch(console.error);
+            }
+          }
+        });
+  }
+
+  updateOrderCB(order: Order, cb: Function): void {
+    this.db.collection('orders').ref.where('ref', '==', order.ref)
+      .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            console.error('Order not found');
+            cb('Order not found', null);
+          } else {
+            const doc = querySnapshot.docs[0];
+            if (order.items && order.items.length === 0) {
+              // delete empty order
+              cb('Order will be delited', null);
+              this.db.collection('orders').doc(doc.id).delete()
+                .catch(console.error);
+            } else {
+              this.db.collection('orders').doc(doc.id).update(order)
+                .then((res) => cb(null, res))
+                .catch((err) => cb(err, null));
+            }
           }
         });
   }
