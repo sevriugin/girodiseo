@@ -42,7 +42,7 @@
     "ngx-clipboard": "^11.1.9",
     "ngx-gravatar": "^7.2.1",
     "ngx-kjua": "^1.3.0",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.7",
     "rxjs": "^6.4.0",
     "truffle": "^5.0.2",
     "truffle-hdwallet-provider": "^1.0.2",
